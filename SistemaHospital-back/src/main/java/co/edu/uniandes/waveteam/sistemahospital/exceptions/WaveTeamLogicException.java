@@ -22,26 +22,26 @@ package co.edu.uniandes.waveteam.sistemahospital.exceptions;
 import javax.ejb.ApplicationException;
 
 @ApplicationException(rollback = true)
-public class BusinessLogicException extends Exception {
+public class WaveTeamLogicException extends Exception {
 
     /**
      * 
      */
-    public BusinessLogicException() {
+    public WaveTeamLogicException() {
         super();
     }
     /**
      * 
      * @param message 
      */
-    public BusinessLogicException(String message) {
+    public WaveTeamLogicException(String message) {
         super(message);
     }
     /**
      * 
      * @param cause 
      */
-    public BusinessLogicException(Throwable cause) {
+    public WaveTeamLogicException(Throwable cause) {
         super(cause);
     }
     /**
@@ -49,7 +49,7 @@ public class BusinessLogicException extends Exception {
      * @param message
      * @param cause 
      */
-    public BusinessLogicException(String message, Throwable cause) {
+    public WaveTeamLogicException(String message, Throwable cause) {
         super(message, cause);
     }
 
