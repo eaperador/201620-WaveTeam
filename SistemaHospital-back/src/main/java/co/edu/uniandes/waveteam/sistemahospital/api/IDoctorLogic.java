@@ -2,7 +2,7 @@ package co.edu.uniandes.waveteam.sistemahospital.api;
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
-import co.edu.uniandes.waveteam.sistemahospital.exceptions.BusinessLogicException;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public interface IDoctorLogic {
      * @param doctorName
      * @return
      */
-    public DoctorEntity getDoctorByName(String doctorName) throws BusinessLogicException;
+    public DoctorEntity getDoctorByName(String doctorName) throws WaveTeamLogicException;
 
     /**
      * Get all doctors with the given speciality.

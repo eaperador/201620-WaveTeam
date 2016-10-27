@@ -3,7 +3,7 @@ package co.edu.uniandes.waveteam.sistemahospital.ejbs;
 import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
-import co.edu.uniandes.waveteam.sistemahospital.exceptions.BusinessLogicException;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 
 import javax.ejb.Stateless;
@@ -43,9 +43,9 @@ public class DoctorLogic implements IDoctorLogic {
      * @return
      */
     @Override
-    public DoctorEntity getDoctorByName(String doctorName) throws BusinessLogicException {
+    public DoctorEntity getDoctorByName(String doctorName) throws WaveTeamLogicException {
         if (doctorName.split("\\s+").length == 1)
-            throw new BusinessLogicException ("You must specify a longer name, only a name is too general");
+            throw new WaveTeamLogicException("You must specify a longer name, only a name is too general");
         return persistence.findByName(doctorName);
     }
 
