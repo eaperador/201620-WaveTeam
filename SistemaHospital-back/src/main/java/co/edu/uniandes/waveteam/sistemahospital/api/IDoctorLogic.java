@@ -1,6 +1,8 @@
 package co.edu.uniandes.waveteam.sistemahospital.api;
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.BusinessLogicException;
 
 import java.util.List;
 
@@ -17,21 +19,24 @@ public interface IDoctorLogic {
 
     /**
      * Get a doctor by id.
+     * @param doctorId
      * @return
      */
-    public DoctorEntity getDoctorById();
+    public DoctorEntity getDoctorById(Long doctorId);
 
     /**
      * Get a doctor by his/her name.
+     * @param doctorName
      * @return
      */
-    public DoctorEntity getDoctorByName();
+    public DoctorEntity getDoctorByName(String doctorName) throws BusinessLogicException;
 
     /**
      * Get all doctors with the given speciality.
+     * @param especialidad
      * @return
      */
-    public List<DoctorEntity> getDoctorByEspecialidad();
+    public List<DoctorEntity> getDoctorByEspecialidad(EspecialidadEntity especialidad);
 
     /**
      * Create a new doctor

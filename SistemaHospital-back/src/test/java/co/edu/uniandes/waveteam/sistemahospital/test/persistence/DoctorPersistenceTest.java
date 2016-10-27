@@ -178,5 +178,5 @@ public class DoctorPersistenceTest {
         Assert.assertNull(deleted);
         Assert.assertNull(deleted2);
     }
-    
+
 }
