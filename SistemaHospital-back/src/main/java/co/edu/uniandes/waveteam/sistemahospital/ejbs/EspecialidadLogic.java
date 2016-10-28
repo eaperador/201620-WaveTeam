@@ -39,7 +39,12 @@ public class EspecialidadLogic implements IEspecialidadLogic{
 
     @Override
     public EspecialidadEntity createEspecialidad(EspecialidadEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EspecialidadEntity bus = persistence.findByName(entity.getName());
+        if(bus!=null)
+        {
+            
+        }
+        return persistence.create(entity);
     }
 
     @Override
@@ -50,11 +55,6 @@ public class EspecialidadLogic implements IEspecialidadLogic{
     @Override
     public void deleteEspecialidad(Long id) {
         persistence.delete(id);
-    }
-
-    @Override
-    public Integer getNumeroDoctoresEspecialidad(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

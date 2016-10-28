@@ -26,5 +26,4 @@ public interface IEspecialidadLogic {
 
     public void deleteEspecialidad(Long id);
 
-    public Integer getNumeroDoctoresEspecialidad(Long id);
 }
