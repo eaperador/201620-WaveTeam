@@ -151,6 +151,15 @@ public class EspecialidadLogicTest {
         Assert.assertEquals(entity.getName(), resultEntity.getName());
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
+    
+    @Test
+    public void testGetEspecialidadPorNombre2(){
+        
+        EspecialidadEntity entity = factory.manufacturePojo(EspecialidadEntity.class);
+        EspecialidadEntity resultEntity = logic.getEspecialidadPorNombre(entity.getName());
+        Assert.assertNull(resultEntity);
+        
+    }
 
     
     /**
