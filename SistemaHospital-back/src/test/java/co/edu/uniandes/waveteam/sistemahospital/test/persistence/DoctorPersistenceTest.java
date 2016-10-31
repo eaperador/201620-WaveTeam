@@ -142,7 +142,7 @@ public class DoctorPersistenceTest {
         Assert.assertNotNull(result);
         Assert.assertEquals(newEntity.getName(), result.getName());
         Assert.assertEquals(newEntity.getConsultorio(), result.getConsultorio());
-        Assert.assertEquals(newEntity.getEspecialidad(), result.getEspecialidad());
+        Assert.assertEquals(newEntity.getEspecialidad().getName(), result.getEspecialidad().getName());
     }
     
     @Test
