@@ -162,6 +162,27 @@ public class CitaLogicTest {
         }
     }
     
+    @Test
+    public void updateCitaTest(){
+        CitaEntity cita = data.get(0);
+        CitaEntity citaNueva = factory.manufacturePojo(CitaEntity.class);
+        
+        citaNueva.setId(cita.getId());        
+        citaLogic.updateCita(citaNueva);        
+        
+        CitaEntity nueva = em.find(CitaEntity.class, cita.getId());
+        Assert.assertEquals(citaNueva.getName(), nueva.getName());
+                   
+    }
+    
+    @Test
+    public void deleteCitaTest(){
+        CitaEntity cita = data.get(0);
+        citaLogic.deleteCita(cita.getId());
+        CitaEntity eliminada = em.find(CitaEntity.class, cita.getId());
+        Assert.assertNull(eliminada);
+    }
+    
     
 }
 

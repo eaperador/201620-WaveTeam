@@ -7,7 +7,6 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
