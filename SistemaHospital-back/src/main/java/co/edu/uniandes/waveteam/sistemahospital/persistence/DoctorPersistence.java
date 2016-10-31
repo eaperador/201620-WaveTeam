@@ -28,10 +28,13 @@ public class DoctorPersistence {
     }
         
     public List<DoctorEntity> findByEspecialidad(EspecialidadEntity especialidad){
+        String name = especialidad.getName();
         LOGGER.log(Level.INFO, "Consultando doctores con la dada especialidad");
-        Query q = em.createQuery("select d from DoctorEntity d where d.especialidad.name LIKE :especialidadName")
-                .setParameter("especialidadName", especialidad.getName());
+        
+        Query q = em.createQuery("select d from DoctorEntity d where d.especialidad.name = :name");
+        q.setParameter("name", name);
         LOGGER.log(Level.INFO, "Retornando doctores de la dada especialidad");
+        
         return q.getResultList();
     }
     

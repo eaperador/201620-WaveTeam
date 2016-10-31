@@ -94,7 +94,7 @@ public class EspecialidadLogicTest {
          for (int i = 0; i < 4; i++) {
             EspecialidadEntity entity = factory.manufacturePojo(EspecialidadEntity.class);
             for (DoctorEntity d : entity.getDoctores()) {
-                d.EspecialidadEntity(entity);
+                d.setEspecialidad(entity);
             }
             em.persist(entity);
             data.add(entity);

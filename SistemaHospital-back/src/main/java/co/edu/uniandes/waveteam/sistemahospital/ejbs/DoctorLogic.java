@@ -3,8 +3,10 @@ package co.edu.uniandes.waveteam.sistemahospital.ejbs;
 import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,6 +20,9 @@ public class DoctorLogic implements IDoctorLogic {
 
     @Inject
     private DoctorPersistence persistence;
+
+    @Inject
+    private PacientePersistence pacientePersistence;
 
     /**
      * List all the doctors
@@ -64,7 +69,8 @@ public class DoctorLogic implements IDoctorLogic {
      */
     @Override
     public void createDoctor(DoctorEntity doctorEntity) {
-
+//        if (doctorEntity.)
+        persistence.create(doctorEntity);
     }
 
     /**
@@ -73,7 +79,7 @@ public class DoctorLogic implements IDoctorLogic {
      */
     @Override
     public void updateDoctor(DoctorEntity doctorEntity) {
-
+        persistence.update(doctorEntity);
     }
 
     /**
@@ -82,6 +88,6 @@ public class DoctorLogic implements IDoctorLogic {
      */
     @Override
     public void deleteDoctor(Long doctorId) {
-
+        persistence.delete(doctorId);
     }
 }

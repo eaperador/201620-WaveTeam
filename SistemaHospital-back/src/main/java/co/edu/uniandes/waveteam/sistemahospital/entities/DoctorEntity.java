@@ -22,7 +22,7 @@ public class DoctorEntity extends BaseEntity implements Serializable{
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CitaEntity> disponibilidadCitas = new ArrayList<>();
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private EspecialidadEntity especialidad;
     
     private Long consultorio;
@@ -39,7 +39,7 @@ public class DoctorEntity extends BaseEntity implements Serializable{
         return especialidad;
     }
 
-    public void EspecialidadEntity(EspecialidadEntity especialidad) {
+    public void setEspecialidad(EspecialidadEntity especialidad) {
         this.especialidad = especialidad;
     }
 
