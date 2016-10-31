@@ -172,9 +172,15 @@ public class CitaLogicTest {
         
         CitaEntity nueva = em.find(CitaEntity.class, cita.getId());
         Assert.assertEquals(citaNueva.getName(), nueva.getName());
-        
-        
-                
+                   
+    }
+    
+    @Test
+    public void deleteCitaTest(){
+        CitaEntity cita = data.get(0);
+        citaLogic.deleteCita(cita.getId());
+        CitaEntity eliminada = em.find(CitaEntity.class, cita.getId());
+        Assert.assertNull(eliminada);
     }
     
     
