@@ -6,6 +6,7 @@
 package co.edu.uniandes.waveteam.sistemahospital.api;
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface IEspecialidadLogic {
 
     public EspecialidadEntity getEspecialidadPorNombre(String name);
 
-    public EspecialidadEntity createEspecialidad(EspecialidadEntity entity);
+    public EspecialidadEntity createEspecialidad(EspecialidadEntity entity) throws WaveTeamLogicException;
 
     public EspecialidadEntity updateEspecialidad(EspecialidadEntity entity);
 

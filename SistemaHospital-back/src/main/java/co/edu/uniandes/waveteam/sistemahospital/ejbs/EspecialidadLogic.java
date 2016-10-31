@@ -7,6 +7,7 @@ package co.edu.uniandes.waveteam.sistemahospital.ejbs;
 
 import co.edu.uniandes.waveteam.sistemahospital.api.IEspecialidadLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.EspecialidadPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -37,12 +38,18 @@ public class EspecialidadLogic implements IEspecialidadLogic{
         return persistence.findByName(name);
     }
 
+    /**
+     *
+     * @param entity
+     * @return
+     * @throws WaveTeamLogicException
+     */
     @Override
-    public EspecialidadEntity createEspecialidad(EspecialidadEntity entity) {
+    public EspecialidadEntity createEspecialidad(EspecialidadEntity entity) throws WaveTeamLogicException {
         EspecialidadEntity bus = persistence.findByName(entity.getName());
         if(bus!=null)
         {
-            
+            throw new WaveTeamLogicException("ya existe una especialidad con ese nombre");
         }
         return persistence.create(entity);
     }

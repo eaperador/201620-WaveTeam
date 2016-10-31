@@ -9,8 +9,10 @@ import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
 import co.edu.uniandes.waveteam.sistemahospital.api.IEspecialidadLogic;
 import co.edu.uniandes.waveteam.sistemahospital.ejbs.DoctorLogic;
 import co.edu.uniandes.waveteam.sistemahospital.ejbs.EspecialidadLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.EspecialidadPersistence;
 import java.util.ArrayList;
@@ -63,8 +65,6 @@ public class EspecialidadLogicTest {
                 .addPackage(EspecialidadPersistence.class.getPackage())
                 .addPackage(DoctorPersistence.class.getPackage())
                 .addPackage(DoctorEntity.class.getPackage())
-                .addPackage(DoctorLogic.class.getPackage())
-                .addPackage(IDoctorLogic.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -152,21 +152,20 @@ public class EspecialidadLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
     
-    @Test
-    public void testGetEspecialidadPorNombre2(){
-        
-        EspecialidadEntity entity = factory.manufacturePojo(EspecialidadEntity.class);
-        EspecialidadEntity resultEntity = logic.getEspecialidadPorNombre(entity.getName());
-        Assert.assertNull(resultEntity);
-        
-    }
-
-    
     /**
      * Test of createEspecialidad method, of class EspecialidadLogic.
      */
     @Test
-    public void testCreateEspecialidad(){
+    public void testCreateEspecialidad1() throws WaveTeamLogicException{
+        
+
+    }
+    
+    @Test(expected = WaveTeamLogicException.class)
+    public void createEspecialidadTest2() throws Exception {
+        EspecialidadEntity newEntity = factory.manufacturePojo(EspecialidadEntity.class);
+        newEntity.setName(data.get(0).getName());
+        EspecialidadEntity result = logic.createEspecialidad(newEntity);
     }
 
     /**

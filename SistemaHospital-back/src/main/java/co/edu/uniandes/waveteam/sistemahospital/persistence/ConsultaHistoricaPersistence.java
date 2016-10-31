@@ -45,17 +45,19 @@ public class ConsultaHistoricaPersistence {
         q = q.setParameter("espId", espId);
         return q.getResultList();
     }
+    
+    public List<ConsultaHistoricaEntity> findAllInFecha(String fecha) {
+        LOGGER.log(Level.INFO, "Consultando todas las consultasHistoricas en fecha={0} ", fecha);
+        TypedQuery q = em.createQuery("select d from ConsultaHistoricaEntity d  where d.fecha = :f", ConsultaHistoricaEntity.class);
+        q = q.setParameter("f", fecha);
+        return q.getResultList();
+    }
 
     public ConsultaHistoricaEntity create(ConsultaHistoricaEntity entity) {
         LOGGER.info("Creando una consulta historica nueva");
         em.persist(entity);
         LOGGER.info("Consulta historica creada");
         return entity;
-    }
-
-    public ConsultaHistoricaEntity update(ConsultaHistoricaEntity entity) {
-        LOGGER.log(Level.INFO, "Actualizando consulta historica con id={0}", entity.getId());
-        return em.merge(entity);
     }
 
     /**

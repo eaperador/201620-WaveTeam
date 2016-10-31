@@ -8,7 +8,10 @@ package co.edu.uniandes.waveteam.sistemahospital.test.persistence;
 import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.ConsultaHistoricaPersistence;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -86,7 +89,12 @@ public class ConsultaHistoricaPersistenceTest {
         em.persist(padre);
         for (int i = 0; i < 4; i++) {
             ConsultaHistoricaEntity entity = factory.manufacturePojo(ConsultaHistoricaEntity.class);
+            
             entity.setEspecialidad(padre);
+            
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            entity.setFecha(df.format(new Date()));
+            
             data.add(entity);
             em.persist(entity);
         }
@@ -102,6 +110,22 @@ public class ConsultaHistoricaPersistenceTest {
         ConsultaHistoricaEntity newEntity = persistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+    
+    @Test
+    public void testFindAll() throws Exception {
+        
+        List<ConsultaHistoricaEntity> list = persistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (ConsultaHistoricaEntity ent : list) {
+            boolean found = false;
+            for (ConsultaHistoricaEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
     
     @Test
@@ -131,6 +155,21 @@ public class ConsultaHistoricaPersistenceTest {
         }
     } 
     
+     @Test
+    public void testFindAllInFecha() {
+        List<ConsultaHistoricaEntity> list = persistence.findAllInFecha(data.get(0).getFecha());
+        Assert.assertEquals(data.size(), list.size());
+        for (ConsultaHistoricaEntity ent : list) {
+            boolean found = false;
+            for (ConsultaHistoricaEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    } 
+    
     @Test
     public void testDelete() {
         ConsultaHistoricaEntity entity = data.get(0);
@@ -138,19 +177,5 @@ public class ConsultaHistoricaPersistenceTest {
         ConsultaHistoricaEntity deleted = em.find(ConsultaHistoricaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
-    @Test
-    public void testUpdate() {
-        ConsultaHistoricaEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        ConsultaHistoricaEntity newEntity = factory.manufacturePojo(ConsultaHistoricaEntity.class);
 
-        newEntity.setId(entity.getId());
-
-        persistence.update(newEntity);
-
-        ConsultaHistoricaEntity resp = em.find(ConsultaHistoricaEntity.class, entity.getId());
-
-        Assert.assertEquals(newEntity.getName(), resp.getName());
-    }
 }
