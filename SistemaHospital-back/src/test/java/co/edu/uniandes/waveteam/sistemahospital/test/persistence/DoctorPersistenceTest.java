@@ -6,6 +6,7 @@
 package co.edu.uniandes.waveteam.sistemahospital.test.persistence;
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class DoctorPersistenceTest {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(DoctorEntity.class.getPackage())
+                .addPackage(EspecialidadEntity.class.getPackage())
                 .addPackage(DoctorPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
@@ -83,9 +85,34 @@ public class DoctorPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             DoctorEntity entity = factory.manufacturePojo(DoctorEntity.class);
+
+            EspecialidadEntity e = entity.getEspecialidad();
+            e.getDoctores().add(entity);
+
             em.persist(entity);
             data.add(entity);
         }
+    }
+
+    @Test
+    public void findByEspecialidadTest(){
+        EspecialidadEntity especialidad = data.get(0).getEspecialidad();
+        List<DoctorEntity> doctorsByEntities = doctorPersistence.findByEspecialidad(especialidad);
+        for (DoctorEntity doctor : doctorsByEntities){
+            Assert.assertEquals(especialidad.getId(), doctor.getEspecialidad().getId());
+        }
+
+//        especialidad = data.get(1).getEspecialidad();
+//        doctorsByEntities = doctorPersistence.findByEspecialidad(especialidad);
+//        for (DoctorEntity doctor : doctorsByEntities){
+//            Assert.assertEquals(especialidad.getId(), doctor.getEspecialidad().getId());
+//        }
+//
+//        especialidad = data.get(2).getEspecialidad();
+//        doctorsByEntities = doctorPersistence.findByEspecialidad(especialidad);
+//        for (DoctorEntity doctor : doctorsByEntities){
+//            Assert.assertEquals(especialidad.getId(), doctor.getEspecialidad().getId());
+//        }
     }
     
     @Test
@@ -115,7 +142,7 @@ public class DoctorPersistenceTest {
         Assert.assertNotNull(result);
         Assert.assertEquals(newEntity.getName(), result.getName());
         Assert.assertEquals(newEntity.getConsultorio(), result.getConsultorio());
-        Assert.assertEquals(newEntity.getEspecialidad(), result.getEspecialidad());
+        Assert.assertEquals(newEntity.getEspecialidad().getName(), result.getEspecialidad().getName());
     }
     
     @Test

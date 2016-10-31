@@ -38,15 +38,15 @@ public class CitaPersistence {
     
     public CitaEntity findByDoctor(DoctorEntity doctor) {
         LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}", doctor.getId());
-        TypedQuery<CitaEntity> q = em.createQuery("select u, m from CitaEntity u, DoctorEntity m where u.doctor = m", CitaEntity.class);
-        q = q.setParameter("doctor", doctor); 
+        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.doctor.id = :idDoctor", CitaEntity.class);
+        q = q.setParameter("idDoctor", doctor.getId()); 
         return q.getSingleResult();
     }
     
     public CitaEntity findByPaciente(PacienteEntity paciente){
         LOGGER.log(Level.INFO, "Consultando cita con paciente = {0}", paciente.getId());
-        TypedQuery<CitaEntity> q = em.createQuery("select u, p from CitaEntity u, PacienteEntity p where u.paciente = p", CitaEntity.class);
-        q = q.setParameter("paciente", paciente);
+        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.paciente.id = :idPaciente", CitaEntity.class);
+        q = q.setParameter("idPaciente", paciente.getId());
         return q.getSingleResult();
     }
     
