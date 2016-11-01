@@ -49,7 +49,8 @@ public class ConsultaHistoricaLogic implements IConsultaHistoricaLogic{
     }
 
     @Override
-    public ConsultaHistoricaEntity createConsultaHistorica(EspecialidadEntity esp) {
+    public ConsultaHistoricaEntity createConsultaHistorica(String nombEsp) {
+        EspecialidadEntity esp = espLogic.getEspecialidadPorNombre(nombEsp);
         ConsultaHistoricaEntity c = new ConsultaHistoricaEntity();
         c.setEspecialidad(esp);
         c.setNumeroDoctores(esp.getDoctores().size());

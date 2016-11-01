@@ -7,8 +7,11 @@ package co.edu.uniandes.rest.waveteam.resources;
 
 import co.edu.uniandes.rest.waveteam.dtos.ConsultaHistoricaDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.ConsultaHistoricaLogicException;
-import co.edu.uniandes.rest.waveteam.mocks.ConsultaHistoricaLogicMock;
+import co.edu.uniandes.waveteam.sistemahospital.api.IConsultaHistoricaLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,45 +30,56 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 public class ConsultaHistoricaResource {
     
-    ConsultaHistoricaLogicMock logic = new ConsultaHistoricaLogicMock();
+    @Inject
+    private IConsultaHistoricaLogic logic;
+ 
+    private List<ConsultaHistoricaDTO> listEntity2DTO(List<ConsultaHistoricaEntity> entityList) {
+        List<ConsultaHistoricaDTO> list = new ArrayList<>();
+        for (ConsultaHistoricaEntity entity : entityList) {
+            list.add(new ConsultaHistoricaDTO(entity));
+        }
+        return list;
+    }
+    
 
     /**
      * Obtiene el listado de especialidades.
      *
      * @return lista de especialidades
-     * @throws EspecialidadLogicException excepción retornada por la lógica
      */
     @GET
-    public List<ConsultaHistoricaDTO> getConsultasHistoricas() throws ConsultaHistoricaLogicException {
-        return logic.getConsultasHisotircas();
-    }
-
-    @GET
-    @Path("{nombre: }")
-    public ConsultaHistoricaDTO getConsultaHistorica(@PathParam("nombre") String nombreEsp) throws ConsultaHistoricaLogicException {
-        return logic.getConsultaHistorica(nombreEsp);
-    }
-
-    @PUT
-    @Path("{nombre: }")
-    public ConsultaHistoricaDTO updateConsultaHistorica(@PathParam("nombre") String nombreEsp) throws ConsultaHistoricaLogicException {
-        return logic.updateConsultaHistorica(nombreEsp);
+    public List<ConsultaHistoricaDTO> getConsultasHistoricas() throws Exception {
+        return listEntity2DTO(logic.getTodasLasConsultasHistoricas());
     }
     
     @GET
-    @Path("generateAll")
-    public List<ConsultaHistoricaDTO> generarTodas() throws ConsultaHistoricaLogicException {
-        return logic.generarTodas();
+    @Path("{id: \\d+}")
+    public List<ConsultaHistoricaDTO> getConsultasHistoricasPorEspecialidad(@PathParam("id") Long espId) throws Exception {
+        return listEntity2DTO(logic.getConsultasHistoricasPorEspecialidad(espId));
+    }
+    
+    @GET
+    @Path("{fecha: }")
+    public List<ConsultaHistoricaDTO> getConsultasHistoricasPorFecha(@PathParam("fecha") String fecha) throws Exception {
+        return listEntity2DTO(logic.getConsultasHistoricasPorFecha(fecha));
+    }
+    
+    @GET
+    @Path("{id: \\d+}")
+    public ConsultaHistoricaDTO getConsultaHistorica(@PathParam("id") Long id) throws Exception {
+        return new ConsultaHistoricaDTO(logic.getConsultaHistorica(id));
     }
 
+
     @POST
-    public ConsultaHistoricaDTO createConsultaHistorica(String nombreEsp) throws ConsultaHistoricaLogicException {
-        return logic.createConsultaHistorica(nombreEsp);
+    @Path("{nombre: }")
+    public ConsultaHistoricaDTO createConsultaHistorica(@PathParam("nombre") String nombreEsp) throws ConsultaHistoricaLogicException {
+        return new ConsultaHistoricaDTO(logic.createConsultaHistorica(nombreEsp));
     }
 
     @DELETE
-    @Path("{nombre: }")
-    public void deleteConsultaHistorica(@PathParam("nombre") String nombreEsp) throws ConsultaHistoricaLogicException {
-        logic.deleteConsultaHistorica(nombreEsp);
+    @Path("{id: \\d+}")
+    public void deleteConsultaHistorica(@PathParam("id") Long id) throws ConsultaHistoricaLogicException {
+        logic.deleteConsultaHistorica(id);
     }
 }

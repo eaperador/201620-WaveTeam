@@ -8,12 +8,14 @@ package co.edu.uniandes.rest.waveteam.resources;
 import co.edu.uniandes.rest.waveteam.dtos.*;
 import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.MedicoLogicMock;
-
+import co.edu.uniandes.waveteam.sistemahospital.api.*;
+import co.edu.uniandes.waveteam.sistemahospital.entities.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,7 +24,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Clase que implementa el recurso REST correspondiente a "doctors".
@@ -40,21 +44,37 @@ public class MedicoResource {
 
     MedicoLogicMock cityLogic = new MedicoLogicMock();
     
+    @Inject
+    private IDoctorLogic logic;
+    
     /**
      * Obtiene el listado de médicos.
      *
      * @return lista de médicos
-     * @throws MedicoLogicException excepción retornada por la lógica
+     * @throws WebApplicationException 
      */
     @GET
-    public List<MedicoDTO> getDoctors() throws MedicoLogicException {
-        return cityLogic.getDoctors();
+    public List<MedicoDTO> getDoctors() {
+        List <MedicoDTO> doctors = new ArrayList<>();
+        for (DoctorEntity entity: logic.getDoctores()){
+            doctors.add(new MedicoDTO(entity));
+        }
+        return doctors;
     }
 
+    /**
+     * Get a doctor by his id.
+     * @param id
+     * @return
+     * @throws WebApplicationException 
+     */
     @GET
     @Path("{id: \\d+}")
-    public MedicoDTO getDoctor(@PathParam("id") Long id) throws MedicoLogicException {
-        return cityLogic.getDoctor(id);
+    public MedicoDTO getDoctor(@PathParam("id") Long id) {
+        MedicoDTO doc = new MedicoDTO(logic.getDoctorById(id));
+        if (doc == null)
+            throw new WebApplicationException("The given doctor does nor exist", Response.Status.BAD_REQUEST);
+        return doc;
     }
 
     /**

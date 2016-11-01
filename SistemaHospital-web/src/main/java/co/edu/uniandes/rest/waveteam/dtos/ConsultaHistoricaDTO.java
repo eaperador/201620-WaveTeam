@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.waveteam.dtos;
 
+import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity;
+
 /**
  *
  * @author d.marino10
@@ -33,6 +35,17 @@ public class ConsultaHistoricaDTO {
         this.citasCanceladas=citasCan;
         this.citasTerminadas=citasTer;
         this.fecha=fecha;
+    }
+    
+    public ConsultaHistoricaDTO(ConsultaHistoricaEntity entity){
+        this.especialidad=new EspecialidadDTO(entity.getEspecialidad());
+        this.numeroDoctores=entity.getNumeroDoctores();
+        this.numeroCitas=entity.getNumeroCitas();
+        this.promedioDuracion=entity.getPromedioDuracion();
+        this.citasLibres=entity.getCitasLibres();
+        this.citasCanceladas=entity.getCitasCanceladas();
+        this.citasTerminadas=entity.getCitasTerminadas();
+        this.fecha=entity.getFecha();
     }
     
     	public EspecialidadDTO getEspecialidad() {
