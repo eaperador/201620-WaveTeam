@@ -5,11 +5,12 @@
 package co.edu.uniandes.rest.waveteam.dtos;
 
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlRootElement;
+//import SistemaHospital-back.target.classes.co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 /**
- * Objeto de transferencia de datos de Ciudades.
  * @author je.ardila1501
  */
+@XmlRootElement
 public class PatientDTO {
 
     private Long id;
@@ -18,7 +19,6 @@ public class PatientDTO {
     private int edad;
     private String tipoSangre;
     private String eps;
-//    private String correo;
     private List<CitaDTO> citas;
     /**
      * Constructor por defecto
@@ -26,6 +26,22 @@ public class PatientDTO {
     public PatientDTO() {
 
     }
+    
+    /**
+     * 
+     * @param entity 
+     */
+//     public PatientDTO(PacienteEntity entity) {
+//        if (entity != null) {
+//        this.id = id;
+//        this.name = name;
+//        this.edad=edad;
+//        this.sexo=sexo;
+//        this.tipoSangre=tipoSangre;
+//        this.eps=eps;
+//        this.citas = null;
+//        }
+//    }
 
     /**
      * Constructor con parámetros.
@@ -45,8 +61,7 @@ public class PatientDTO {
         this.sexo=sexo;
         this.tipoSangre=tipoSangre;
         this.eps=eps;
-//        this.correo = correo;
-//        this.citas=pcitas;
+        this.citas = null;
         
     }
 
