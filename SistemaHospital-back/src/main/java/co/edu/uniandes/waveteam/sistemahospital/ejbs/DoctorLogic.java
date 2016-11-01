@@ -64,9 +64,12 @@ public class DoctorLogic implements IDoctorLogic {
     /**
      * Create a new doctor instance
      * @param doctorEntity
+     * @throws WaveTeamLogicException 
      */
     @Override
-    public void createDoctor(DoctorEntity doctorEntity) {
+    public void createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException {
+        if (getDoctorById(doctorEntity.getId() ) != null)
+            throw new WaveTeamLogicException("There already exists a doctor with that id");
         persistence.create(doctorEntity);
     }
 
