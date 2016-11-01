@@ -5,11 +5,11 @@
 package co.edu.uniandes.rest.waveteam.dtos;
 
 import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
-import co.edu.uniandes.rest.waveteam.mocks.MedicoLogicMock;
-import co.edu.uniandes.waveteam.sistemahospital.entities.*;
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
-import java.util.logging.Logger;
 /**
  * Objeto de transferencia de datos de Ciudades.
  *
@@ -33,9 +33,13 @@ public class MedicoDTO {
     public MedicoDTO(DoctorEntity entity){
         this.id = entity.getId();
         this.name = entity.getName();
-        this.especialidad = entity;
-        this.consultorio = consultorio;
-        this.disponibilidad = dispo;
+        this.especialidad = entity.getEspecialidad().getName();
+        this.consultorio = entity.getConsultorio();
+        this.disponibilidad = new ArrayList<>();
+        for (CitaEntity cita:entity.getDisponibilidadCitas()){
+            CitaDTO c = new CitaDTO(cita);
+            disponibilidad.add(c);
+        }
     }
 
     public MedicoDTO(Long id, String name, String especialidad, Long consultorio, ArrayList<CitaDTO> dispo) {
@@ -44,6 +48,16 @@ public class MedicoDTO {
         this.especialidad = especialidad;
         this.consultorio = consultorio;
         this.disponibilidad = dispo;
+    }
+    
+    public DoctorEntity toEntity(){
+        DoctorEntity entity = new DoctorEntity();
+        entity.setId(this.getId());
+        entity.setConsultorio(this.consultorio);
+        EspecialidadEntity ent = new EspecialidadEntity();
+        ent.setName(this.getEspecialidad());
+        entity.setEspecialidad(ent);
+        return entity;
     }
 
     public String getEspecialidad() {
