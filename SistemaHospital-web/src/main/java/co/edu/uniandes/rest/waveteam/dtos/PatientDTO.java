@@ -180,42 +180,15 @@ public class PatientDTO {
          this.eps=eps;
      }
      
-//     /**
-//      * 
-//      */
-//     public String getCorreo(){
-//         return this.correo;
-//     }
-//     
-//     /**
-//      * 
-//      */
-//     public void setCorreo(String pcorreo){
-//         this.correo=pcorreo;
-//     }
-     
-//     /**
-//      * 
-//      */
-//     public List<CitaDTO> getCitas(){
-//         return this.citas;
-//     }
-//     
-//     /**
-//      * 
-//      */
-//     public void setCitas(List<CitaDTO> pcitas){
-//         this.citas=pcitas;
-//     }
-    
+
      /**
      * Convierte el objeto a una cadena
      */
-//    @Override
-//    public String toString() {
-//        return "{ id : " + getId() + ", name : \"" + getName() + ", edad : \"" + getEdad() + 
-//                ", sexo : \"" + getSexo() + ", tipoSangre : \""+ getTipoSangre()+ 
-//                ", eps : \""+ getEps()+ "\" }";
-//    }
+    @Override
+    public String toString() {
+        return "{ id : " + getId() + ", name : \"" + getName() + ", edad : \"" + getEdad() + 
+                ", sexo : \"" + getSexo() + ", tipoSangre : \""+ getTipoSangre()+ 
+                ", eps : \""+ getEps()+ "\" }";
+    }
  
 }

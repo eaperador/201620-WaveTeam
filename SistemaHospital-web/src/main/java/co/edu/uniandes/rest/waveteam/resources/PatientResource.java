@@ -7,11 +7,17 @@ package co.edu.uniandes.rest.waveteam.resources;
 
 import co.edu.uniandes.rest.waveteam.dtos.CitaDTO;
 import co.edu.uniandes.rest.waveteam.dtos.PatientDTO;
+import co.edu.uniandes.rest.waveteam.dtos.PatientDetailDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.CitaLogicException;
 import co.edu.uniandes.rest.waveteam.exceptions.PatientLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.PatientLogicMock;
+import co.edu.uniandes.waveteam.sistemahospital.api.IPacienteLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import java.util.ArrayList;
 
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -34,7 +40,20 @@ import javax.ws.rs.PUT;
 public class PatientResource {
 
     PatientLogicMock patientLogic = new PatientLogicMock();
+    
+    @Inject
+    IPacienteLogic pacienteLogic;
 
+    
+    
+    private List<PatientDetailDTO> convertEntityToDTO(List<PacienteEntity> entityList) {
+        List<PatientDetailDTO> list = new ArrayList<>();
+        for (PacienteEntity entity : entityList) {
+            list.add(new PatientDetailDTO(entity));
+        }
+        return list;
+    }
+    
     /**
      * Obtiene el listado de pacientes.
      *
@@ -42,8 +61,8 @@ public class PatientResource {
      * @throws PatientLogicException excepción retornada por la lógica
      */
     @GET
-    public List<PatientDTO> getPatients() throws PatientLogicException {
-        return patientLogic.getPatients();
+    public List<PatientDetailDTO> getPatients() throws PatientLogicException {
+        return convertEntityToDTO(pacienteLogic.findAllPacientes());
     }
     
      /**
@@ -54,8 +73,8 @@ public class PatientResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public PatientDTO getPatient (@PathParam("id") Long id) throws PatientLogicException{
-        return patientLogic.getPatient(id);
+    public PatientDetailDTO getPatient (@PathParam("id") Long id) throws PatientLogicException{
+        return new PatientDetailDTO(pacienteLogic.getPaciente(id));
     }
     
     /**
@@ -69,8 +88,10 @@ public class PatientResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public PatientDTO updatePatient (@PathParam("id") Long id, PatientDTO patient) throws PatientLogicException{
-        return patientLogic.updatePatient(id, patient);
+    public PatientDetailDTO updatePatient (@PathParam("id") Long id, PatientDetailDTO patient) throws PatientLogicException, WaveTeamLogicException{
+        PacienteEntity pacienteentity = patient.toEntity();
+        pacienteentity.setId(id);
+        return new PatientDetailDTO(pacienteLogic.updatePaciente(pacienteentity));
     }
     
     /**
@@ -81,7 +102,7 @@ public class PatientResource {
     @DELETE
     @Path("{id: \\d+}")
     public void deltePatient (@PathParam("id") Long id) throws PatientLogicException{
-        patientLogic.deletePatient(id);
+        pacienteLogic.deletePaciente(id);
     }
 
     /**
@@ -93,8 +114,9 @@ public class PatientResource {
      * suministrado
      */
     @POST
-    public PatientDTO createPatient(PatientDTO patient) throws PatientLogicException {
-        return patientLogic.createPatient(patient);
+    public PatientDetailDTO createPatient(PatientDetailDTO patient) throws PatientLogicException, WaveTeamLogicException {
+        
+        return new PatientDetailDTO(pacienteLogic.createPaciente(patient.toEntity()));
     }
     
     /**
@@ -106,14 +128,5 @@ public class PatientResource {
         return patientLogic.getCitas(id);
     }
     
-//    /**
-//     * informa las citas que tiene el paciente
-//     * 
-//     */
-//    @GET
-//    @Path("{id: \\d+}")
-//  public List<PatientDTO> getCitas (@PathParam("id") Long id) throws PatientLogicException, CitaLogicException
-//  {
-//      return patientLogic.getCitas(id);
-//  }
+
 }

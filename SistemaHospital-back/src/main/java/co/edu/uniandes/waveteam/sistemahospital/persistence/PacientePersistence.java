@@ -67,7 +67,7 @@ public class PacientePersistence {
      */
     public List<PacienteEntity> findAllCitasPaciente(Long Idpaciente) {
         LOGGER.log(Level.INFO, "consultandi todas las citas del paciente con id={0}", Idpaciente);
-        TypedQuery<PacienteEntity> query = em.createQuery("select u from PacienteEntity u where u.citas.paciente.id=:pId", PacienteEntity.class);
+        TypedQuery<PacienteEntity> query = em.createQuery("select u.paciente from CitaEntity u where u.paciente.id:pId", PacienteEntity.class);
         query = query.setParameter("pId", Idpaciente);
         return query.getResultList();
     }

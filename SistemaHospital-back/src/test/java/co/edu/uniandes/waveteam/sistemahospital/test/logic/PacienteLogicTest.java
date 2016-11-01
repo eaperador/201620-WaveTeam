@@ -7,6 +7,7 @@ package co.edu.uniandes.waveteam.sistemahospital.test.logic;
 
 import co.edu.uniandes.waveteam.sistemahospital.api.IPacienteLogic;
 import co.edu.uniandes.waveteam.sistemahospital.ejbs.PacienteLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
@@ -199,6 +200,42 @@ public class PacienteLogicTest {
     }
     
     /**
+     * 
+     * @throws WaveTeamLogicException 
+     */
+//    @Test(expected = WaveTeamLogicException.class)
+//    public void findNumCitasPacienteErrorTest() throws WaveTeamLogicException{
+//        Random random= new Random();
+//        int number = random.nextInt(8);
+//        PacienteEntity entity = data.get(number);
+//        
+//        for (int i = 0; i < 15; i++) {
+//            CitaEntity citaEntity = factory.manufacturePojo(CitaEntity.class);
+//            entity.addCita(citaEntity);
+//        }
+//        
+//        pacienteLogic.findNumCitasPaciente(entity.getId());
+//    }
+    
+    /**
+     * 
+     * @throws WaveTeamLogicException 
+     */
+//    @Test
+//    public void findNumCitasPacienteTest() throws WaveTeamLogicException{
+//        Random random= new Random();
+//        int number = random.nextInt(8);
+//        PacienteEntity entity = data.get(number);
+//        
+//        for (int i = 0; i < 10; i++) {
+//            CitaEntity citaEntity = factory.manufacturePojo(CitaEntity.class);
+//            entity.addCita(citaEntity);
+//        }
+//        
+//        pacienteLogic.findNumCitasPaciente(entity.getId());
+//    }
+    
+    /**
      * Prueba: Busca un Paciente con Id existente en la base de datos.
      */
     @Test
@@ -257,6 +294,8 @@ public class PacienteLogicTest {
             Assert.assertTrue(existe);
         }
     }
+    
+    
     
     
     

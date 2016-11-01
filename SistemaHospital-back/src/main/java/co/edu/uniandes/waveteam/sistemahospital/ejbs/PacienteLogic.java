@@ -53,15 +53,10 @@ public class PacienteLogic implements IPacienteLogic{
         
     }
     
-    public  List<PacienteEntity> findAllCitasPaciente(Long idPaciente)throws WaveTeamLogicException{
+    public void findNumCitasPaciente(Long idPaciente)throws WaveTeamLogicException{
         List<PacienteEntity> lista = pacientePercistence.findAllCitasPaciente(idPaciente);
         if(lista.size()>10){
-            return lista;
-//           lista.get(0).getCitas().get(0).setHabilitada(habilitada);
-        }
-        else
-        {
-            throw new WaveTeamLogicException("Un paciente NO puede tener mas de 10 citas");
+           throw new WaveTeamLogicException("Un paciente NO puede tener mas de 10 citas");
         }
     }
             
