@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.rest.waveteam.dtos;
 
+import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,6 +33,14 @@ public class EspecialidadDTO {
         this.tipo=tipo;
         this.doctores=doctores;
         this.citas=citas;
+    }
+    
+    public EspecialidadDTO(EspecialidadEntity entity){
+        this.id=entity.getId();
+        this.nombre=entity.getName();
+        this.gruposEdad=entity.getGruposEdad();
+        this.tipo=entity.getTipo();
+        
     }
     
     	public Long getId() {
@@ -81,6 +91,18 @@ public class EspecialidadDTO {
 		this.citas = citas;
 	}
         
+        
+    public EspecialidadEntity toEntity() {
+        
+        EspecialidadEntity entity = new EspecialidadEntity();
+        entity.setName(this.getNombre());
+        entity.setId(this.getId());
+        entity.setTipo(this.getTipo());
+        entity.setGruposEdad(this.getGruposEdad());
+        return entity;
+
+    }
+     
     @Override
     public String toString() {
         return "{ id : " + getId() + ", nombre : \"" + getNombre() + "\" }";

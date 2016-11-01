@@ -25,6 +25,6 @@ public interface IConsultaHistoricaLogic {
 
     public ConsultaHistoricaEntity createConsultaHistorica(EspecialidadEntity esp);
 
-    public void deleteEspecialidad(Long id);
+    public void deleteConsultaHistorica(Long id);
 
 }

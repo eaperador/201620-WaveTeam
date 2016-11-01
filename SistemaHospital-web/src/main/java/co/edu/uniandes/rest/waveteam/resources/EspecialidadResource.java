@@ -7,9 +7,11 @@ package co.edu.uniandes.rest.waveteam.resources;
 
 import co.edu.uniandes.rest.waveteam.dtos.EspecialidadDTO;
 import co.edu.uniandes.rest.waveteam.dtos.MedicoDTO;
-import co.edu.uniandes.rest.waveteam.exceptions.EspecialidadLogicException;
-import co.edu.uniandes.rest.waveteam.mocks.EspecialidadLogicMock;
+import co.edu.uniandes.waveteam.sistemahospital.api.IEspecialidadLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +20,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -28,7 +32,17 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 public class EspecialidadResource {
     
-    EspecialidadLogicMock espLogic = new EspecialidadLogicMock();
+    
+    @Inject
+    private IEspecialidadLogic espLogic;
+ 
+    private List<EspecialidadDTO> listEntity2DTO(List<EspecialidadEntity> entityList) {
+        List<EspecialidadDTO> list = new ArrayList<>();
+        for (EspecialidadEntity entity : entityList) {
+            list.add(new EspecialidadDTO(entity));
+        }
+        return list;
+    }
 
     /**
      * Obtiene el listado de especialidades.
@@ -37,14 +51,25 @@ public class EspecialidadResource {
      * @throws EspecialidadLogicException excepción retornada por la lógica
      */
     @GET
-    public List<EspecialidadDTO> getEspecialidades() throws EspecialidadLogicException {
-        return espLogic.getEspecialidades();
+    public List<EspecialidadDTO> getEspecialidades() throws Exception {
+        return listEntity2DTO(espLogic.getEspecialidades());
     }
 
     @GET
     @Path("{id: \\d+}")
-    public EspecialidadDTO getEspecialidad(@PathParam("id") Long id) throws EspecialidadLogicException {
-        return espLogic.getEspecialidad(id);
+    public EspecialidadDTO getEspecialidad(@PathParam("id") Long id) throws Exception {
+        return new EspecialidadDTO(espLogic.getEspecialidad(id));
+    }
+    
+    @GET
+    @Path("name")
+    public EspecialidadDTO getEspecialidadByName(@QueryParam("name") String name) {
+        EspecialidadEntity entity = espLogic.getEspecialidadPorNombre(name);
+        if (entity == null) {
+            throw new WebApplicationException("La compañía no existe", 404);
+        } else {
+            return new EspecialidadDTO(entity);
+        }
     }
 
     /**
@@ -52,12 +77,14 @@ public class EspecialidadResource {
      * @param id
      * @param especialidad
      * @return
-     * @throws EapecialidadLogicException 
      */
     @PUT
     @Path("{id: \\d+}")
-    public EspecialidadDTO updateEspecialidad(@PathParam("id") Long id, EspecialidadDTO especialidad) throws EspecialidadLogicException {
-        return espLogic.updateEspecialidad(id, especialidad);
+    public EspecialidadDTO updateEspecialidad(@PathParam("id") Long id, EspecialidadDTO especialidad) throws Exception {
+        
+        EspecialidadEntity entity =especialidad.toEntity();
+        entity.setId(id);
+        return new EspecialidadDTO(espLogic.updateEspecialidad(entity));
     }
 
     /**
@@ -69,8 +96,8 @@ public class EspecialidadResource {
      * suministrado
      */
     @POST
-    public EspecialidadDTO createEspecialidad(EspecialidadDTO especialidad) throws EspecialidadLogicException {
-        return espLogic.createEspecialidad(especialidad);
+    public EspecialidadDTO createEspecialidad(EspecialidadDTO especialidad) throws Exception {
+        return new EspecialidadDTO(espLogic.createEspecialidad(especialidad.toEntity()));
     }
 
     /**
@@ -80,20 +107,8 @@ public class EspecialidadResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteEspecialidad(@PathParam("id") Long id) throws EspecialidadLogicException {
+    public void deleteEspecialidad(@PathParam("id") Long id) throws Exception {
         espLogic.deleteEspecialidad(id);
     }
-    
-    
-    @GET
-    @Path("{id: \\d+}/doctores")
-    public List<MedicoDTO> getDoctoresPorEspecialidad(@PathParam("id") Long id) throws EspecialidadLogicException {
-        return espLogic.getDoctoresPorEspecialidad(id);
-    }
-    
-     @GET
-    @Path("{id: \\d+}/citas")
-    public List<MedicoDTO> getCitasPorEspecialidad(@PathParam("id") Long id) throws EspecialidadLogicException {
-        return espLogic.getDoctoresPorEspecialidad(id);
-    }
+ 
 }

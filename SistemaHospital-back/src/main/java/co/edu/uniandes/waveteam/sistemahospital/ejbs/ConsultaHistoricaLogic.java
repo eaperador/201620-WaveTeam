@@ -11,13 +11,14 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.ConsultaHistoricaPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 
 /**
  *
  * @author d.marino10
  */
+@Stateless
 public class ConsultaHistoricaLogic implements IConsultaHistoricaLogic{
 
     @Inject
@@ -39,22 +40,25 @@ public class ConsultaHistoricaLogic implements IConsultaHistoricaLogic{
     
     @Override
     public List<ConsultaHistoricaEntity> getConsultasHistoricasPorFecha(String fecha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return persistence.findAllInFecha(fecha);
     }
 
     @Override
     public ConsultaHistoricaEntity getConsultaHistorica(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return persistence.find(id);
     }
 
     @Override
     public ConsultaHistoricaEntity createConsultaHistorica(EspecialidadEntity esp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ConsultaHistoricaEntity c = new ConsultaHistoricaEntity();
+        c.setEspecialidad(esp);
+        c.setNumeroDoctores(esp.getDoctores().size());
+        return persistence.create(c);
     }
 
     @Override
-    public void deleteEspecialidad(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteConsultaHistorica(Long id) {
+        persistence.delete(id);
     }
       
 }
