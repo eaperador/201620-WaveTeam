@@ -18,4 +18,5 @@ public interface IPacienteLogic {
     public  PacienteEntity  findPacienteByName (String name);
     public  PacienteEntity  findPacienteByID(Long id);
     public  List<PacienteEntity> findAllPacientes(); 
+    public  void findNumCitasPaciente(Long idPaciente)throws WaveTeamLogicException;
 }

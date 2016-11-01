@@ -72,5 +72,9 @@ public class PacienteEntity extends BaseEntity implements Serializable{
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
+    
+    public void addCita (CitaEntity cita){
+        citas.add(cita);
+    }
   
 }
