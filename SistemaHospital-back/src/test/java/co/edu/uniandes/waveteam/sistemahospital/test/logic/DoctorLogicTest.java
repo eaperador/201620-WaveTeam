@@ -161,7 +161,8 @@ public class DoctorLogicTest {
      */
     @Test
     public void createDoctorTest(){
-        DoctorEntity entity = factory.manufacturePojo(DoctorEntity.class);
+        try{
+                    DoctorEntity entity = factory.manufacturePojo(DoctorEntity.class);
         logic.createDoctor(entity);
         DoctorEntity result = logic.getDoctorById(entity.getId());
 
@@ -169,6 +170,10 @@ public class DoctorLogicTest {
         Assert.assertEquals(entity.getName(), result.getName());
         Assert.assertEquals(entity.getId(), result.getId());
         Assert.assertEquals(entity.getEspecialidad().getName(), result.getEspecialidad().getName());
+        } catch(Exception e){
+            e.printStackTrace();
+            Assert.fail();
+        }
     }
 
     /**
