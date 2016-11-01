@@ -3,10 +3,10 @@
  * Objeto de transferencia de datos de Patient.
  */
 package co.edu.uniandes.rest.waveteam.dtos;
-
+import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
-//import SistemaHospital-back.target.classes.co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
+
 /**
  * @author je.ardila1501
  */
@@ -19,7 +19,8 @@ public class PatientDTO {
     private int edad;
     private String tipoSangre;
     private String eps;
-    private List<CitaDTO> citas;
+    private String tipoDocumento;
+    
     /**
      * Constructor por defecto
      */
@@ -31,8 +32,45 @@ public class PatientDTO {
      * 
      * @param entity 
      */
-//     public PatientDTO(PacienteEntity entity) {
-//        if (entity != null) {
+     public PatientDTO(PacienteEntity entity) {
+        if (entity != null) {
+        this.id = id;
+        this.name = name;
+        this.edad=edad;
+        this.sexo=sexo;
+        this.tipoSangre=tipoSangre;
+        this.eps=eps;
+        }
+    }
+     
+    /**
+     * 
+     * @return 
+     */
+     public PacienteEntity toEntity() {
+        PacienteEntity entity = new PacienteEntity();
+        entity.setName(this.getName());
+        entity.setId(this.getId());
+        entity.setEdad(this.edad);
+        entity.setSexo(this.sexo);
+        entity.setEps(this.eps);
+        entity.setTipoSangre(this.tipoSangre);
+        entity.setTipoDocumento(this.tipoDocumento);
+        return entity;
+    }
+
+//    /**
+//     * Constructor con parámetros.
+//     * @param id
+//     * @param name
+//     * @param sexo
+//     * @param edad
+//     * @param tipoSangre
+//     * @param eps 
+//     * @param pcorreo
+//     * @param pcitas 
+//     */
+//    public PatientDTO(Long id, String name,int edad, String sexo , String tipoSangre, String eps) {
 //        this.id = id;
 //        this.name = name;
 //        this.edad=edad;
@@ -40,44 +78,22 @@ public class PatientDTO {
 //        this.tipoSangre=tipoSangre;
 //        this.eps=eps;
 //        this.citas = null;
-//        }
+//        
 //    }
-
-    /**
-     * Constructor con parámetros.
-     * @param id
-     * @param name
-     * @param sexo
-     * @param edad
-     * @param tipoSangre
-     * @param eps 
-     * @param pcorreo
-     * @param pcitas 
-     */
-    public PatientDTO(Long id, String name,int edad, String sexo , String tipoSangre, String eps) {
-        this.id = id;
-        this.name = name;
-        this.edad=edad;
-        this.sexo=sexo;
-        this.tipoSangre=tipoSangre;
-        this.eps=eps;
-        this.citas = null;
-        
-    }
-
-    public List<CitaDTO> getCitas() {
-        return citas;
-    }
-
-    public void setCitas(List<CitaDTO> citas) {
-        this.citas = citas;
-    }
 
     /**
      * @return the id
      */
     public Long getId() {
         return id;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
     /**
@@ -196,21 +212,11 @@ public class PatientDTO {
      /**
      * Convierte el objeto a una cadena
      */
-    @Override
-    public String toString() {
-        return "{ id : " + getId() + ", name : \"" + getName() + ", edad : \"" + getEdad() + 
-                ", sexo : \"" + getSexo() + ", tipoSangre : \""+ getTipoSangre()+ 
-                ", eps : \""+ getEps()+ "\" }";
-    }
-     
-     
-//    /**
-//     * Convierte el objeto a una cadena
-//     */
 //    @Override
 //    public String toString() {
 //        return "{ id : " + getId() + ", name : \"" + getName() + ", edad : \"" + getEdad() + 
 //                ", sexo : \"" + getSexo() + ", tipoSangre : \""+ getTipoSangre()+ 
-//                ", eps : \""+ getEps()+ ", correo : \""+ getCorreo()+ "\" }";
+//                ", eps : \""+ getEps()+ "\" }";
 //    }
+ 
 }

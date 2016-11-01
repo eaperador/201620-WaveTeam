@@ -6,6 +6,7 @@
 package co.edu.uniandes.rest.waveteam.dtos;
 
 
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import java.util.ArrayList;
 
 /**
@@ -30,6 +31,35 @@ public class CitaDTO {
         
     }
     
+    //***********************************************************************
+    //CAMBIOS PARA QUITAR ERRORES EN PACIENTDETAIL
+    
+    public CitaDTO(CitaEntity entity){
+        if (entity != null) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.duracion = duracion;
+        this.medico = medico;
+        this.paciente = paciente; 
+        this.habilitada = habilitada;
+        }
+    }
+    
+    
+    public CitaEntity toEntity() {
+        CitaEntity entity = new CitaEntity();
+        entity.setDuracion(duracion);
+        entity.setFecha(fecha);
+        entity.setHabilitada(habilitada);
+        entity.setHora(hora);
+        entity.setId(id);
+        entity.setName(fecha);
+        return entity;
+    }
+   
+     //***********************************************************************
+    
     public CitaDTO(Long id, String fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
         this.id = id;
         this.fecha = fecha;
@@ -40,6 +70,9 @@ public class CitaDTO {
         this.habilitada = habilitada;
 
     }
+    
+    
+    
     
     public Long getId(){
         return id;
