@@ -32,7 +32,7 @@ public interface IDoctorLogic {
     public DoctorEntity getDoctorByName(String doctorName) throws WaveTeamLogicException;
 
     /**
-     * Get all doctors with the given speciality.
+     * Get all doctors with the given specialty.
      * @param especialidad
      * @return
      */
@@ -42,11 +42,12 @@ public interface IDoctorLogic {
      * Create a new doctor
      * @param doctorEntity
      */
-    public void createDoctor(DoctorEntity doctorEntity);
+    public void createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException;
 
     /**
      * Update a doctor.
      * @param doctorEntity
+     * @throws WaveTeamLogicException 
      */
     public void updateDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException;
 

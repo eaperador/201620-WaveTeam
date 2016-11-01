@@ -10,6 +10,7 @@ import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.MedicoLogicMock;
 import co.edu.uniandes.waveteam.sistemahospital.api.*;
 import co.edu.uniandes.waveteam.sistemahospital.entities.*;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -48,9 +49,9 @@ public class MedicoResource {
     private IDoctorLogic logic;
     
     /**
-     * Obtiene el listado de médicos.
+     * Get all doctors.
      *
-     * @return lista de médicos
+     * @return List with all the doctors
      * @throws WebApplicationException 
      */
     @GET
@@ -78,7 +79,7 @@ public class MedicoResource {
     }
 
     /**
-     * 
+     * Update a doctor
      * @param id
      * @param doctor
      * @return
@@ -86,12 +87,17 @@ public class MedicoResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public MedicoDTO updateDoctor(@PathParam("id") Long id, MedicoDTO doctor) throws MedicoLogicException {
-        return cityLogic.updateDoctor(id, doctor);
+    public MedicoDTO updateDoctor(@PathParam("id") Long id, MedicoDTO doctor) throws WebApplicationException {
+        try{
+            logic.updateDoctor(doctor.toEntity());
+        } catch (WaveTeamLogicException w){
+             throw new WebApplicationException(w.getMessage(), Response.Status.BAD_REQUEST);
+        }
+        return new MedicoDTO(logic.getDoctorById(id));
     }
     
     /**
-     * Asigna un consultorio a un médico
+     * Assign a consulting room to a doctor
      * @param idMedico
      * @param idConsultorio
      * @return
@@ -104,32 +110,58 @@ public class MedicoResource {
     }
     
     /**
-     * Agrega un médico
-     *
+     * Create a new doctor
      * @param doctor
-     * @return doctor2 Datos del médico agregado
+     * @return Created doctor
      * @throws MedicoLogicException cuando ya existe un médico con la cédula
      * suministrada
      */
     @POST
     public MedicoDTO createDoctor(MedicoDTO doctor) throws MedicoLogicException {
-        return cityLogic.createDoctor(doctor);
+        try{
+            logic.createDoctor(doctor.toEntity());
+        } catch (Exception w){
+            throw new WebApplicationException(w.getMessage(), Response.Status.BAD_REQUEST);
+        }
+        
+        return new MedicoDTO(logic.getDoctorById(doctor.getId()));
     }
 
+    /**
+     * Delete a doctor
+     * @param id
+     * @throws MedicoLogicException 
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteDoctor(@PathParam("id") Long id) throws MedicoLogicException {
-        cityLogic.deleteDoctor(id);
+        try{
+            logic.deleteDoctor(id);
+        } catch (WaveTeamLogicException w){
+            throw new WebApplicationException(w.getMessage(), Response.Status.BAD_REQUEST);
+        }
     }
     
     //REQUERIMIENTOS R4 Y R7 - MEDICO Y SUS DISPONIBILIDADES
 
+    /**
+     * 
+     * @param id
+     * @param days
+     * @throws MedicoLogicException 
+     */
     @POST
     @Path("{id: \\d+}/disponibilidad/")
     public void setDisponibilidad(@PathParam("id") Long id, ArrayList days) throws MedicoLogicException {
         cityLogic.definirHorarioMedico(id, days);
     }
 
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws MedicoLogicException 
+     */
     @GET
     @Path("{id: \\d+}/disponibilidad/")
     public List<CitaDTO> getDisponibilidad(@PathParam("id") Long id) throws MedicoLogicException {
