@@ -39,20 +39,20 @@ public class CitaLogicMock {
     public CitaLogicMock(){
         
         if(citas==null){
-            PatientDTO paciente1 = new PatientDTO(1L, "Pepe Pombo", 35 , "Hombre", "A-", "SaludCoop");
-            PatientDTO paciente2 = new PatientDTO(2L, "Magdalena Mejia", 28 , "Mujer", "o+", "CafeSalud");
-            PatientDTO paciente3 = new PatientDTO(3L, "Silvio Salgar", 52 , "Hombre", "b-", "SonrisaSalud");
-            MedicoDTO doctor1 = new MedicoDTO(1L, "Pedro Pablo Jaramillo", "Cardiologia", 301L, new ArrayList<CitaDTO>());
-            MedicoDTO doctor2 = new MedicoDTO(5L, "Jairo Aristizabal", "Neumologia", 305L, new ArrayList<CitaDTO>());
-            MedicoDTO doctor3 = new MedicoDTO(6L, "Carlos Diaz", "Pediatría", 320L, new ArrayList<CitaDTO>());
-            MedicoDTO doctor4 = new MedicoDTO(3L, "Fernando Vallejo", "Traumatologia", 320L, new ArrayList<CitaDTO>());
+            //PatientDTO paciente1 = new PatientDTO(1L, "Pepe Pombo", 35 , "Hombre", "A-", "SaludCoop");
+            //PatientDTO paciente2 = new PatientDTO(2L, "Magdalena Mejia", 28 , "Mujer", "o+", "CafeSalud");
+            //PatientDTO paciente3 = new PatientDTO(3L, "Silvio Salgar", 52 , "Hombre", "b-", "SonrisaSalud");
+            //MedicoDTO doctor1 = new MedicoDTO(1L, "Pedro Pablo Jaramillo", "Cardiologia", 301L, new ArrayList<CitaDTO>());
+            //MedicoDTO doctor2 = new MedicoDTO(5L, "Jairo Aristizabal", "Neumologia", 305L, new ArrayList<CitaDTO>());
+            //MedicoDTO doctor3 = new MedicoDTO(6L, "Carlos Diaz", "Pediatría", 320L, new ArrayList<CitaDTO>());
+           // MedicoDTO doctor4 = new MedicoDTO(3L, "Fernando Vallejo", "Traumatologia", 320L, new ArrayList<CitaDTO>());
             citas = new ArrayList<>();
-            citas.add(new CitaDTO(1L, "17/08/2016", 1471352400000L, 30,doctor1 , paciente1, "Habilitada"));
-            citas.add(new CitaDTO(2L, "01/09/2016", 1471352400000L, 15,doctor2 , paciente2, "Cancelada"));
-            citas.add(new CitaDTO(3L, "18/8/2016", (1471352400000L + 86400000L) ,15, doctor3, paciente2, "Habilitada"));
-            citas.add(new CitaDTO(4L, "15/10/2016", (1471352400000L + 86400000L) ,30, doctor2, paciente2, "Habilitada"));
-            citas.add(new CitaDTO(5L, "19/8/2016", 1471352400000L + (2*86400000L),15, doctor3,paciente3, "Cancelada"));
-            citas.add(new CitaDTO(6L, "31/12/2016", 1471352400000L + (2*86400000L),30, doctor1,paciente3, "Habilitada"));
+            citas.add(new CitaDTO(1L, "17/08/2016", 1471352400000L, 30,1L , 1L, "Habilitada"));
+            citas.add(new CitaDTO(2L, "01/09/2016", 1471352400000L, 15,2L , 2L, "Cancelada"));
+            citas.add(new CitaDTO(3L, "18/8/2016", (1471352400000L + 86400000L) ,15, 3L, 2L, "Habilitada"));
+            citas.add(new CitaDTO(4L, "15/10/2016", (1471352400000L + 86400000L) ,30, 2L, 2L, "Habilitada"));
+            citas.add(new CitaDTO(5L, "19/8/2016", 1471352400000L + (2*86400000L),15, 3L,3L, "Cancelada"));
+            citas.add(new CitaDTO(6L, "31/12/2016", 1471352400000L + (2*86400000L),30, 1L,3L, "Habilitada"));
 
         }    
         
@@ -222,7 +222,7 @@ public class CitaLogicMock {
             throw new CitaLogicException("La lista de citas no ha sido inicializada");
         }
         for (CitaDTO cita : citas){
-            Long idMedico = cita.getMedico().getId();
+            Long idMedico = cita.getMedico();
             
             if(medico==idMedico){
                 MedicoDTO medic = mlm.getDoctor(medico);
