@@ -9,6 +9,7 @@ import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.Session;
 import java.util.List;
 
 /**
@@ -48,8 +49,6 @@ public class DoctorLogic implements IDoctorLogic {
      */
     @Override
     public DoctorEntity getDoctorByName(String doctorName) throws WaveTeamLogicException {
-        if (doctorName.split("\\s+").length == 1)
-            throw new WaveTeamLogicException("You must specify a longer name, only a name is too general");
         return persistence.findByName(doctorName);
     }
 
