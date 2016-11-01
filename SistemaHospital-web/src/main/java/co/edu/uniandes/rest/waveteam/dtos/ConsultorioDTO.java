@@ -24,7 +24,6 @@ public class ConsultorioDTO {
     // Un consultorio puede estar asignado a muchos doctores
     private List<MedicoDTO> doctoresAsignados = new ArrayList<MedicoDTO>();
     
-    
     /**
      * Constructor vacío
      */
