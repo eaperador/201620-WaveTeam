@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.waveteam.sistemahospital.persistence;
 
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,5 +58,17 @@ public class PacientePersistence {
         LOGGER.log(Level.INFO,"Borrando paciente con id={0}",id);
         PacienteEntity entity = em.find(PacienteEntity.class,id);
         em.remove(entity);
+    }
+    
+    /**
+     * 
+     * @param Id del paciente.
+     * @return 
+     */
+    public List<PacienteEntity> findAllCitasPaciente(Long Idpaciente) {
+        LOGGER.log(Level.INFO, "consultandi todas las citas del paciente con id={0}", Idpaciente);
+        TypedQuery<PacienteEntity> query = em.createQuery("select u from PacienteEntity u where u.citas.paciente.id=:pId", PacienteEntity.class);
+        query = query.setParameter("pId", Idpaciente);
+        return query.getResultList();
     }
 }

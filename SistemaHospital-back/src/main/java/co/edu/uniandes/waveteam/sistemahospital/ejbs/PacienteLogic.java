@@ -7,6 +7,7 @@ package co.edu.uniandes.waveteam.sistemahospital.ejbs;
 
 import co.edu.uniandes.waveteam.sistemahospital.api.IPacienteLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +30,41 @@ public class PacienteLogic implements IPacienteLogic{
         pacientePercistence.delete(id);
     }
     
-    public PacienteEntity updatePaciente(PacienteEntity paciente){
-        return pacientePercistence.update(paciente);
+    public PacienteEntity updatePaciente(PacienteEntity paciente) throws WaveTeamLogicException{ 
+        PacienteEntity entity = getPaciente(paciente.getId());
+        if(entity==null){
+            throw new WaveTeamLogicException("No existe un paciente con ese id");
+        }
+        else{
+           return pacientePercistence.update(paciente);
+        }
+        
     }
     
     
-    public PacienteEntity createPaciente(PacienteEntity paciente){
-        return pacientePercistence.create(paciente);
+    public PacienteEntity createPaciente(PacienteEntity paciente) throws WaveTeamLogicException{
+        PacienteEntity entity = getPaciente(paciente.getId());
+        if(entity!=null){
+            throw new WaveTeamLogicException("ya existe un paciente con ese id");
+        }
+        else{
+           return pacientePercistence.create(paciente); 
+        }
+        
     }
+    
+    public  List<PacienteEntity> findAllCitasPaciente(Long idPaciente)throws WaveTeamLogicException{
+        List<PacienteEntity> lista = pacientePercistence.findAllCitasPaciente(idPaciente);
+        if(lista.size()>10){
+            return lista;
+//           lista.get(0).getCitas().get(0).setHabilitada(habilitada);
+        }
+        else
+        {
+            throw new WaveTeamLogicException("Un paciente NO puede tener mas de 10 citas");
+        }
+    }
+            
     
     public PacienteEntity findPacienteByName (String name){
         return pacientePercistence.findByName(name);
