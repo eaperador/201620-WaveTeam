@@ -5,10 +5,33 @@
  */
 package co.edu.uniandes.waveteam.sistemahospital.api;
 
+import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultorioEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import java.util.List;
+
 /**
  *
  * @author r.garcia11
  */
 public interface IConsultorioLogic {
     
+    public List<ConsultorioEntity> getConsultorios();
+            
+    public ConsultorioEntity getConsultorio(Long id);
+
+    public ConsultorioEntity updateConsultorio(ConsultorioEntity consultorioActualizado) throws WaveTeamLogicException;
+
+    public ConsultorioEntity createConsultorio(ConsultorioEntity consultorio) throws WaveTeamLogicException;
+
+    public void deleteConsultorio(Long id) throws WaveTeamLogicException;
+
+    public ConsultorioEntity unasignDoctors(Long id) throws WaveTeamLogicException;
+
+    public ConsultorioEntity unasignDoctor(Long idConsultorio, Long idDoctor) throws WaveTeamLogicException;
+
+    public ConsultorioEntity asignDoctor(Long idConsultorio, DoctorEntity doc) throws WaveTeamLogicException;
+
+    public ConsultorioEntity asignDoctors(Long idConsultorio, List<DoctorEntity> docs) throws WaveTeamLogicException;
+
 }

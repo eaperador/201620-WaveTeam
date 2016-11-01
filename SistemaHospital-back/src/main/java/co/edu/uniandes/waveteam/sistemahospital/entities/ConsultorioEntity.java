@@ -8,8 +8,10 @@ package co.edu.uniandes.waveteam.sistemahospital.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -18,8 +20,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class ConsultorioEntity extends BaseEntity implements Serializable{
     
+    @PodamExclude
     @OneToMany
-    private List<DoctorEntity> doctoresAsignados = new ArrayList<DoctorEntity>();
+    private List<DoctorEntity> doctoresAsignados = new ArrayList();
     
     private String nombre;
     private String horario;
@@ -50,28 +53,32 @@ public class ConsultorioEntity extends BaseEntity implements Serializable{
         this.unidadCuidadosIntensivos = unidadCuidadosIntensivos;
     }
     
-//    public List<DoctorEntity> getDoctoresAsignados(){
-//        return doctoresAsignados;
-//    }
+    public List<DoctorEntity> getDoctoresAsignados(){
+        return doctoresAsignados;
+    }
     
-//    public void setDoctoresAsignados(List<DoctorEntity> doctoresAsignados){
-//        this.doctoresAsignados = doctoresAsignados;
-//    }
+    public void setDoctoresAsignados(List<DoctorEntity> doctoresAsignados){
+        this.doctoresAsignados = doctoresAsignados;
+    }
     
-//    public void agregarDoctorAsignado(DoctorEntity doc){
-//        doctoresAsignados.add(doc);
-//    }
+    public void agregarDoctorAsignado(DoctorEntity doc){
+        doctoresAsignados.add(doc);
+    }
     
-//    public boolean eliminarDoctorAsignado(Long idDoctor)
-//    {
-//        for (DoctorEntity doc: doctoresAsignados)
-//        {
-//            if (Objects.equals(doc.getId(), idDoctor))
-//            {
-//                doctoresAsignados.remove(doc);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean eliminarDoctorAsignado(Long idDoctor)
+    {
+        for (DoctorEntity doc: doctoresAsignados)
+        {
+            if (Objects.equals(doc.getId(), idDoctor))
+            {
+                doctoresAsignados.remove(doc);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void elminarDoctores() {
+        doctoresAsignados.clear();
+    }
 }
