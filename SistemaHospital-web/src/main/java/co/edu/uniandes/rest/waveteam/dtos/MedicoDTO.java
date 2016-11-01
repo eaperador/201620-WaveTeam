@@ -6,7 +6,8 @@ package co.edu.uniandes.rest.waveteam.dtos;
 
 import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
 import co.edu.uniandes.rest.waveteam.mocks.MedicoLogicMock;
-
+import co.edu.uniandes.waveteam.sistemahospital.entities.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
 import java.util.logging.Logger;
 /**
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Asistente
  */
+@XmlRootElement
 public class MedicoDTO {
     private Long id;
     private String name;
@@ -26,6 +28,14 @@ public class MedicoDTO {
      */
     public MedicoDTO() {
 
+    }
+
+    public MedicoDTO(DoctorEntity entity){
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.especialidad = entity;
+        this.consultorio = consultorio;
+        this.disponibilidad = dispo;
     }
 
     public MedicoDTO(Long id, String name, String especialidad, Long consultorio, ArrayList<CitaDTO> dispo) {
