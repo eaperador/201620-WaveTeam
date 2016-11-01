@@ -48,13 +48,13 @@ public interface IDoctorLogic {
      * Update a doctor.
      * @param doctorEntity
      */
-    public void updateDoctor(DoctorEntity doctorEntity);
+    public void updateDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException;
 
     /**
      * Delete the doctor with the given id.
      * @param doctorId
      */
-    public void deleteDoctor(Long doctorId);
+    public void deleteDoctor(Long doctorId) throws WaveTeamLogicException;
 
 
 }

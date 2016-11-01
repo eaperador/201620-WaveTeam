@@ -156,6 +156,9 @@ public class DoctorLogicTest {
         }
     }
 
+    /**
+     * Create a new doctor test
+     */
     @Test
     public void createDoctorTest(){
         DoctorEntity entity = factory.manufacturePojo(DoctorEntity.class);
@@ -168,5 +171,76 @@ public class DoctorLogicTest {
         Assert.assertEquals(entity.getEspecialidad().getName(), result.getEspecialidad().getName());
     }
 
-    
+    /**
+     * Update a doctor test 1
+     */
+    @Test
+    public void updateDoctorTest1(){
+        try{
+            DoctorEntity newEntity = factory.manufacturePojo(DoctorEntity.class);
+            DoctorEntity entity = data.get(0);
+            newEntity.setId(entity.getId());
+            logic.updateDoctor(newEntity);
+
+            entity = logic.getDoctorById(entity.getId());
+            Assert.assertNotNull(entity);
+            Assert.assertEquals(entity.getName(), newEntity.getName());
+            Assert.assertEquals(entity.getId(), newEntity.getId());
+            Assert.assertEquals(entity.getEspecialidad().getName(), newEntity.getEspecialidad().getName());
+        } catch (WaveTeamLogicException w){
+            w.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * Update a doctor test 2
+     */
+    @Test
+    public void updateDoctorTest2(){
+        try{
+            DoctorEntity newEntity = factory.manufacturePojo(DoctorEntity.class);
+            DoctorEntity entity = data.get(2);
+            newEntity.setId(574389654L);
+            logic.updateDoctor(newEntity);
+
+            Assert.fail();
+        } catch (WaveTeamLogicException w){
+
+        }
+    }
+
+    /**
+     * Delete a doctor test 1
+     */
+    @Test
+    public void deleteDoctorTest1(){
+        try{
+            DoctorEntity entity = data.get(0);
+            logic.deleteDoctor(entity.getId());
+
+            entity = logic.getDoctorById(entity.getId());
+            Assert.assertNull(entity);
+        } catch (WaveTeamLogicException w){
+            w.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    /**
+     * Delete a doctor test 2
+     */
+    @Test
+    public void deleteDoctorTest2(){
+        try{
+            logic.deleteDoctor(645796403L);
+
+            Assert.fail();
+        } catch (WaveTeamLogicException w){
+
+        }
+    }
+
+
+
 }
