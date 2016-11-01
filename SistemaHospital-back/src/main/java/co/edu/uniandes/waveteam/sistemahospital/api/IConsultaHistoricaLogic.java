@@ -23,7 +23,7 @@ public interface IConsultaHistoricaLogic {
 
     public ConsultaHistoricaEntity getConsultaHistorica(Long id);
 
-    public ConsultaHistoricaEntity createConsultaHistorica(EspecialidadEntity esp);
+    public ConsultaHistoricaEntity createConsultaHistorica(String nombreEsp);
 
     public void deleteConsultaHistorica(Long id);
 
