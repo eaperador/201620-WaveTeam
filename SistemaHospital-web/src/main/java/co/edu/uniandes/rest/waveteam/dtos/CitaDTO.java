@@ -22,8 +22,8 @@ public class CitaDTO {
     private String fecha;
     private Long hora;
     private int duracion;
-    private Long medico;
-    private Long paciente;
+    private MedicoDTO doctor;
+    private PatientDTO paciente;
     private String habilitada;
     
     
@@ -40,7 +40,7 @@ public class CitaDTO {
         this.fecha = fecha;
         this.hora = hora;
         this.duracion = duracion;
-        this.medico = medico;
+        this.doctor = doctor;
         this.paciente = paciente; 
         this.habilitada = habilitada;
         }
@@ -60,12 +60,12 @@ public class CitaDTO {
    
      //***********************************************************************
     
-    public CitaDTO(Long id, String fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
+    public CitaDTO(Long id, String fecha, Long hora, int duracion, MedicoDTO medico, PatientDTO paciente, String habilitada){
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.duracion = duracion;
-        this.medico = medico;
+        this.doctor = doctor;
         this.paciente = paciente; 
         this.habilitada = habilitada;
 
@@ -112,21 +112,21 @@ public class CitaDTO {
     }
     
     
-    public Long getMedico(){
-        return medico;
+    public MedicoDTO getMedico(){
+        return doctor;
     }
     
-    public void setMedico(Long medico){
-        this.medico = medico;
+    public void setMedico(MedicoDTO doctor){
+        this.doctor = doctor;
     }
     
     
-    public Long getPaciente(){
+    public PatientDTO getPaciente(){
         return paciente;
     }
     
     
-    public void setPaciente(Long paciente){
+    public void setPaciente(PatientDTO paciente){
         this.paciente = paciente;
     }
     
@@ -154,8 +154,8 @@ public class CitaDTO {
                 ", fecha : " + fecha + 
                 ", hora : " +hora + 
                 ", duracion : " + duracion + 
-                ", medico : " + medico + 
-                ", paciente : " + paciente +
+                ", medico : " + doctor.toString() + 
+                ", paciente : " + paciente.toString() +
                 ", habilitada : " + habilitada 
                 +" }";
     }
