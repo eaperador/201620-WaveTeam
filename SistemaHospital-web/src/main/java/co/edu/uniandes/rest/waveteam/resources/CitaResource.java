@@ -10,10 +10,13 @@ import co.edu.uniandes.rest.waveteam.dtos.CitaDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.CitaLogicException;
 import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
+import co.edu.uniandes.waveteam.sistemahospital.api.ICitaLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -36,11 +39,22 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 public class CitaResource {
     
+    @Inject
+    private ICitaLogic citLogic;
+    
     CitaLogicMock citaLogic = new CitaLogicMock();
 
  //   public CitaResource() throws ParseException {
    //     this.citaLogic = new AppLogicMock();
   //  }
+    
+    private List<CitaDTO> listaEntity(List<CitaEntity> listaECitas){
+        List<CitaDTO> lista = new ArrayList();
+        for(CitaEntity cita : listaECitas){
+            lista.add(new CitaDTO(cita));
+        }
+        return lista;
+    }
     
     /**
      * Obtiene el listado de citas
@@ -49,14 +63,14 @@ public class CitaResource {
      */
     @GET
     public List<CitaDTO> getCitas() throws CitaLogicException{
-        return citaLogic.getCitas();
+        return listaEntity(citLogic.getCitas());
     }
     
     
     @GET
     @Path("{id: \\d+}")
     public CitaDTO getCita(@PathParam("id") Long id) throws CitaLogicException {
-        return citaLogic.getCita(id);
+        return new  CitaDTO( citLogic.getCita(id));
     }
     
     /**
@@ -69,7 +83,9 @@ public class CitaResource {
     @PUT
     @Path("{id: \\d+}")
     public CitaDTO updateCita(@PathParam("id") Long id, CitaDTO cita) throws CitaLogicException{
-        return citaLogic.updateCita(id, cita);
+        CitaEntity citaE = cita.toEntity();
+        citaE.setId(id);
+        return new CitaDTO (citLogic.updateCita(citaE));
     }
     
     /**
@@ -81,7 +97,7 @@ public class CitaResource {
      */
     @POST
     public CitaDTO createCita(CitaDTO cita) throws CitaLogicException{
-        return citaLogic.crearCita(cita);
+        return new CitaDTO(citLogic.createCita(cita.toEntity()));
     }
     
     
@@ -94,7 +110,7 @@ public class CitaResource {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCita(@PathParam("id") Long id) throws CitaLogicException {
-        citaLogic.deleteCita(id);
+        citLogic.deleteCita(id);
     }
     
     
