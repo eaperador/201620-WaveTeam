@@ -59,27 +59,26 @@ public class PatientDTO {
         return entity;
     }
 
-//    /**
-//     * Constructor con parámetros.
-//     * @param id
-//     * @param name
-//     * @param sexo
-//     * @param edad
-//     * @param tipoSangre
-//     * @param eps 
-//     * @param pcorreo
-//     * @param pcitas 
-//     */
-//    public PatientDTO(Long id, String name,int edad, String sexo , String tipoSangre, String eps) {
-//        this.id = id;
-//        this.name = name;
-//        this.edad=edad;
-//        this.sexo=sexo;
-//        this.tipoSangre=tipoSangre;
-//        this.eps=eps;
-//        this.citas = null;
-//        
-//    }
+    /**
+     * Constructor con parámetros.
+     * @param id
+     * @param name
+     * @param sexo
+     * @param edad
+     * @param tipoSangre
+     * @param eps 
+     * @param pcorreo
+     * @param pcitas 
+     */
+    public PatientDTO(Long id, String name,int edad, String sexo , String tipoSangre, String eps) {
+        this.id = id;
+        this.name = name;
+        this.edad=edad;
+        this.sexo=sexo;
+        this.tipoSangre=tipoSangre;
+        this.eps=eps;
+        
+    }
 
     /**
      * @return the id
