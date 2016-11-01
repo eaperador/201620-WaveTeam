@@ -173,7 +173,7 @@ public class DoctorLogicTest {
         } catch(Exception e){
             e.printStackTrace();
             Assert.fail();
-        }
+        } 
     }
 
     /**
