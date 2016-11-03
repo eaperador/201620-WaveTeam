@@ -62,6 +62,13 @@ public class EspecialidadPersistence {
         TypedQuery<EspecialidadEntity> q 
             = em.createQuery("select u from EspecialidadEntity u where u.name = :name", EspecialidadEntity.class);
         q = q.setParameter("name", name); 
-        return q.getSingleResult();
+        List<EspecialidadEntity> lista = q.getResultList();
+        if(lista.size()==0)
+        {
+            return null;
+        }
+        else
+        return lista.get(0);
+        
     }
 }

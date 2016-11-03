@@ -13,6 +13,7 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.ConsultaHistoricaPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.EspecialidadPersistence;
 import java.util.ArrayList;
@@ -65,6 +66,8 @@ public class EspecialidadLogicTest {
                 .addPackage(EspecialidadPersistence.class.getPackage())
                 .addPackage(DoctorPersistence.class.getPackage())
                 .addPackage(DoctorEntity.class.getPackage())
+                .addPackage(ConsultaHistoricaPersistence.class.getPackage())
+                .addPackage(ConsultaHistoricaEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -158,6 +161,33 @@ public class EspecialidadLogicTest {
     @Test
     public void testCreateEspecialidad1() throws WaveTeamLogicException{
         
+        EspecialidadEntity newEntity = factory.manufacturePojo(EspecialidadEntity.class);
+        for (DoctorEntity d : newEntity.getDoctores()) {
+            d.setEspecialidad(newEntity);
+            System.out.println("pato");
+        }
+
+        EspecialidadEntity result = logic.createEspecialidad(newEntity);
+        Assert.assertNotNull(result);
+
+        EspecialidadEntity entity = em.find(EspecialidadEntity.class, result.getId());
+
+        Assert.assertEquals(newEntity.getName(), entity.getName());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertNotNull(entity.getDoctores());
+        Assert.assertNotNull(result.getDoctores());
+        Assert.assertEquals(result.getDoctores().size(), entity.getDoctores().size());
+
+        for (DoctorEntity d : result.getDoctores()) {
+            boolean found = false;
+            for (DoctorEntity oracle : entity.getDoctores()) {
+                if (d.getName().equals(oracle.getName())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+
+        }
 
     }
     

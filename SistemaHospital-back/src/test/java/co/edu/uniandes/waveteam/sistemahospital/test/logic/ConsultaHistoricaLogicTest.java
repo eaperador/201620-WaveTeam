@@ -90,6 +90,7 @@ public class ConsultaHistoricaLogicTest {
         for (int i = 0; i < 4; i++) {
             ConsultaHistoricaEntity entity = factory.manufacturePojo(ConsultaHistoricaEntity.class);
             entity.setEspecialidad(padre);
+            entity.setFecha("07/23/2016");
             em.persist(entity);
             data.add(entity);
         }
@@ -119,6 +120,19 @@ public class ConsultaHistoricaLogicTest {
      */
     @Test
     public void testGetConsultasHistoricasPorEspecialidad() {
+        
+        List<ConsultaHistoricaEntity> list = logic.getConsultasHistoricasPorEspecialidad(data.get(0).getEspecialidad().getId());
+        Assert.assertEquals(data.size(), list.size());
+         for (ConsultaHistoricaEntity entity : list) {
+            boolean found = false;
+            for (ConsultaHistoricaEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+        
     }
 
     /**
@@ -126,6 +140,18 @@ public class ConsultaHistoricaLogicTest {
      */
     @Test
     public void testGetConsultasHistoricasPorFecha() {
+        
+        List<ConsultaHistoricaEntity> list = logic.getConsultasHistoricasPorFecha(data.get(0).getFecha());
+        Assert.assertEquals(data.size(), list.size());
+         for (ConsultaHistoricaEntity entity : list) {
+            boolean found = false;
+            for (ConsultaHistoricaEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
 
     /**
@@ -133,13 +159,25 @@ public class ConsultaHistoricaLogicTest {
      */
     @Test
     public void testGetConsultaHistorica() {
+        
+        ConsultaHistoricaEntity entity = data.get(0);
+        ConsultaHistoricaEntity resultEntity = logic.getConsultaHistorica(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getName(), resultEntity.getName());
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
 
     /**
-     * Test of createConsultaHistorica method, of class ConsultaHistoricaLogic.
+     * Test of createConsultaHistorica methsod, of class ConsultaHistoricaLogic.
      */
     @Test
     public void testCreateConsultaHistorica() {
+        ConsultaHistoricaEntity entity = logic.createConsultaHistorica(padre.getName());
+ 
+        Assert.assertNotNull(entity);
+        Assert.assertEquals(entity.getEspecialidad().getName(),padre.getName());
+        Assert.assertEquals(entity.getNumeroDoctores(), padre.getDoctores().size());
+        
     }
 
     /**
@@ -147,6 +185,10 @@ public class ConsultaHistoricaLogicTest {
      */
     @Test
     public void testDeleteConsultaHistorica() {
+        ConsultaHistoricaEntity entity = data.get(1);
+        logic.deleteConsultaHistorica(entity.getId());
+        ConsultaHistoricaEntity deleted = em.find(ConsultaHistoricaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
 }
