@@ -13,7 +13,6 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity
  */
 public class ConsultaHistoricaDTO {
     
-    private EspecialidadDTO especialidad;
     private String fecha;
     private int numeroDoctores;
     private int numeroCitas;
@@ -27,7 +26,6 @@ public class ConsultaHistoricaDTO {
     }
     
     public ConsultaHistoricaDTO(EspecialidadDTO es,int numDoc,int numCitas,int prom,int citasLi,int citasCan,int citasTer, String fecha){
-        this.especialidad=es;
         this.numeroDoctores=numDoc;
         this.numeroCitas=numCitas;
         this.promedioDuracion=prom;
@@ -38,7 +36,6 @@ public class ConsultaHistoricaDTO {
     }
     
     public ConsultaHistoricaDTO(ConsultaHistoricaEntity entity){
-        this.especialidad=new EspecialidadDTO(entity.getEspecialidad());
         this.numeroDoctores=entity.getNumeroDoctores();
         this.numeroCitas=entity.getNumeroCitas();
         this.promedioDuracion=entity.getPromedioDuracion();
@@ -47,14 +44,6 @@ public class ConsultaHistoricaDTO {
         this.citasTerminadas=entity.getCitasTerminadas();
         this.fecha=entity.getFecha();
     }
-    
-    	public EspecialidadDTO getEspecialidad() {
-		return especialidad;
-	}
-
-	public void setEspecialidad(EspecialidadDTO especialidad) {
-		this.especialidad = especialidad;
-	}
 
 	public int getNumeroDoctores() {
 		return numeroDoctores;
@@ -110,5 +99,19 @@ public class ConsultaHistoricaDTO {
 
 	public void setFecha(String fecha) {
 		this.fecha=fecha;
-	}   
+	}  
+        
+        
+        public ConsultaHistoricaEntity toEntity() {
+        ConsultaHistoricaEntity entity = new ConsultaHistoricaEntity();
+        entity.setCitasCanceladas(citasCanceladas);
+        entity.setCitasLibres(citasLibres);
+        entity.setCitasTerminadas(citasTerminadas);
+        entity.setFecha(fecha);
+        entity.setNumeroCitas(numeroCitas);
+        entity.setNumeroDoctores(numeroDoctores);
+        entity.setPromedioDuracion(promedioDuracion);
+        return entity;
+
+    }
 }

@@ -6,6 +6,7 @@
 package co.edu.uniandes.rest.waveteam.resources;
 
 import co.edu.uniandes.rest.waveteam.dtos.EspecialidadDTO;
+import co.edu.uniandes.rest.waveteam.dtos.EspecialidadDetailDTO;
 import co.edu.uniandes.rest.waveteam.dtos.MedicoDTO;
 import co.edu.uniandes.waveteam.sistemahospital.api.IEspecialidadLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
@@ -36,10 +37,10 @@ public class EspecialidadResource {
     @Inject
     private IEspecialidadLogic espLogic;
  
-    private List<EspecialidadDTO> listEntity2DTO(List<EspecialidadEntity> entityList) {
-        List<EspecialidadDTO> list = new ArrayList<>();
+    private List<EspecialidadDetailDTO> listEntity2DTO(List<EspecialidadEntity> entityList) {
+        List<EspecialidadDetailDTO> list = new ArrayList<>();
         for (EspecialidadEntity entity : entityList) {
-            list.add(new EspecialidadDTO(entity));
+            list.add(new EspecialidadDetailDTO(entity));
         }
         return list;
     }
@@ -51,24 +52,24 @@ public class EspecialidadResource {
      * @throws EspecialidadLogicException excepción retornada por la lógica
      */
     @GET
-    public List<EspecialidadDTO> getEspecialidades() throws Exception {
+    public List<EspecialidadDetailDTO> getEspecialidades() throws Exception {
         return listEntity2DTO(espLogic.getEspecialidades());
     }
 
     @GET
     @Path("{id: \\d+}")
-    public EspecialidadDTO getEspecialidad(@PathParam("id") Long id) throws Exception {
-        return new EspecialidadDTO(espLogic.getEspecialidad(id));
+    public EspecialidadDetailDTO getEspecialidad(@PathParam("id") Long id) throws Exception {
+        return new EspecialidadDetailDTO(espLogic.getEspecialidad(id));
     }
     
     @GET
     @Path("name")
-    public EspecialidadDTO getEspecialidadByName(@QueryParam("name") String name) {
+    public EspecialidadDetailDTO getEspecialidadByName(@QueryParam("name") String name) {
         EspecialidadEntity entity = espLogic.getEspecialidadPorNombre(name);
         if (entity == null) {
-            throw new WebApplicationException("La compañía no existe", 404);
+            throw new WebApplicationException("La especialidad no existe", 404);
         } else {
-            return new EspecialidadDTO(entity);
+            return new EspecialidadDetailDTO(entity);
         }
     }
 
@@ -80,11 +81,11 @@ public class EspecialidadResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public EspecialidadDTO updateEspecialidad(@PathParam("id") Long id, EspecialidadDTO especialidad) throws Exception {
+    public EspecialidadDetailDTO updateEspecialidad(@PathParam("id") Long id, EspecialidadDTO especialidad) throws Exception {
         
         EspecialidadEntity entity =especialidad.toEntity();
         entity.setId(id);
-        return new EspecialidadDTO(espLogic.updateEspecialidad(entity));
+        return new EspecialidadDetailDTO(espLogic.updateEspecialidad(entity));
     }
 
     /**
@@ -96,8 +97,8 @@ public class EspecialidadResource {
      * suministrado
      */
     @POST
-    public EspecialidadDTO createEspecialidad(EspecialidadDTO especialidad) throws Exception {
-        return new EspecialidadDTO(espLogic.createEspecialidad(especialidad.toEntity()));
+    public EspecialidadDetailDTO createEspecialidad(EspecialidadDetailDTO especialidad) throws Exception {
+        return new EspecialidadDetailDTO(espLogic.createEspecialidad(especialidad.toEntity()));
     }
 
     /**

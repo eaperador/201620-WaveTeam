@@ -35,10 +35,10 @@ public class EspecialidadLogicMock {
 
         if (especialidades == null) {
             especialidades = new ArrayList<>();
-            especialidades.add(new EspecialidadDTO(1L, "Pediatría", "0-18", "clinica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
-            especialidades.add(new EspecialidadDTO(2L, "Cardiologia", "0-95", "clinica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
-            especialidades.add(new EspecialidadDTO(3L, "Neumologia", "0-95", "clinica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
-            especialidades.add(new EspecialidadDTO(4L, "Traumatologia", "0-95", "medico-quirurgica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
+            //especialidades.add(new EspecialidadDTO(1L, "Pediatría", "0-18", "clinica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
+            //especialidades.add(new EspecialidadDTO(2L, "Cardiologia", "0-95", "clinica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
+            //especialidades.add(new EspecialidadDTO(3L, "Neumologia", "0-95", "clinica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
+            //especialidades.add(new EspecialidadDTO(4L, "Traumatologia", "0-95", "medico-quirurgica",new ArrayList<MedicoDTO>(),new ArrayList<CitaDTO>()));
             
             medicos=new MedicoLogicMock();
             
@@ -55,8 +55,8 @@ public class EspecialidadLogicMock {
                             citas.addAll(medicos.getDoctorSchedule(medicos.getDoctors().get(j).getId()));
                         }
                     }
-                    especialidades.get(i).setDoctores(docs);
-                    especialidades.get(i).setCitas(citas);
+                    //especialidades.get(i).setDoctores(docs);
+                    //especialidades.get(i).setCitas(citas);
                 }
             } catch (Exception ex) {
                 logger.severe("Error interno: problemas con el mock de doctores");
@@ -168,8 +168,8 @@ public class EspecialidadLogicMock {
             }
             
             newEsp.setId(nuevoid);
-            newEsp.setDoctores(new ArrayList());
-            newEsp.setCitas(new ArrayList());
+            //newEsp.setDoctores(new ArrayList());
+            //newEsp.setCitas(new ArrayList());
         }
 
         logger.info("Agregando especialidad " + newEsp);
@@ -204,7 +204,7 @@ public class EspecialidadLogicMock {
         for (EspecialidadDTO especialidad : especialidades) {
             if (Objects.equals(id, especialidad.getId())) {
                 logger.info("Dando los doctores de la especialidad con ID: "+id);
-                doctores=especialidad.getDoctores();
+              //  doctores=especialidad.getDoctores();
                 return doctores;
             }
         }
@@ -223,7 +223,7 @@ public class EspecialidadLogicMock {
         for (EspecialidadDTO especialidad : especialidades) {
             if (Objects.equals(id, especialidad.getId())) {
                 logger.info("Dando las citas de la especialidad con ID:"+id);
-                citas=especialidad.getCitas();
+                //citas=especialidad.getCitas();
                 return citas;
             }
         }
@@ -237,9 +237,9 @@ public class EspecialidadLogicMock {
          {
              if(doc.getEspecialidad().equals(especialidades.get(i).getNombre()))
              {
-                 ArrayList<MedicoDTO> docs = especialidades.get(i).getDoctores();
-                 docs.add(doc);
-                 especialidades.get(i).setDoctores(docs);
+                 //ArrayList<MedicoDTO> docs = especialidades.get(i).getDoctores();
+                 //docs.add(doc);
+                 //especialidades.get(i).setDoctores(docs);
              }
          }
     }

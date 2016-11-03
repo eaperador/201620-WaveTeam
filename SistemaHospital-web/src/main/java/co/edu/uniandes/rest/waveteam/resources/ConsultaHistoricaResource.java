@@ -6,6 +6,7 @@
 package co.edu.uniandes.rest.waveteam.resources;
 
 import co.edu.uniandes.rest.waveteam.dtos.ConsultaHistoricaDTO;
+import co.edu.uniandes.rest.waveteam.dtos.ConsultaHistoricaDetailDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.ConsultaHistoricaLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.api.IConsultaHistoricaLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity;
@@ -16,7 +17,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -33,10 +33,10 @@ public class ConsultaHistoricaResource {
     @Inject
     private IConsultaHistoricaLogic logic;
  
-    private List<ConsultaHistoricaDTO> listEntity2DTO(List<ConsultaHistoricaEntity> entityList) {
-        List<ConsultaHistoricaDTO> list = new ArrayList<>();
+    private List<ConsultaHistoricaDetailDTO> listEntity2DTO(List<ConsultaHistoricaEntity> entityList) {
+        List<ConsultaHistoricaDetailDTO> list = new ArrayList<>();
         for (ConsultaHistoricaEntity entity : entityList) {
-            list.add(new ConsultaHistoricaDTO(entity));
+            list.add(new ConsultaHistoricaDetailDTO(entity));
         }
         return list;
     }
@@ -48,22 +48,23 @@ public class ConsultaHistoricaResource {
      * @return lista de especialidades
      */
     @GET
-    public List<ConsultaHistoricaDTO> getConsultasHistoricas() throws Exception {
+    public List<ConsultaHistoricaDetailDTO> getConsultasHistoricas() throws Exception {
         return listEntity2DTO(logic.getTodasLasConsultasHistoricas());
     }
     
     @GET
     @Path("{id: \\d+}")
-    public List<ConsultaHistoricaDTO> getConsultasHistoricasPorEspecialidad(@PathParam("id") Long espId) throws Exception {
+    public List<ConsultaHistoricaDetailDTO> getConsultasHistoricasPorEspecialidad(@PathParam("id") Long espId) throws Exception {
         return listEntity2DTO(logic.getConsultasHistoricasPorEspecialidad(espId));
     }
     
     @GET
     @Path("{fecha: }")
-    public List<ConsultaHistoricaDTO> getConsultasHistoricasPorFecha(@PathParam("fecha") String fecha) throws Exception {
+    public List<ConsultaHistoricaDetailDTO> getConsultasHistoricasPorFecha(@PathParam("fecha") String fecha) throws Exception {
         return listEntity2DTO(logic.getConsultasHistoricasPorFecha(fecha));
     }
     
+
 //    @GET
 //    @Path("{id: \\d+}")
 //    public ConsultaHistoricaDTO getConsultaHistorica(@PathParam("id") Long id) throws Exception {
@@ -71,10 +72,11 @@ public class ConsultaHistoricaResource {
 //    }
 
 
+
     @POST
     @Path("{nombre: }")
-    public ConsultaHistoricaDTO createConsultaHistorica(@PathParam("nombre") String nombreEsp) throws ConsultaHistoricaLogicException {
-        return new ConsultaHistoricaDTO(logic.createConsultaHistorica(nombreEsp));
+    public ConsultaHistoricaDetailDTO createConsultaHistorica(@PathParam("nombre") String nombreEsp) throws ConsultaHistoricaLogicException {
+        return new ConsultaHistoricaDetailDTO(logic.createConsultaHistorica(nombreEsp));
     }
 
     @DELETE
