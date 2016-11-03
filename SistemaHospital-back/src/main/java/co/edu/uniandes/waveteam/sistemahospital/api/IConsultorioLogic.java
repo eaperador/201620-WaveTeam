@@ -20,6 +20,8 @@ public interface IConsultorioLogic {
             
     public ConsultorioEntity getConsultorio(Long id);
 
+    public ConsultorioEntity findByName(String name);
+    
     public ConsultorioEntity updateConsultorio(ConsultorioEntity consultorioActualizado) throws WaveTeamLogicException;
 
     public ConsultorioEntity createConsultorio(ConsultorioEntity consultorio) throws WaveTeamLogicException;
@@ -31,7 +33,4 @@ public interface IConsultorioLogic {
     public ConsultorioEntity unasignDoctor(Long idConsultorio, Long idDoctor) throws WaveTeamLogicException;
 
     public ConsultorioEntity asignDoctor(Long idConsultorio, DoctorEntity doc) throws WaveTeamLogicException;
-
-    public ConsultorioEntity asignDoctors(Long idConsultorio, List<DoctorEntity> docs) throws WaveTeamLogicException;
-
 }

@@ -121,7 +121,6 @@ public class ConsultorioPersistenceTest {
     @Test
     public void testFindByName(){
          String nombre = data.get(2).getName();
-         
          ConsultorioEntity encontrado = consultorioPersistence.findByName(nombre);
          
          Assert.assertNotNull(encontrado);

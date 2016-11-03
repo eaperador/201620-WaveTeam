@@ -38,7 +38,11 @@ public class ConsultorioPersistence {
         TypedQuery<ConsultorioEntity> q
                 = em.createQuery("select u from ConsultorioEntity u where u.name = :name", ConsultorioEntity.class);
         q = q.setParameter("name", name);
-        return q.getSingleResult();
+        List<ConsultorioEntity> lista = q.getResultList();
+        if (lista.size() == 0)
+            return null;
+        else
+            return lista.get(0);
     }
 
     public List<ConsultorioEntity> findAll() {
@@ -83,13 +87,6 @@ public class ConsultorioPersistence {
         LOGGER.log(Level.INFO, "Asignando un doctor a un consultorio");
         ConsultorioEntity cons = em.find(ConsultorioEntity.class, idConsultorio);
         cons.agregarDoctorAsignado(doc);
-        return em.merge(cons);
-    }
-    
-    public ConsultorioEntity asignDoctors(Long idConsultorio, List<DoctorEntity> docs){
-        LOGGER.log(Level.INFO, "Asignando una lista de doctores a un consultorio");
-        ConsultorioEntity cons = em.find(ConsultorioEntity.class, idConsultorio);
-        cons.setDoctoresAsignados(docs);
         return em.merge(cons);
     }
 }
