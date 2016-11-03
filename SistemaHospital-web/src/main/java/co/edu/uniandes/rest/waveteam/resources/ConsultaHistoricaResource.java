@@ -64,11 +64,11 @@ public class ConsultaHistoricaResource {
         return listEntity2DTO(logic.getConsultasHistoricasPorFecha(fecha));
     }
     
-    @GET
-    @Path("{id: \\d+}")
-    public ConsultaHistoricaDTO getConsultaHistorica(@PathParam("id") Long id) throws Exception {
-        return new ConsultaHistoricaDTO(logic.getConsultaHistorica(id));
-    }
+//    @GET
+//    @Path("{id: \\d+}")
+//    public ConsultaHistoricaDTO getConsultaHistorica(@PathParam("id") Long id) throws Exception {
+//        return new ConsultaHistoricaDTO(logic.getConsultaHistorica(id));
+//    }
 
 
     @POST
