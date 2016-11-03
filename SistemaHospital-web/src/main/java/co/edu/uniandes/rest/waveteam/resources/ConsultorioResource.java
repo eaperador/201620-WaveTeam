@@ -8,7 +8,7 @@ import co.edu.uniandes.rest.waveteam.exceptions.ConsultorioLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.ConsultorioLogicMock;
 import co.edu.uniandes.rest.waveteam.dtos.ConsultorioDTO;
 import co.edu.uniandes.rest.waveteam.dtos.MedicoDTO;
-import co.edu.uniandes.waveteam.sistemahospital.api.IConsultorioLogic;
+import co.edu.uniandes.waveteam.sistemahospital.ejbs.ConsultorioLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultorioEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class ConsultorioResource {
 //    ConsultorioLogicMock consultorioLogic = new ConsultorioLogicMock();
         
         @Inject
-        IConsultorioLogic consultorioLogic;
+        ConsultorioLogic consultorioLogic;
     /**
      * Devuelve la lista de los consultorios
      * 

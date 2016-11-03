@@ -59,32 +59,32 @@ public class ConsultorioLogic implements IConsultorioLogic {
     @Override
     public void deleteConsultorio(Long id) throws WaveTeamLogicException {
         ConsultorioEntity cons = persistencia.find(id);
-        if (cons == null)
-            throw new WaveTeamLogicException("El consultorio que se quiere eliminar no existe");
+        if (cons == null){
+            throw new WaveTeamLogicException("El consultorio que se quiere eliminar no existe");}
         persistencia.delete(id);
     }
 
     @Override
     public ConsultorioEntity unasignDoctors(Long id) throws WaveTeamLogicException {
         ConsultorioEntity cons = persistencia.find(id);
-        if (cons == null)
-            throw new WaveTeamLogicException("El consultorio cuyos doctores se quieren desasignar no existe");
+        if (cons == null){
+            throw new WaveTeamLogicException("El consultorio cuyos doctores se quieren desasignar no existe");}
         return persistencia.unasignDoctors(id);
     }
 
     @Override
     public ConsultorioEntity unasignDoctor(Long idConsultorio, Long idDoctor) throws WaveTeamLogicException {
         ConsultorioEntity cons = persistencia.find(idConsultorio);
-        if (cons == null)
-            throw new WaveTeamLogicException("El consultorio cuyo doctor se quiere desasignar no existe");
+        if (cons == null){
+            throw new WaveTeamLogicException("El consultorio cuyo doctor se quiere desasignar no existe");}
         return persistencia.unasignDoctor(idConsultorio, idDoctor);
     }
 
     @Override
     public ConsultorioEntity asignDoctor(Long idConsultorio, DoctorEntity doc) throws WaveTeamLogicException {
         ConsultorioEntity cons = persistencia.find(idConsultorio);
-        if (cons == null)
-            throw new WaveTeamLogicException("El consultorio al que se le quiere asignar un doctor no existe");
-            return persistencia.asignDoctor(idConsultorio, doc);
+        if (cons == null){
+            throw new WaveTeamLogicException("El consultorio al que se le quiere asignar un doctor no existe");}
+        return persistencia.asignDoctor(idConsultorio, doc);
     }
 }
