@@ -7,8 +7,6 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.ConsultorioPersistence;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -18,9 +16,6 @@ import javax.inject.Inject;
  */
 @Stateless
 public class ConsultorioLogic implements IConsultorioLogic {
-
-    private static final Logger LOGGER = Logger.getLogger(ConsultorioPersistence.class.getName());
-    
     @Inject
     private ConsultorioPersistence persistencia;
 

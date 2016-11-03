@@ -400,7 +400,7 @@ public class ConsultorioLogicTest {
     @Test
     public void testUnasignDoctorExistente() {
         PodamFactory factory = new PodamFactoryImpl();
-        ConsultorioEntity consultorio = factory.manufacturePojo(ConsultorioEntity.class);
+        ConsultorioEntity consultorio = data.get(0);
         List<DoctorEntity> lista = consultorio.getDoctoresAsignados();
         int tam = lista.size();
         if (tam != 0) {
