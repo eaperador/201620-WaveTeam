@@ -12,7 +12,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultorioEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.ConsultorioPersistence;
+import java.util.Objects;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -192,5 +195,27 @@ public class ConsultorioPersistenceTest {
         Assert.assertEquals(found.getName(), actualizado.getName());
         Assert.assertEquals(found.getUnidadCuidadosintensivos(), actualizado.getUnidadCuidadosintensivos());
     }
-
+    
+    /**
+     * Test of unasignDoctor method of class ConsultorioPersistence.
+     */
+    @Test
+    public void testUnasignDoctor(){
+        ConsultorioEntity consultorio = data.get(0);
+        List<DoctorEntity> lista = consultorio.getDoctoresAsignados();
+        int tam = lista.size();
+        if (tam != 0) {
+            DoctorEntity doc = lista.get(0);
+            consultorio = consultorioPersistence.unasignDoctor(consultorio.getId(), doc.getId());
+            lista = consultorio.getDoctoresAsignados();
+            Assert.assertEquals(lista.size(), tam - 1);
+            boolean encontrado = false;
+            for (DoctorEntity doctor : lista) {
+                if (Objects.equals(doctor, doc)) {
+                    encontrado = true;
+                }
+            }
+            Assert.assertFalse(encontrado);
+        }
+    }
 }

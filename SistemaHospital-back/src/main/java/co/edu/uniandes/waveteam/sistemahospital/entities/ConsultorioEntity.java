@@ -33,7 +33,7 @@ public class ConsultorioEntity extends BaseEntity implements Serializable{
         return horario;
     }
     
-    public void setHorario(){
+    public void setHorario(String horario){
         this.horario = horario;
     }
     
@@ -49,7 +49,7 @@ public class ConsultorioEntity extends BaseEntity implements Serializable{
         return unidadCuidadosIntensivos;
     }
     
-    public void setUnidadCuidadosIntensivos(){
+    public void setUnidadCuidadosIntensivos(boolean unidadCuidadosIntensivos){
         this.unidadCuidadosIntensivos = unidadCuidadosIntensivos;
     }
     
