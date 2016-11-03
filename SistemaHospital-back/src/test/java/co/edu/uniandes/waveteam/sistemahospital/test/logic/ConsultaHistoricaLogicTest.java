@@ -7,6 +7,7 @@ package co.edu.uniandes.waveteam.sistemahospital.test.logic;
 
 import co.edu.uniandes.waveteam.sistemahospital.api.IConsultaHistoricaLogic;
 import co.edu.uniandes.waveteam.sistemahospital.ejbs.ConsultaHistoricaLogic;
+import co.edu.uniandes.waveteam.sistemahospital.ejbs.ConsultaHistoricaLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.ConsultaHistoricaPersistence;
