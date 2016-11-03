@@ -156,7 +156,7 @@ public class CitaDTO {
                 ", fecha : " + fecha + 
                 ", hora : " +hora + 
                 ", duracion : " + duracion + 
-                ", medico : " + doctor.toString() + 
+//                ", medico : " + doctor.toString() + 
                 ", paciente : " + paciente.toString() +
                 ", habilitada : " + habilitada 
                 +" }";

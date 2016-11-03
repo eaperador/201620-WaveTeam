@@ -6,7 +6,6 @@
 package co.edu.uniandes.rest.waveteam.resources;
 
 import co.edu.uniandes.rest.waveteam.dtos.CitaDTO;
-import co.edu.uniandes.rest.waveteam.dtos.PatientDTO;
 import co.edu.uniandes.rest.waveteam.dtos.PatientDetailDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.CitaLogicException;
 import co.edu.uniandes.rest.waveteam.exceptions.PatientLogicException;
@@ -17,6 +16,7 @@ import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicExceptio
 import java.util.ArrayList;
 
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -37,6 +37,7 @@ import javax.ws.rs.PUT;
  */
 @Path("patient")
 @Produces("application/json")
+@RequestScoped
 public class PatientResource {
 
     PatientLogicMock patientLogic = new PatientLogicMock();

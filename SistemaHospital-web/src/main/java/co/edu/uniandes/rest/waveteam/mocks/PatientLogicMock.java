@@ -14,12 +14,14 @@ import co.edu.uniandes.rest.waveteam.dtos.CitaDTO;
 import co.edu.uniandes.rest.waveteam.dtos.PatientDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.CitaLogicException;
 import co.edu.uniandes.rest.waveteam.exceptions.PatientLogicException;
+import javax.ejb.Stateless;
 
 
 /*
  * CityLogicMock
  * Mock del recurso Patient (Mock del servicio REST)
  */
+@Stateless
 public class PatientLogicMock {
 
     
