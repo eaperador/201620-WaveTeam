@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.rest.waveteam.resources;
-import co.edu.uniandes.rest.waveteam.dtos.CitaDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.ConsultorioLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.ConsultorioLogicMock;
 import co.edu.uniandes.rest.waveteam.dtos.ConsultorioDTO;
 import co.edu.uniandes.rest.waveteam.dtos.MedicoDTO;
+import co.edu.uniandes.waveteam.sistemahospital.api.IConsultorioLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultorioEntity;
+import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,6 +24,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 /**
  * Clase que implementa el recurso REST de "Consultorio"
@@ -34,7 +40,10 @@ import javax.ws.rs.Produces;
 public class ConsultorioResource {
         private final static Logger logger = Logger.getLogger(ConsultorioLogicMock.class.getName());
 
-    ConsultorioLogicMock consultorioLogic = new ConsultorioLogicMock();
+//    ConsultorioLogicMock consultorioLogic = new ConsultorioLogicMock();
+        
+        @Inject
+        IConsultorioLogic consultorioLogic;
     /**
      * Devuelve la lista de los consultorios
      * 
@@ -44,7 +53,12 @@ public class ConsultorioResource {
     @GET
     public List<ConsultorioDTO> getConsultorios() throws ConsultorioLogicException
     {
-        return consultorioLogic.getConsultorios();
+        List<ConsultorioDTO> consultorios = new ArrayList();
+        List<ConsultorioEntity> consEntity = consultorioLogic.getConsultorios();
+        for (ConsultorioEntity cons : consEntity){
+            consultorios.add(new ConsultorioDTO(cons));
+        }
+        return consultorios;
     }
     
     /**
@@ -58,7 +72,8 @@ public class ConsultorioResource {
     @Path("{id: \\d+}")
     public ConsultorioDTO getConsultorio(@PathParam("id") long id) throws ConsultorioLogicException
     {
-        return consultorioLogic.getConsultorio(id);
+        ConsultorioDTO cons = new ConsultorioDTO(consultorioLogic.getConsultorio(id));
+        return cons;
     }
     
     /**
@@ -72,7 +87,14 @@ public class ConsultorioResource {
     @Path("{id: \\d+}")
     public ConsultorioDTO updateConsultorio(@PathParam("id") long id, ConsultorioDTO updatedConsultorio) throws ConsultorioLogicException            
     {
-        return consultorioLogic.updateConsultorio(id, updatedConsultorio);
+        try{
+            consultorioLogic.updateConsultorio(updatedConsultorio.entity());
+        }catch(WaveTeamLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
+        }
+        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(id));
+        return res;
     }
     
     /**
@@ -85,7 +107,14 @@ public class ConsultorioResource {
     @POST
     public ConsultorioDTO createConsultorio(ConsultorioDTO consultorioNuevo) throws ConsultorioLogicException
     {
-        return consultorioLogic.createConsultorio(consultorioNuevo);
+        try{
+            consultorioLogic.createConsultorio(consultorioNuevo.entity());
+        }catch(WaveTeamLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
+        }
+        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(consultorioNuevo.getId()));
+        return res;
     }
     
     /**
@@ -98,7 +127,12 @@ public class ConsultorioResource {
     @Path("{id: \\d+}")
     public void deleteConsultorio(@PathParam("id") long id) throws ConsultorioLogicException
     {
-        consultorioLogic.deleteConsultorio(id);
+        try{
+            consultorioLogic.deleteConsultorio(id);
+        }catch(WaveTeamLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
+        }
     }
     
     //REQUERIMIENTO R8 - ASIGNAR CONSULTORIO A MEDICO
@@ -113,7 +147,14 @@ public class ConsultorioResource {
     @Path("{idConsultorio: \\d+}/doctores")
     public ConsultorioDTO unasignDoctors(@PathParam("idConsultorio") long idConsultorio) throws ConsultorioLogicException
     {
-        return consultorioLogic.unasignDoctors(idConsultorio);
+        try{
+            consultorioLogic.unasignDoctors(idConsultorio);
+        }catch(WaveTeamLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
+        }
+        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(idConsultorio));
+        return res;
     }
     
     /**
@@ -127,7 +168,14 @@ public class ConsultorioResource {
     @Path("{idConsultorio: \\d+}/doctores/{idDoctor: \\d+}")
     public ConsultorioDTO unasignDoctor(@PathParam("idConsultorio") long idConsultorio, @PathParam("idDoctor") long idDoctor) throws ConsultorioLogicException
     {
-        return consultorioLogic.unasignDoctor(idConsultorio, idDoctor);
+        try{
+            consultorioLogic.unasignDoctor(idConsultorio, idDoctor);
+        }catch(WaveTeamLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
+        }
+        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(idConsultorio));
+        return res;
     }
     
     /**
@@ -141,21 +189,27 @@ public class ConsultorioResource {
     @Path("{idConsultorio: \\d+}/doctores")
     public ConsultorioDTO asignDoctor(@PathParam("idConsultorio") long idConsultorio, MedicoDTO doc) throws ConsultorioLogicException
     {
-
-        return consultorioLogic.asignDoctor(idConsultorio, doc);
+        try{
+            consultorioLogic.asignDoctor(idConsultorio, doc.toEntity());
+        }catch(WaveTeamLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
+        }
+        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(idConsultorio));
+        return res;
     }
     
-    /**
-     * Asigna doctores al consultorio
-     * @param idConsultorio
-     * @param idDoctor
-     * @return
-     * @throws ConsultorioLogicException 
-     */
-    @PUT
-    @Path("{idConsultorio: \\d+}/doctores")
-    public ConsultorioDTO asignDoctors(@PathParam("idConsultorio") long idConsultorio, List<MedicoDTO> nuevaLista) throws ConsultorioLogicException
-    {
-        return consultorioLogic.asignDoctors(idConsultorio, nuevaLista);
-    }
+//    /**
+//     * Asigna doctores al consultorio
+//     * @param idConsultorio
+//     * @param idDoctor
+//     * @return
+//     * @throws ConsultorioLogicException 
+//     */
+//    @PUT
+//    @Path("{idConsultorio: \\d+}/doctores")
+//    public ConsultorioDTO asignDoctors(@PathParam("idConsultorio") long idConsultorio, List<MedicoDTO> nuevaLista) throws ConsultorioLogicException
+//    {
+//        return consultorioLogic.asignDoctors(idConsultorio, nuevaLista);
+//    }
 }

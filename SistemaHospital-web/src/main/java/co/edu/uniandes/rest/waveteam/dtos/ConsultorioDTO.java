@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.waveteam.dtos;
 
+import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultorioEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +32,21 @@ public class ConsultorioDTO {
     public ConsultorioDTO()
     {        
        //Este constructor esta vacio porque es el predeterminado
+    }
+    
+    /**
+     * Constructor vacío
+     */
+    public ConsultorioDTO(ConsultorioEntity cons)
+    {        
+        this.id = cons.getId();
+        this.nombre = cons.getName();
+        this.horario = cons.getHorario();
+        this.atencionUrgencias = cons.getAtencionUrgencias();
+        this.unidadCuidadosIntensivos = cons.getUnidadCuidadosintensivos();
+        for(DoctorEntity doc : cons.getDoctoresAsignados()){
+            doctoresAsignados.add(new MedicoDTO(doc));
+        }
     }
     
     /**
@@ -159,6 +176,18 @@ public class ConsultorioDTO {
             }
         }
         return false;
+    }
+    
+    
+    public ConsultorioEntity entity()
+    {
+        ConsultorioEntity cons = new ConsultorioEntity();
+        cons.setId(this.id);
+        cons.setName(this.nombre);
+//        cons.setHorario(this.horario);
+        cons.setAtencionUrgencias(this.atencionUrgencias);
+//        cons.setUnidadCuidadosIntensivos(this.unidadCuidadosIntensivos);
+        return cons;
     }
     
     /**
