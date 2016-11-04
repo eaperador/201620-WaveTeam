@@ -77,5 +77,19 @@ public class CitaPersistence {
         em.remove(entity);
     }
     
+    public List<CitaEntity> findByDoctorEnFecha(DoctorEntity doctor, Long fechaInicio, Long fechaFin){
+        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}",doctor.getId() + " - " +fechaInicio + " - " + fechaFin);
+        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.doctor.id = :idDoctor and u.fecha >= fechaInicio and u.fecha <= fechaFin", CitaEntity.class);
+        q = q.setParameter("idDoctor", doctor.getId()); 
+        return q.getResultList();
+    }
+    
+    public List<CitaEntity> findByPacienteEnFecha(PacienteEntity paciente, Long fechaInicio, Long fechaFin){
+        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}",paciente.getId() + " - " +fechaInicio + " - " + fechaFin);
+        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.paciente.id = :idDoctor and u.fecha >= fechaInicio and u.fecha <= fechaFin", CitaEntity.class);
+        q = q.setParameter("idPaciente", paciente.getId()); 
+        return q.getResultList();
+    }
+    
     
 }

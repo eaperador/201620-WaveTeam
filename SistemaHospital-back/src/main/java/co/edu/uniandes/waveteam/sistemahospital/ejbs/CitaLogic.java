@@ -9,6 +9,8 @@ package co.edu.uniandes.waveteam.sistemahospital.ejbs;
 
 import co.edu.uniandes.waveteam.sistemahospital.api.ICitaLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.CitaPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -50,4 +52,15 @@ public class CitaLogic implements ICitaLogic{
         persistence.delete(id);
     }
     
+    @Override
+    public List<CitaEntity> getCitasByDoctorEnFecha(DoctorEntity doctor, Long fechaInicio, Long fechaFin){        
+        return persistence.findByDoctorEnFecha(doctor, fechaInicio, fechaFin);
+        
+    }
+    
+    @Override
+    public List<CitaEntity> getCitasByPacienteEnFecha(PacienteEntity paciente, Long fechaInicio, Long fechaFin){
+        return persistence.findByPacienteEnFecha(paciente, fechaInicio, fechaFin);
+    }
+
 }

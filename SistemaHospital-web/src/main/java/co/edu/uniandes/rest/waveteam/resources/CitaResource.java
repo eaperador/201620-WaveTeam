@@ -12,6 +12,8 @@ import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
 import co.edu.uniandes.waveteam.sistemahospital.api.ICitaLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ import javax.ws.rs.Produces;
 public class CitaResource {
     
     @Inject
-    private ICitaLogic citLogic;
+    ICitaLogic citLogic;
     
     CitaLogicMock citaLogic = new CitaLogicMock();
 
@@ -122,9 +124,17 @@ public class CitaResource {
     
     @GET
     @Path("/doctor/{fechaInicio: \\w+}-{fechaFin: \\w+}/{id: \\d+}")
-    public ArrayList<CitaDTO> getCitasByMedicoEnFecha(@PathParam("id") Long medico, @PathParam("fechaInicio") String fechaInicio, @PathParam("fechaFin") String fechaFin) throws CitaLogicException, MedicoLogicException{
-        return citaLogic.getCitasByMedicoEnFecha(medico, fechaInicio, fechaFin);
+    public List<CitaEntity> getCitasByDoctorEnFecha(@PathParam("doctor") DoctorEntity doctor, @PathParam("fechaInicio") Long fechaInicio, @PathParam("fechaFin") Long fechaFin) throws CitaLogicException, MedicoLogicException{
+        return citLogic.getCitasByDoctorEnFecha(doctor, fechaInicio, fechaFin);
+        
     }
+    
+    @GET
+    @Path("/paciente/{fechaInicio: \\w+}-{fechaFin: \\w+}/{id: \\d+}")
+    public List<CitaEntity> getCitasByPacienteEnFecha(@PathParam("paciente") PacienteEntity paciente, @PathParam("fechaInicio") Long fechaInicio, @PathParam("fechaFin") Long fechaFin) throws CitaLogicException{
+        return citLogic.getCitasByPacienteEnFecha(paciente, fechaInicio, fechaFin);
+    }
+    
     
     @PUT
     @Path("{id: \\d+}/terminar")

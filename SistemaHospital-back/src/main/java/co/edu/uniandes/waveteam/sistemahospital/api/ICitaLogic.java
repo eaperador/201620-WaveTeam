@@ -6,6 +6,8 @@
 package co.edu.uniandes.waveteam.sistemahospital.api;
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import java.util.List;
 
 /**
@@ -19,5 +21,7 @@ public interface ICitaLogic {
     public CitaEntity createCita(CitaEntity entity);
     public CitaEntity updateCita(CitaEntity entity);
     public void deleteCita(Long id);
+    public List<CitaEntity> getCitasByDoctorEnFecha(DoctorEntity doctor, Long fechaInicio, Long fechaFin);
+    public List<CitaEntity> getCitasByPacienteEnFecha(PacienteEntity paciente, Long fechaInicio, Long fechaFin);
     
 }
