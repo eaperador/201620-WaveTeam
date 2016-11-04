@@ -12,7 +12,9 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.ejbs.CitaLogic;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.CitaPersistence;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -209,6 +211,7 @@ public class CitaLogicTest {
 //        Assert.assertTrue(encontrada);
 //    }
 //    
+
 //    @Test
 //    public void findCitaByPacienteEnFecha(){
 //        Long fechaInicio = 1L;
@@ -224,14 +227,21 @@ public class CitaLogicTest {
 //        boolean encontrada = false;
 //        
 //        for(CitaEntity citaE: lista){
+//            if(citaE.getPaciente()!=null){
+
 //            if(citaE.getPaciente().getId()==idPaciente){
 //                if(citaE.getFecha()>=fechaInicio&&citaE.getFecha()<=fechaFin){
 //                    encontrada = true;
 //                }
 //            }
+
 //        }
 //        Assert.assertTrue(encontrada);
 //    }
+//            }
+ //       }
+ //       Assert.assertTrue(encontrada);
+ //   }
     
     
 }

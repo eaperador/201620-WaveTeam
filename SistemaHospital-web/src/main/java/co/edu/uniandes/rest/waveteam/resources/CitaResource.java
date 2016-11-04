@@ -14,7 +14,7 @@ import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
 import co.edu.uniandes.waveteam.sistemahospital.api.ICitaLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
-import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -120,8 +120,8 @@ public class CitaResource {
     
     
 //    @GET
-//    @Path("/paciente/{id: \\d+}")
-//    public List<CitaDTO> getCitasByPaciente(@PathParam("id") Long paciente) throws CitaLogicException{
+//    @Path("/paciente/{paciente.id: \\d+}")
+//    public List<CitaDTO> getCitasByPaciente(@PathParam("paciente") PacienteEntity paciente) throws CitaLogicException{
 //        return citaLogic.getCitasByPaciente(paciente);
 //    }
     

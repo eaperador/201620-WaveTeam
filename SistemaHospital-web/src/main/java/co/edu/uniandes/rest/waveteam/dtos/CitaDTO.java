@@ -18,6 +18,7 @@ public class CitaDTO {
     public ArrayList a = new ArrayList();
 
     
+    private String nombre;
     private Long id;
     private String fecha;
     private Long hora;
@@ -56,7 +57,7 @@ public class CitaDTO {
         entity.setHabilitada(habilitada);
         entity.setHora(hora);
         entity.setId(id);
-        entity.setName(fecha);
+        entity.setName(nombre);
         return entity;
     }
    
