@@ -119,6 +119,7 @@ public class MedicoResource {
     public MedicoDetailDTO createDoctor(MedicoDetailDTO doctor) throws MedicoLogicException {
         try{
             DoctorEntity ent = logic.createDoctor( doctor.toEntity() );
+            System.out.println("ENTITY WAS CREATED");
             MedicoDetailDTO med = new MedicoDetailDTO( ent );
             return med;
         } catch (Exception w){

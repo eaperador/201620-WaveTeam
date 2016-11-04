@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
+import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author felipeplazas
  */
+@XmlRootElement
 public class MedicoDetailDTO extends MedicoDTO {
     
     private ArrayList<CitaDTO> disponibilidad;
@@ -35,6 +38,16 @@ public class MedicoDetailDTO extends MedicoDTO {
     
     public ArrayList<CitaDTO> getDisponibilidad(){
         return disponibilidad;
+    }
+    
+    @Override
+    public DoctorEntity toEntity() {
+        DoctorEntity entity = super.toEntity();
+         List<CitaDTO> citas = this.disponibilidad; 
+//        for (CitaDTO cita : this.disponibilidad) {         
+//            entity.getDisponibilidadCitas().add(cita.toEntity());
+//        }
+        return entity;
     }
     
     public void setDisponibilidad(ArrayList<LinkedHashMap> diasDisponible){
