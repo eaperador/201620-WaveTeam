@@ -43,11 +43,11 @@ public class CitaPersistence {
         return q.getSingleResult();
     }
     
-    public CitaEntity findByPaciente(PacienteEntity paciente){
+    public List<CitaEntity> findByPaciente(PacienteEntity paciente){
         LOGGER.log(Level.INFO, "Consultando cita con paciente = {0}", paciente.getId());
         TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.paciente.id = :idPaciente", CitaEntity.class);
         q = q.setParameter("idPaciente", paciente.getId());
-        return q.getSingleResult();
+        return q.getResultList();
     }
     
     

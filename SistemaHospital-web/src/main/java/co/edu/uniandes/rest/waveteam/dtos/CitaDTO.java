@@ -18,8 +18,9 @@ public class CitaDTO {
     public ArrayList a = new ArrayList();
 
     
+    private String nombre;
     private Long id;
-    private String fecha;
+    private Long fecha;
     private Long hora;
     private int duracion;
     //private MedicoDTO doctor;
@@ -56,13 +57,13 @@ public class CitaDTO {
         entity.setHabilitada(habilitada);
         entity.setHora(hora);
         entity.setId(id);
-        entity.setName(fecha);
+        entity.setName(nombre);
         return entity;
     }
    
      //***********************************************************************
     
-    public CitaDTO(Long id, String fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
+    public CitaDTO(Long id, Long fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
@@ -86,11 +87,11 @@ public class CitaDTO {
         this.id = id;
     }
     
-    public String getFecha(){
+    public Long getFecha(){
         return fecha;
     }
     
-    public void setFecha(String fecha){
+    public void setFecha(Long fecha){
         this.fecha = fecha;
     }
     

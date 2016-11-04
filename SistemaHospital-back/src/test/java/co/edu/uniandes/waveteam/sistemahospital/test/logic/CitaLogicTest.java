@@ -200,6 +200,7 @@ public class CitaLogicTest {
         boolean encontrada = false;
         
         for(CitaEntity citaE: lista){
+            if(citaE.getDoctor()!=null)
             if(citaE.getDoctor().getId()==idDoctor){
                 if(citaE.getFecha()>=fechaInicio&&citaE.getFecha()<=fechaFin){
                     encontrada = true;
@@ -224,10 +225,12 @@ public class CitaLogicTest {
         boolean encontrada = false;
         
         for(CitaEntity citaE: lista){
+            if(citaE.getPaciente()!=null){
             if(citaE.getPaciente().getId()==idPaciente){
                 if(citaE.getFecha()>=fechaInicio&&citaE.getFecha()<=fechaFin){
                     encontrada = true;
                 }
+            }
             }
         }
         Assert.assertTrue(encontrada);
