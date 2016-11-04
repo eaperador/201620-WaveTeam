@@ -63,7 +63,7 @@ public class MedicoDTO {
         
         EspecialidadEntity ent = new EspecialidadEntity();
 //        ent.setId(5L);
-//        ent.setName(this.getEspecialidad());
+        ent.setName(this.getEspecialidad());
         entity.setEspecialidad(ent);
         return entity;
     }
