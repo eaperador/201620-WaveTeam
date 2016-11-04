@@ -64,7 +64,7 @@ public class PatientResource {
     @GET
     public List<PatientDetailDTO> getPatients() throws PatientLogicException {
         return convertEntityToDTO(pacienteLogic.findAllPacientes());
-    }
+    } 
     
      /**
      * Obtieneel paciente identificado con el id del parametro
