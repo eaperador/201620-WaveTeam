@@ -41,12 +41,12 @@ import javax.ws.rs.core.Response;
 @Consumes("application/json")
 @RequestScoped
 public class ConsultorioResource {
-        private final static Logger logger = Logger.getLogger(ConsultorioLogicMock.class.getName());
-
+    private final static Logger logger = Logger.getLogger(ConsultorioLogicMock.class.getName());
+    
 //    ConsultorioLogicMock consultorioLogic = new ConsultorioLogicMock();
-        
-        @Inject
-        IConsultorioLogic consultorioLogic;
+    
+    @Inject
+    IConsultorioLogic consultorioLogic;
     /**
      * Devuelve la lista de los consultorios
      * 
@@ -90,13 +90,14 @@ public class ConsultorioResource {
     @Path("{id: \\d+}")
     public ConsultorioDTO updateConsultorio(@PathParam("id") long id, ConsultorioDTO updatedConsultorio) throws ConsultorioLogicException            
     {
+        updatedConsultorio.setId(id);
         try{
             consultorioLogic.updateConsultorio(updatedConsultorio.entity());
         }catch(WaveTeamLogicException e)
         {
             throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
         }
-        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(id));
+        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(updatedConsultorio.getId()));
         return res;
     }
     
@@ -110,13 +111,15 @@ public class ConsultorioResource {
     @POST
     public ConsultorioDTO createConsultorio(ConsultorioDTO consultorioNuevo) throws ConsultorioLogicException
     {
+        logger.info("ME LLEGO UN CONSULTORIO "+consultorioNuevo);
+        
         try{
-            consultorioLogic.createConsultorio(consultorioNuevo.entity());
+            consultorioNuevo = new ConsultorioDTO(consultorioLogic.createConsultorio(consultorioNuevo.entity()));
         }catch(WaveTeamLogicException e)
         {
             throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
         }
-        ConsultorioDTO res = new ConsultorioDTO(consultorioLogic.getConsultorio(consultorioNuevo.getId()));
+        ConsultorioDTO res = consultorioNuevo;
         return res;
     }
     
@@ -184,7 +187,7 @@ public class ConsultorioResource {
     /**
      * Asigna un nuevo doctor al consultorio
      * @param idConsultorio
-     * @param idDoctor
+     * @param doc
      * @return
      * @throws ConsultorioLogicException 
      */
