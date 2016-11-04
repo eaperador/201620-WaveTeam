@@ -6,11 +6,13 @@
 package co.edu.uniandes.rest.waveteam.dtos;
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultaHistoricaEntity;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author d.marino10
  */
+@XmlRootElement
 public class ConsultaHistoricaDTO {
     
     private String fecha;

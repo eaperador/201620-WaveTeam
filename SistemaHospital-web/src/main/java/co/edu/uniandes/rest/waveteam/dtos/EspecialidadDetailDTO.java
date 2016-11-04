@@ -10,11 +10,13 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author d.marino10
  */
+@XmlRootElement
 public class EspecialidadDetailDTO extends EspecialidadDTO{
      
     private List<MedicoDTO> doctores = new ArrayList<>();

@@ -45,6 +45,12 @@
            <version>7.0</version>
            <scope>provided</scope>
        </dependency>
+        <dependency>
+        <groupId>org.jboss.shrinkwrap.resolver</groupId>
+        <artifactId>shrinkwrap-resolver-depchain</artifactId>
+        <scope>test</scope>
+        <type>pom</type>
+    </dependency>
    </dependencies>
 
    <build>
@@ -116,6 +122,19 @@
                    </execution>
                </executions>
            </plugin>
+           <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.19.1</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
        </plugins>
    </build>
 </project>
