@@ -20,7 +20,7 @@ public class CitaDTO {
     
     private String nombre;
     private Long id;
-    private Long fecha;
+    private String fecha;
     private Long hora;
     private int duracion;
     //private MedicoDTO doctor;
@@ -63,7 +63,7 @@ public class CitaDTO {
    
      //***********************************************************************
     
-    public CitaDTO(Long id, Long fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
+    public CitaDTO(Long id, String fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
@@ -87,11 +87,11 @@ public class CitaDTO {
         this.id = id;
     }
     
-    public Long getFecha(){
+    public String getFecha(){
         return fecha;
     }
     
-    public void setFecha(Long fecha){
+    public void setFecha(String fecha){
         this.fecha = fecha;
     }
     
