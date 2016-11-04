@@ -1,0 +1,53 @@
+{
+	"id": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
+	"name": "WaveTeam",
+	"description": "",
+	"order": [
+		"38513372-aa86-ea3a-537f-2ed4d87f9261",
+		"50fcc1b7-91b1-e5cb-9781-78a0f1edebf9"
+	],
+	"folders": [],
+	"timestamp": 1478235619156,
+	"owner": "902951",
+	"public": false,
+	"requests": [
+		{
+			"id": "38513372-aa86-ea3a-537f-2ed4d87f9261",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8080/SistemaHospital-web/api/doctors",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1478298756902,
+			"name": "Create a doctor",
+			"description": "",
+			"collectionId": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\":\"Pedro Jaramillo\",\n\t\"especialidad\":\"Cardiodlogo\",\n\t\"consultorio\":24\n}"
+		},
+		{
+			"id": "50fcc1b7-91b1-e5cb-9781-78a0f1edebf9",
+			"headers": "",
+			"url": "http://localhost:8080/SistemaHospital-web/api/doctors",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1478273816634,
+			"name": "Get doctors",
+			"description": "",
+			"collectionId": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
+			"responses": []
+		}
+	]
+}
