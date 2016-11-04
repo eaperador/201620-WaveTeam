@@ -8,10 +8,10 @@ package co.edu.uniandes.rest.waveteam.resources;
 import co.edu.uniandes.rest.waveteam.dtos.*;
 import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.MedicoLogicMock;
-import co.edu.uniandes.waveteam.sistemahospital.api.*;
+import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
+
 import co.edu.uniandes.waveteam.sistemahospital.entities.*;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
