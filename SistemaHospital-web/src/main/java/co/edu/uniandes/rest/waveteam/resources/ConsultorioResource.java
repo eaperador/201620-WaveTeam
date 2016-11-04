@@ -135,7 +135,7 @@ public class ConsultorioResource {
         }catch(WaveTeamLogicException e)
         {
             throw new WebApplicationException(e.getMessage(), Response.Status.BAD_REQUEST);
-        }
+        } 
     }
     
     //REQUERIMIENTO R8 - ASIGNAR CONSULTORIO A MEDICO

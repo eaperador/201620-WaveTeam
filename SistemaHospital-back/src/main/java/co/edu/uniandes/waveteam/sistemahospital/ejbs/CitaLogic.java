@@ -55,7 +55,7 @@ public class CitaLogic implements ICitaLogic{
     @Override
     public List<CitaEntity> getCitasByDoctorEnFecha(DoctorEntity doctor, Long fechaInicio, Long fechaFin){        
         return persistence.findByDoctorEnFecha(doctor, fechaInicio, fechaFin);
-        
+
     }
     
     @Override

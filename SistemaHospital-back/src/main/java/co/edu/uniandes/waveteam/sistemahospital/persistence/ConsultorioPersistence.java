@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author r.garcia11eeeeeeeeeee y6
+ * @author r.garcia11
  */
 @Stateless
 public class ConsultorioPersistence {
@@ -48,6 +48,11 @@ public class ConsultorioPersistence {
     public List<ConsultorioEntity> findAll() {
         LOGGER.log(Level.INFO, "Consultando todos los consultorios");
         Query q = em.createQuery("select u from ConsultorioEntity u");
+//        List<ConsultorioEntity> lista = q.getResultList();
+//        if (lista.isEmpty())
+//            return null;
+//        else
+//            return lista;
         return q.getResultList();
     }
 
