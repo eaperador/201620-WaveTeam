@@ -25,7 +25,7 @@ public class MedicoDTO {
     
     private static Long index = 1L;
 
-    /**
+    /**  
      * Constructor por defecto
      */
     public MedicoDTO() {
