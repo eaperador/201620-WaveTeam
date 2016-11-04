@@ -238,10 +238,8 @@ public class CitaLogicTest {
 //        }
 //        Assert.assertTrue(encontrada);
 //    }
-//            }
- //       }
- //       Assert.assertTrue(encontrada);
- //   }
+//            
+ //   
     
     
 }
