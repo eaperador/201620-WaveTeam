@@ -22,6 +22,8 @@ public class MedicoDTO {
     private String especialidad;
     private Long consultorio;
     private ArrayList<CitaDTO> disponibilidad;
+    
+    private static Long index = 1L;
 
     /**
      * Constructor por defecto
@@ -36,10 +38,10 @@ public class MedicoDTO {
         this.especialidad = entity.getEspecialidad().getName();
         this.consultorio = entity.getConsultorio();
         this.disponibilidad = new ArrayList<>();
-        for (CitaEntity cita:entity.getDisponibilidadCitas()){
-            CitaDTO c = new CitaDTO(cita);
-            disponibilidad.add(c);
-        }
+//        for (CitaEntity cita:entity.getDisponibilidadCitas()){
+//            CitaDTO c = new CitaDTO(cita);
+//            disponibilidad.add(c);
+//        }
     }
 
     public MedicoDTO(Long id, String name, String especialidad, Long consultorio, ArrayList<CitaDTO> dispo) {
@@ -53,9 +55,15 @@ public class MedicoDTO {
     public DoctorEntity toEntity(){
         DoctorEntity entity = new DoctorEntity();
         entity.setId(this.getId());
+        
+//        System.out.println("JOJO: "+entity.getId());
         entity.setConsultorio(this.consultorio);
+        entity.setName(this.name);
+        entity.setConsultorio(this.consultorio);
+        
         EspecialidadEntity ent = new EspecialidadEntity();
-        ent.setName(this.getEspecialidad());
+//        ent.setId(5L);
+//        ent.setName(this.getEspecialidad());
         entity.setEspecialidad(ent);
         return entity;
     }
@@ -136,11 +144,11 @@ public class MedicoDTO {
         return disponibilidad;
     }
    
-    /**
-     * Convierte el objeto a una cadena
-     */
-    @Override
-    public String toString() {
-        return "{ id : " + getId() + ", name : \"" + getName() + "\" }";
-    }
+//    /**
+//     * Convierte el objeto a una cadena
+//     */
+//    @Override
+//    public String toString() {
+//        return "{ id : " + getId() + ", name : \"" + getName() + "\" }";
+//    }
 }

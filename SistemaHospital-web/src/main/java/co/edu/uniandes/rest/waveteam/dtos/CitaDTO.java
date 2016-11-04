@@ -52,7 +52,7 @@ public class CitaDTO {
     public CitaEntity toEntity() {
         CitaEntity entity = new CitaEntity();
         entity.setDuracion(duracion);
-        entity.setFecha(fecha);
+//        entity.setFecha(fecha);
         entity.setHabilitada(habilitada);
         entity.setHora(hora);
         entity.setId(id);

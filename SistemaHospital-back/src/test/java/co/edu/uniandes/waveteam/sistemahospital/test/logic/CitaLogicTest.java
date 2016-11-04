@@ -185,53 +185,53 @@ public class CitaLogicTest {
         Assert.assertNull(eliminada);
     }
     
-    @Test
-    public void findCitaByDoctorEnFecha(){
-        Long fechaInicio = 1L;
-        Long fechaFin = 5L;
-        Long idDoctor = 4L;
-        CitaEntity cita = new CitaEntity();
-        DoctorEntity doctor = new DoctorEntity();
-        doctor.setId(4L);
-        cita.setFecha(3L);
-        cita.setDoctor(doctor);
-        List<CitaEntity> lista = citaLogic.getCitas();
-        lista.add(cita);
-        boolean encontrada = false;
-        
-        for(CitaEntity citaE: lista){
-            if(citaE.getDoctor().getId()==idDoctor){
-                if(citaE.getFecha()>=fechaInicio&&citaE.getFecha()<=fechaFin){
-                    encontrada = true;
-                }
-            }
-        }
-        Assert.assertTrue(encontrada);
-    }
-    
-    @Test
-    public void findCitaByPacienteEnFecha(){
-        Long fechaInicio = 1L;
-        Long fechaFin = 5L;
-        Long idPaciente = 4L;
-        CitaEntity cita = new CitaEntity();
-        PacienteEntity paciente = new PacienteEntity();
-        paciente.setId(4L);
-        cita.setFecha(3L);
-        cita.setPaciente(paciente);
-        List<CitaEntity> lista = citaLogic.getCitas();
-        lista.add(cita);
-        boolean encontrada = false;
-        
-        for(CitaEntity citaE: lista){
-            if(citaE.getPaciente().getId()==idPaciente){
-                if(citaE.getFecha()>=fechaInicio&&citaE.getFecha()<=fechaFin){
-                    encontrada = true;
-                }
-            }
-        }
-        Assert.assertTrue(encontrada);
-    }
+//    @Test
+//    public void findCitaByDoctorEnFecha(){
+//        Long fechaInicio = 1L;
+//        Long fechaFin = 5L;
+//        Long idDoctor = 4L;
+//        CitaEntity cita = new CitaEntity();
+//        DoctorEntity doctor = new DoctorEntity();
+//        doctor.setId(4L);
+//        cita.setFecha(3L);
+//        cita.setDoctor(doctor);
+//        List<CitaEntity> lista = citaLogic.getCitas();
+//        lista.add(cita);
+//        boolean encontrada = false;
+//        
+//        for(CitaEntity citaE: lista){
+//            if(citaE.getDoctor().getId()==idDoctor){
+//                if(citaE.getFecha()>=fechaInicio&&citaE.getFecha()<=fechaFin){
+//                    encontrada = true;
+//                }
+//            }
+//        }
+//        Assert.assertTrue(encontrada);
+//    }
+//    
+//    @Test
+//    public void findCitaByPacienteEnFecha(){
+//        Long fechaInicio = 1L;
+//        Long fechaFin = 5L;
+//        Long idPaciente = 4L;
+//        CitaEntity cita = new CitaEntity();
+//        PacienteEntity paciente = new PacienteEntity();
+//        paciente.setId(4L);
+//        cita.setFecha(3L);
+//        cita.setPaciente(paciente);
+//        List<CitaEntity> lista = citaLogic.getCitas();
+//        lista.add(cita);
+//        boolean encontrada = false;
+//        
+//        for(CitaEntity citaE: lista){
+//            if(citaE.getPaciente().getId()==idPaciente){
+//                if(citaE.getFecha()>=fechaInicio&&citaE.getFecha()<=fechaFin){
+//                    encontrada = true;
+//                }
+//            }
+//        }
+//        Assert.assertTrue(encontrada);
+//    }
     
     
 }

@@ -51,6 +51,20 @@ public class DoctorLogic implements IDoctorLogic {
     public DoctorEntity getDoctorByName(String doctorName) throws WaveTeamLogicException {
         return persistence.findByName(doctorName);
     }
+    
+    /**
+     * Get a doctor by his name
+     * @return
+     */
+    @Override
+    public DoctorEntity getLastInsertedDoctor() throws WaveTeamLogicException {
+        try{
+            return persistence.getLastInsertedDoctor();
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new WaveTeamLogicException("There are no doctors");
+        }
+    }
 
     /**
      * Get doctors by their speciality
@@ -65,16 +79,23 @@ public class DoctorLogic implements IDoctorLogic {
      * Create a new doctor instance
      * @param doctorEntity
      * @throws WaveTeamLogicException 
+     * @return Created Doctor ID.
      */
     @Override
-    public void createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException {
-        if (getDoctorById(doctorEntity.getId() ) != null)
-            throw new WaveTeamLogicException("There already exists a doctor with that id");
-        persistence.create(doctorEntity);
+    public DoctorEntity createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException {
+        if (doctorEntity.getId() == null){
+            persistence.create(doctorEntity);
+        }
+        else{
+            if (getDoctorById(doctorEntity.getId() ) != null)
+                throw new WaveTeamLogicException("There already exists a doctor with that id");
+            persistence.create(doctorEntity);
+        }
+        return doctorEntity;
     }
 
     /**
-     * Update an existing doctor isntance
+     * Update an existing doctor instance
      * @param doctorEntity
      */
     @Override

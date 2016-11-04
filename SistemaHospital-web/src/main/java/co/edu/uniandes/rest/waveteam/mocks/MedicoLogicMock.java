@@ -141,7 +141,7 @@ public class MedicoLogicMock {
             for (MedicoDTO doctor : doctors) {
                 if (Objects.equals(id, doctor.getId())) {
                     logger.info("Actualizando informacion del doctor con");
-                    doctor.setId(updatedCity.getId());
+//                    doctor.setId(updatedCity.getId());
                     doctor.setName(updatedCity.getName());
                     doctor.setConsultorio(updatedCity.getConsultorio());
                     doctor.setEspecialidad(updatedCity.getEspecialidad());

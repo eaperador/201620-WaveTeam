@@ -30,6 +30,13 @@ public interface IDoctorLogic {
      * @return
      */
     public DoctorEntity getDoctorByName(String doctorName) throws WaveTeamLogicException;
+    
+    /**
+     * Get the last inserted doctor
+     * @return Doctor
+     * @throws WaveTeamLogicException 
+     */
+    public DoctorEntity getLastInsertedDoctor() throws WaveTeamLogicException;
 
     /**
      * Get all doctors with the given specialty.
@@ -41,8 +48,9 @@ public interface IDoctorLogic {
     /**
      * Create a new doctor
      * @param doctorEntity
+     * @return Created Doctor ID.
      */
-    public void createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException;
+    public DoctorEntity createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException;
 
     /**
      * Update a doctor.

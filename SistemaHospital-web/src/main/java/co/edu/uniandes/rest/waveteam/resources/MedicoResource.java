@@ -11,11 +11,10 @@ import co.edu.uniandes.rest.waveteam.mocks.MedicoLogicMock;
 import co.edu.uniandes.waveteam.sistemahospital.api.*;
 import co.edu.uniandes.waveteam.sistemahospital.entities.*;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,7 +25,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -41,6 +39,7 @@ import javax.ws.rs.core.Response;
 @Path("doctors")
 @Produces("application/json")
 @Consumes("application/json")
+@RequestScoped
 public class MedicoResource {
 
     MedicoLogicMock cityLogic = new MedicoLogicMock();
@@ -71,11 +70,11 @@ public class MedicoResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public MedicoDTO getDoctor(@PathParam("id") Long id) {
-        MedicoDTO doc = new MedicoDTO(logic.getDoctorById(id));
+    public MedicoDTO getDoctor(@PathParam("id") Long id) { 
+        DoctorEntity doc = logic.getDoctorById(id);
         if (doc == null)
             throw new WebApplicationException("The given doctor does nor exist", Response.Status.BAD_REQUEST);
-        return doc;
+        return new MedicoDTO(logic.getDoctorById(id));
     }
 
     /**
@@ -119,12 +118,13 @@ public class MedicoResource {
     @POST
     public MedicoDTO createDoctor(MedicoDTO doctor) throws MedicoLogicException {
         try{
-            logic.createDoctor(doctor.toEntity());
+            DoctorEntity ent = logic.createDoctor( doctor.toEntity() );
+            MedicoDTO med = new MedicoDTO( ent );
+            return med;
         } catch (Exception w){
+            w.printStackTrace();
             throw new WebApplicationException(w.getMessage(), Response.Status.BAD_REQUEST);
         }
-        
-        return new MedicoDTO(logic.getDoctorById(doctor.getId()));
     }
 
     /**

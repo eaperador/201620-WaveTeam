@@ -46,6 +46,14 @@ public class DoctorPersistence {
         return q.getSingleResult();
     }
     
+    public DoctorEntity getLastInsertedDoctor(){
+        LOGGER.log(Level.INFO, "Consultando el ultimo doctor agregado.");
+        TypedQuery<DoctorEntity> q
+                = em.createQuery("select * from (select * from DoctorEntity e " +
+                        "order by id desc) where rownum = 1;", DoctorEntity.class);
+        return q.getSingleResult();
+    }
+    
     public List<DoctorEntity> findAll() {
         LOGGER.info("Consultando todos los doctores");
         Query q = em.createQuery("select d from DoctorEntity d");
