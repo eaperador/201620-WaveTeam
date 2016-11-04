@@ -7,6 +7,8 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.Session;
@@ -92,6 +94,10 @@ public class DoctorLogic implements IDoctorLogic {
             persistence.create(doctorEntity);
         }
         return doctorEntity;
+    }
+    
+    public void setDisponibilidad(Long doctorID, ArrayList<LinkedHashMap> days){
+        persistence.find(doctorID);
     }
 
     /**

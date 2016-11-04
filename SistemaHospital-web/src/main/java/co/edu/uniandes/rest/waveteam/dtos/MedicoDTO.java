@@ -17,11 +17,10 @@ import java.util.*;
  */
 @XmlRootElement
 public class MedicoDTO {
-    private Long id;
+    Long id;
     private String name;
     private String especialidad;
     private Long consultorio;
-    private ArrayList<CitaDTO> disponibilidad;
     
     private static Long index = 1L;
 
@@ -37,11 +36,6 @@ public class MedicoDTO {
         this.name = entity.getName();
         this.especialidad = entity.getEspecialidad().getName();
         this.consultorio = entity.getConsultorio();
-        this.disponibilidad = new ArrayList<>();
-//        for (CitaEntity cita:entity.getDisponibilidadCitas()){
-//            CitaDTO c = new CitaDTO(cita);
-//            disponibilidad.add(c);
-//        }
     }
 
     public MedicoDTO(Long id, String name, String especialidad, Long consultorio, ArrayList<CitaDTO> dispo) {
@@ -49,7 +43,6 @@ public class MedicoDTO {
         this.name = name;
         this.especialidad = especialidad;
         this.consultorio = consultorio;
-        this.disponibilidad = dispo;
     }
     
     public DoctorEntity toEntity(){
@@ -133,16 +126,16 @@ public class MedicoDTO {
                 cita.setId(1L);
                 cita.setPaciente(-1L);
                 System.out.println(cita.toString());
-                disponibilidad.add(cita);
+//                disponibilidad.add(cita);
                 CitaLogicMock.getCityArray().add(cita);
                 i++;
             }
         }
     }
     
-    public ArrayList<CitaDTO> getDisponibilidad(){
-        return disponibilidad;
-    }
+//    public ArrayList<CitaDTO> getDisponibilidad(){
+//        return disponibilidad;
+//    }
    
 //    /**
 //     * Convierte el objeto a una cadena

@@ -88,7 +88,8 @@ public class MedicoLogicMock {
         for (MedicoDTO doctor : doctors) {
             if (Objects.equals(id, doctor.getId())) {
                 logger.info("Retornando la disponibilidad del doctor con ID " + id);
-                return doctor.getDisponibilidad();
+//                return doctor.getDisponibilidad();
+                return null;
             }
         }
         logger.info("No se encontro doctor con ese ID");
@@ -123,7 +124,8 @@ public class MedicoLogicMock {
                 logger.info("Agregando disponibilidad al doctor con id: " + id);
                 logger.info("Agregando disponibilidad al doctor con id: " + id);
                 doctor.setDisponibilidad(diasDisponible);
-                return doctor.getDisponibilidad();
+//                return doctor.getDisponibilidad();
+            return null;
             }
         }
         logger.info("No se encontro doctor con ese ID");

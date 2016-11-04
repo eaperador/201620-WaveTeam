@@ -54,10 +54,10 @@ public class MedicoResource {
      * @throws WebApplicationException 
      */
     @GET
-    public List<MedicoDTO> getDoctors() {
-        List <MedicoDTO> doctors = new ArrayList<>();
+    public List<MedicoDetailDTO> getDoctors() {
+        List <MedicoDetailDTO> doctors = new ArrayList<>();
         for (DoctorEntity entity: logic.getDoctores()){
-            doctors.add(new MedicoDTO(entity));
+            doctors.add(new MedicoDetailDTO(entity));
         }
         return doctors;
     }
@@ -70,11 +70,11 @@ public class MedicoResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public MedicoDTO getDoctor(@PathParam("id") Long id) { 
+    public MedicoDetailDTO getDoctor(@PathParam("id") Long id) { 
         DoctorEntity doc = logic.getDoctorById(id);
         if (doc == null)
             throw new WebApplicationException("The given doctor does nor exist", Response.Status.BAD_REQUEST);
-        return new MedicoDTO(logic.getDoctorById(id));
+        return new MedicoDetailDTO(logic.getDoctorById(id));
     }
 
     /**
@@ -86,13 +86,13 @@ public class MedicoResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public MedicoDTO updateDoctor(@PathParam("id") Long id, MedicoDTO doctor) throws WebApplicationException {
+    public MedicoDetailDTO updateDoctor(@PathParam("id") Long id, MedicoDTO doctor) throws WebApplicationException {
         try{
             logic.updateDoctor(doctor.toEntity());
         } catch (WaveTeamLogicException w){
              throw new WebApplicationException(w.getMessage(), Response.Status.BAD_REQUEST);
         }
-        return new MedicoDTO(logic.getDoctorById(id));
+        return new MedicoDetailDTO(logic.getDoctorById(id));
     }
     
     /**
@@ -116,10 +116,10 @@ public class MedicoResource {
      * suministrada
      */
     @POST
-    public MedicoDTO createDoctor(MedicoDTO doctor) throws MedicoLogicException {
+    public MedicoDetailDTO createDoctor(MedicoDetailDTO doctor) throws MedicoLogicException {
         try{
             DoctorEntity ent = logic.createDoctor( doctor.toEntity() );
-            MedicoDTO med = new MedicoDTO( ent );
+            MedicoDetailDTO med = new MedicoDetailDTO( ent );
             return med;
         } catch (Exception w){
             w.printStackTrace();
