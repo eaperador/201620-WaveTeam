@@ -231,11 +231,10 @@ public class CitaPersistenceTest {
 	Assert.assertNotNull(found);
 	Assert.assertNotNull(found.getId()+"", nuevoE.getId());
 	Assert.assertNotNull(found.getId()+"", nuevoE.getId());
-	Assert.assertNotNull(found.getFecha(), nuevoE.getFecha());
+//	Assert.assertNotNull(found.getFecha(), nuevoE.getFecha());
 	Assert.assertNotNull(found.getHora()+"", nuevoE.getHora());
 	Assert.assertNotNull(found.getDuracion()+"", nuevoE.getDuracion());
 	Assert.assertNotNull(found.getHabilitada(), nuevoE.getHabilitada());
-		 
     }
 	
 	

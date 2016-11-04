@@ -125,19 +125,19 @@ public class CitaResource {
 //        return citaLogic.getCitasByPaciente(paciente);
 //    }
     
-    @GET
-    @Path("/doctor/{fechaInicio: \\d+}-{fechaFin: \\d+}")
-    public List<CitaEntity> getCitasByDoctorEnFecha(DoctorEntity doctor, @PathParam("fechaInicio") Long fechaInicio, @PathParam("fechaFin") Long fechaFin){
-        return citaLogic.getCitasByDoctorEnFecha(doctor, fechaInicio, fechaFin);
-        
-    }
-    
-    @GET
-    @Path("/paciente/{fechaInicio: \\d+}-{fechaFin: \\d+}")
-    public List<CitaEntity> getCitasByPacienteEnFecha(PatientDTO paciente, @PathParam("fechaInicio") Long fechaInicio, @PathParam("fechaFin") Long fechaFin){
-        return citaLogic.getCitasByPacienteEnFecha(paciente.toEntity(), fechaInicio, fechaFin);
-    }
-    
+//    @GET
+//    @Path("/doctor/{fechaInicio: \\d+}-{fechaFin: \\d+}")
+//    public List<CitaEntity> getCitasByDoctorEnFecha(DoctorEntity doctor, @PathParam("fechaInicio") Long fechaInicio, @PathParam("fechaFin") Long fechaFin){
+//        return citaLogic.getCitasByDoctorEnFecha(doctor, fechaInicio, fechaFin);
+//        
+//    }
+//    
+//    @GET
+//    @Path("/paciente/{fechaInicio: \\d+}-{fechaFin: \\d+}")
+//    public List<CitaEntity> getCitasByPacienteEnFecha(PatientDTO paciente, @PathParam("fechaInicio") Long fechaInicio, @PathParam("fechaFin") Long fechaFin){
+//        return citaLogic.getCitasByPacienteEnFecha(paciente.toEntity(), fechaInicio, fechaFin);
+//    }
+//    
     
 //    @PUT
 //    @Path("{id: \\d+}/terminar")
