@@ -184,9 +184,9 @@ public class ConsultorioDTO {
         ConsultorioEntity cons = new ConsultorioEntity();
         cons.setId(this.id);
         cons.setName(this.nombre);
-//        cons.setHorario(this.horario);
+        cons.setHorario(this.horario);
         cons.setAtencionUrgencias(this.atencionUrgencias);
-//        cons.setUnidadCuidadosIntensivos(this.unidadCuidadosIntensivos);
+        cons.setUnidadCuidadosIntensivos(this.unidadCuidadosIntensivos);
         return cons;
     }
     

@@ -8,13 +8,15 @@ import co.edu.uniandes.rest.waveteam.exceptions.ConsultorioLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.ConsultorioLogicMock;
 import co.edu.uniandes.rest.waveteam.dtos.ConsultorioDTO;
 import co.edu.uniandes.rest.waveteam.dtos.MedicoDTO;
-import co.edu.uniandes.waveteam.sistemahospital.ejbs.ConsultorioLogic;
+import co.edu.uniandes.waveteam.sistemahospital.api.IConsultorioLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultorioEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -37,13 +39,14 @@ import javax.ws.rs.core.Response;
 @Path("consultorios")
 @Produces("application/json")
 @Consumes("application/json")
+@RequestScoped
 public class ConsultorioResource {
         private final static Logger logger = Logger.getLogger(ConsultorioLogicMock.class.getName());
 
 //    ConsultorioLogicMock consultorioLogic = new ConsultorioLogicMock();
         
         @Inject
-        ConsultorioLogic consultorioLogic;
+        IConsultorioLogic consultorioLogic;
     /**
      * Devuelve la lista de los consultorios
      * 
