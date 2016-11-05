@@ -1,8 +1,11 @@
 package co.edu.uniandes.waveteam.sistemahospital.api;
 
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import java.util.List;
 
@@ -64,6 +67,14 @@ public interface IDoctorLogic {
      * @param doctorId
      */
     public void deleteDoctor(Long doctorId) throws WaveTeamLogicException;
-
-
+    
+    /**
+     * Set this doctor availability
+     */
+    public void setDisponibilidad(Long doctorID, ArrayList<LinkedHashMap> days);
+    
+    /**
+     * Get this doctor availability
+     */
+    public List<CitaEntity> getDisponibilidad(Long doctorID);
 }

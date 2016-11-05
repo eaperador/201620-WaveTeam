@@ -6,6 +6,7 @@
 package co.edu.uniandes.rest.waveteam.dtos;
 
 import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +30,10 @@ public class MedicoDetailDTO extends MedicoDTO {
     
     public MedicoDetailDTO(DoctorEntity entity){
         super(entity);
+        this.disponibilidad = new ArrayList<>();
+        for (CitaEntity citaEntity : entity.getDisponibilidadCitas()) {
+            disponibilidad.add( new CitaDTO(citaEntity) );
+        }
     }
     
     public MedicoDetailDTO(Long id, String name, String especialidad, Long consultorio, ArrayList<CitaDTO> dispo) {
@@ -43,7 +48,7 @@ public class MedicoDetailDTO extends MedicoDTO {
     @Override
     public DoctorEntity toEntity() {
         DoctorEntity entity = super.toEntity();
-         List<CitaDTO> citas = this.disponibilidad; 
+        List<CitaDTO> citas = this.disponibilidad;  
 //        for (CitaDTO cita : this.disponibilidad) {         
 //            entity.getDisponibilidadCitas().add(cita.toEntity());
 //        }
@@ -70,7 +75,7 @@ public class MedicoDetailDTO extends MedicoDTO {
                 cita.setId(1L);
                 cita.setPaciente(-1L);
                 System.out.println(cita.toString());
-//                disponibilidad.add(cita);
+                disponibilidad.add(cita);
                 CitaLogicMock.getCityArray().add(cita);
                 i++;
             }

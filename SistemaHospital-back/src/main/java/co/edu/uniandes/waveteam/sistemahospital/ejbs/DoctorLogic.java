@@ -1,6 +1,7 @@
 package co.edu.uniandes.waveteam.sistemahospital.ejbs;
 
 import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
+import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
@@ -96,8 +97,34 @@ public class DoctorLogic implements IDoctorLogic {
         return doctorEntity;
     }
     
+    /**
+     * Set availability
+     * @param doctorID
+     * @param days 
+     */
+    @Override
     public void setDisponibilidad(Long doctorID, ArrayList<LinkedHashMap> days){
-        persistence.find(doctorID);
+        try{
+            persistence.find(doctorID).setDisponibilidad(days);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Get availability
+     * @param doctorID
+     * @param days
+     * @return 
+     */
+    @Override
+    public List<CitaEntity> getDisponibilidad(Long doctorID){
+        try{
+            return persistence.find(doctorID).getDisponibilidadCitas();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

@@ -154,7 +154,7 @@ public class MedicoResource {
     @POST
     @Path("{id: \\d+}/disponibilidad/")
     public void setDisponibilidad(@PathParam("id") Long id, ArrayList days) throws MedicoLogicException {
-        cityLogic.definirHorarioMedico(id, days);
+        logic.setDisponibilidad(id, days);
     }
 
     /**
@@ -166,6 +166,11 @@ public class MedicoResource {
     @GET
     @Path("{id: \\d+}/disponibilidad/")
     public List<CitaDTO> getDisponibilidad(@PathParam("id") Long id) throws MedicoLogicException {
-        return cityLogic.getDoctorSchedule(id);
+        List<CitaEntity> citas = logic.getDisponibilidad(id);
+        List<CitaDTO> dtos = new ArrayList<>();
+        for (CitaEntity entity: citas){
+            dtos.add( new CitaDTO(entity) );
+        }
+        return dtos;
     }
 }

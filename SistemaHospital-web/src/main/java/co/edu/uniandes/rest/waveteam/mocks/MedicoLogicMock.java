@@ -123,7 +123,7 @@ public class MedicoLogicMock {
             if (Objects.equals(id, doctor.getId())) {
                 logger.info("Agregando disponibilidad al doctor con id: " + id);
                 logger.info("Agregando disponibilidad al doctor con id: " + id);
-                doctor.setDisponibilidad(diasDisponible);
+//                doctor.setDisponibilidad(diasDisponible);
 //                return doctor.getDisponibilidad();
             return null;
             }
