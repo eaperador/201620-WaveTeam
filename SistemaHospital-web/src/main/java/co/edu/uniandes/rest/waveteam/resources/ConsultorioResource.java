@@ -44,7 +44,7 @@ public class ConsultorioResource {
     private final static Logger logger = Logger.getLogger(ConsultorioLogicMock.class.getName());
     
 //    ConsultorioLogicMock consultorioLogic = new ConsultorioLogicMock();
-    
+     
     @Inject
     IConsultorioLogic consultorioLogic;
     /**
@@ -194,7 +194,7 @@ public class ConsultorioResource {
     @POST
     @Path("{idConsultorio: \\d+}/doctores")
     public ConsultorioDTO asignDoctor(@PathParam("idConsultorio") long idConsultorio, MedicoDTO doc) throws ConsultorioLogicException
-    {
+    {   
         try{
             consultorioLogic.asignDoctor(idConsultorio, doc.toEntity());
         }catch(WaveTeamLogicException e)
