@@ -44,7 +44,7 @@ public class ConsultorioResource {
     private final static Logger logger = Logger.getLogger(ConsultorioLogicMock.class.getName());
     
 //    ConsultorioLogicMock consultorioLogic = new ConsultorioLogicMock();
-     
+      
     @Inject
     IConsultorioLogic consultorioLogic;
     /**
