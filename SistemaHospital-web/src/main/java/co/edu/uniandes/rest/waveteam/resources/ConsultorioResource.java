@@ -194,7 +194,7 @@ public class ConsultorioResource {
     @POST
     @Path("{idConsultorio: \\d+}/doctores")
     public ConsultorioDTO asignDoctor(@PathParam("idConsultorio") long idConsultorio, MedicoDTO doc) throws ConsultorioLogicException
-    {
+    {   
         try{
             consultorioLogic.asignDoctor(idConsultorio, doc.toEntity());
         }catch(WaveTeamLogicException e)
