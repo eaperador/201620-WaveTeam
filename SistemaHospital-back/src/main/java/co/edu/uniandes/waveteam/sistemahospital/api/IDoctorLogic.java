@@ -49,7 +49,7 @@ public interface IDoctorLogic {
     public List<DoctorEntity> getDoctorByEspecialidad(EspecialidadEntity especialidad);
 
     /**
-     * Create a new doctor
+     * Create a new doctor instance, if the given specialty does not exist, it is created.
      * @param doctorEntity
      * @return Created Doctor ID.
      */

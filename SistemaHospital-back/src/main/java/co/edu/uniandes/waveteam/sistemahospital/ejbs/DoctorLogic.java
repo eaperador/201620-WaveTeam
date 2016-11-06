@@ -7,6 +7,7 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.EspecialidadPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -23,6 +24,9 @@ public class DoctorLogic implements IDoctorLogic {
 
     @Inject
     private DoctorPersistence persistence;
+    
+    @Inject
+    private EspecialidadPersistence specialtyPersistence;
 
     @Inject
     private PacientePersistence pacientePersistence;
@@ -79,13 +83,22 @@ public class DoctorLogic implements IDoctorLogic {
     }
 
     /**
-     * Create a new doctor instance
+     * Create a new doctor instance, if the given specialty does not exist, it is created.
      * @param doctorEntity
      * @throws WaveTeamLogicException 
      * @return Created Doctor ID.
      */
     @Override
     public DoctorEntity createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException {
+        EspecialidadEntity specialty = specialtyPersistence.findByName(doctorEntity.getEspecialidad().getName());
+        if (specialty == null){
+            specialty = new EspecialidadEntity();
+            specialty.setName(doctorEntity.getEspecialidad().getName());
+            specialty.setTipo("Clinica");
+            specialty.setGruposEdad("8-80");
+        }
+        doctorEntity.setEspecialidad(specialty);
+        specialty.getDoctores().add(doctorEntity);
         if (doctorEntity.getId() == null){
             persistence.create(doctorEntity);
         }
