@@ -74,7 +74,6 @@ public class MedicoDetailDTO extends MedicoDTO {
                 cita.desactivar();
                 cita.setId(1L);
                 cita.setPaciente(-1L);
-                System.out.println(cita.toString());
                 disponibilidad.add(cita);
                 CitaLogicMock.getCityArray().add(cita);
                 i++;

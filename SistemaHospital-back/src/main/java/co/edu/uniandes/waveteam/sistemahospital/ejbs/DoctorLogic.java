@@ -133,7 +133,6 @@ public class DoctorLogic implements IDoctorLogic {
     @Override
     public void setDisponibilidad(Long doctorID, ArrayList<LinkedHashMap> days){
         try{
-            System.out.println("ONCE JEJE");
             persistence.find(doctorID).setDisponibilidad(days);
         } catch (Exception e){
             e.printStackTrace();

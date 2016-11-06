@@ -180,7 +180,7 @@ public class MedicoResource {
     //REQUERIMIENTOS R4 Y R7 - MEDICO Y SUS DISPONIBILIDADES
 
     /**
-     * 
+     * Set the availability of a given doctor
      * @param id
      * @param days
      * @throws MedicoLogicException 
@@ -193,9 +193,9 @@ public class MedicoResource {
     }
 
     /**
-     * 
+     * Get a given doctor availability
      * @param id
-     * @return
+     * @return List of {@link CitaDTO} if retrieved successfully
      * @throws MedicoLogicException 
      */
     @Produces("application/json")
@@ -205,17 +205,7 @@ public class MedicoResource {
         List<CitaEntity> citas = logic.getDisponibilidad(id);
         ArrayList<CitaDTO> dtos = new ArrayList<>();
         for (CitaEntity entity: citas){
-//            System.out.println("Fecha "+entity.getFecha());
-//            System.out.println("Habilitada "+entity.getHabilitada());
-//            System.out.println("Name "+entity.getName());
-//            System.out.println("Duracion "+entity.getDuracion());
-//            System.out.println("Doctor "+entity.getDoctor());
-//            System.out.println("Hora "+entity.getHora());
-            CitaDTO citaaa = new CitaDTO(entity, true);
-//            System.out.println("DTO-Fecha "+citaaa.getFecha());
-//            System.out.println("DTODoctor "+citaaa.getMedico());
-//            System.out.println("DTOHora "+citaaa.getHora());
-            dtos.add( citaaa );
+            dtos.add( new CitaDTO(entity, true) );
         }
         return Response
                 .status(200)
