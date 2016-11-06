@@ -159,8 +159,7 @@
             }
         }
         
-        this.hasPatient = function (patient) {
-            console.log("JEJE")
+        $scope.hasPatient = function (patient) {
             if (patient === undefined || !patient || patient == null)
                 return "Not assigned yet.";
             return patient

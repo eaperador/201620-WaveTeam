@@ -36,7 +36,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="c in citas" ng-show="ctrl.checkIfAssigned(c)">
-                    <td>{{ctrl.hasPatient(c.patient)}}</td>
+                    <td>{{hasPatient(c.patient)}}</td>
                     <td>{{ctrl.turnMillisToDate(c.hora)}}</td>
                     <td>{{ctrl.turnMillisToHour(c.hora)}}</td>
                     <td>{{c.duracion}}</td>

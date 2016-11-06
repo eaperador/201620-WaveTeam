@@ -56,7 +56,7 @@ public class CitaResource {
     private List<CitaDTO> listaEntity(List<CitaEntity> listaECitas){
         List<CitaDTO> lista = new ArrayList();
         for(CitaEntity cita : listaECitas){
-            lista.add(new CitaDTO(cita));
+            lista.add(new CitaDTO(cita,true));
         }
         return lista;
     }
