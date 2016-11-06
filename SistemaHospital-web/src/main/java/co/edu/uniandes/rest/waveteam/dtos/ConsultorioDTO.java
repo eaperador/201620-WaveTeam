@@ -10,11 +10,14 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author r.garcia11
  */
+@XmlRootElement
 public class ConsultorioDTO {
     
     private Long id;
@@ -23,7 +26,9 @@ public class ConsultorioDTO {
     private boolean atencionUrgencias;
     private boolean unidadCuidadosIntensivos;
     
+    
     // Un consultorio puede estar asignado a muchos doctores
+    @PodamExclude
     private List<MedicoDTO> doctoresAsignados = new ArrayList<MedicoDTO>();
     
     /**
