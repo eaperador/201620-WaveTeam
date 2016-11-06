@@ -12,6 +12,7 @@
             if($scope.selectedDoctor !== undefined){
                 $http.get(context+"/"+$scope.selectedDoctor.id+"/disponibilidad").then(function (response) {
                     $scope.citas = response.data;
+                    console.log($scope.citas);
                 }, responseError);
             }
         }
@@ -23,6 +24,7 @@
             if($scope.selectedDoctor !== undefined){
                 $http.get(context+"/"+$scope.selectedDoctor.id+"/disponibilidad").then(function (response) {
                     $scope.citas = response.data;
+                    console.log($scope.citas);
                 }, responseError);
             }
         });
@@ -142,7 +144,7 @@
             if (!$scope.scheduleDay1 || !$scope.scheduleDay2){
                 if (!$scope.showAssigned) return true;
                 else{
-                    if (cita.paciente !== -1) return true
+                    if (cita.paciente !== -1 && cita.paciente!== undefined) return true
                 }
                 return false;
             }
@@ -155,6 +157,12 @@
                 }
                 return false;
             }
+        }
+        
+        $scope.hasPatient = function (patient) {
+            if (patient === undefined || !patient || patient == null)
+                return "Not assigned yet.";
+            return patient
         }
 
         this.editDoctorFinal = function () {

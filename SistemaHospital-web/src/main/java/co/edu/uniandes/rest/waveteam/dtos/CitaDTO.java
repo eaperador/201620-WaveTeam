@@ -39,13 +39,28 @@ public class CitaDTO {
     
     public CitaDTO(CitaEntity entity){
         if (entity != null) {
-        this.id = id;
-        this.fecha = fecha;
-        this.hora = hora;
-        this.duracion = duracion;
-        this.doctor = doctor;
-        this.paciente = paciente; 
-        this.habilitada = habilitada;
+            this.id = id;
+            this.fecha = fecha;
+            this.hora = hora;
+            this.duracion = duracion;
+            this.doctor = doctor;
+            this.paciente = paciente; 
+            this.habilitada = habilitada;
+        }
+    }
+    
+    public CitaDTO(CitaEntity entity, boolean alternate){
+        if (entity != null) {
+            this.id = entity.getId();
+            this.fecha = entity.getFecha();
+            this.fecha = entity.getFecha();
+            this.hora = entity.getHora();
+            this.duracion = entity.getDuracion();
+            if (entity.getDoctor() != null )
+                this.doctor = entity.getDoctor().getId();
+            if (entity.getPaciente() != null )
+                this.paciente = entity.getPaciente().getId(); 
+            this.habilitada = entity.getHabilitada();
         }
     }
     
