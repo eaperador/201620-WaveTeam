@@ -45,13 +45,15 @@ public class ConsultorioLogic implements IConsultorioLogic {
 
     @Override
     public ConsultorioEntity createConsultorio(ConsultorioEntity consultorio) throws WaveTeamLogicException{
-        ConsultorioEntity cons = persistencia.find(consultorio.getId());
-        if (cons != null) {
-            throw new WaveTeamLogicException("ya existe un consultorio con ese id");
-        }
-        cons = persistencia.findByName(consultorio.getName());
-        if (cons != null){
-            throw new WaveTeamLogicException("ya existe un consultorio con ese nombre");
+        if (consultorio.getId() != null){
+            ConsultorioEntity cons = persistencia.find(consultorio.getId());
+            if (cons != null) {
+                throw new WaveTeamLogicException("ya existe un consultorio con ese id");
+            }
+            cons = persistencia.findByName(consultorio.getName());
+            if (cons != null){
+                throw new WaveTeamLogicException("ya existe un consultorio con ese nombre");
+            }
         }
         return persistencia.create(consultorio);
     }
