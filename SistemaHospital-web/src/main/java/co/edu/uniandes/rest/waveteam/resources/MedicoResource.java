@@ -205,16 +205,16 @@ public class MedicoResource {
         List<CitaEntity> citas = logic.getDisponibilidad(id);
         ArrayList<CitaDTO> dtos = new ArrayList<>();
         for (CitaEntity entity: citas){
-            System.out.println("Fecha "+entity.getFecha());
-            System.out.println("Habilitada "+entity.getHabilitada());
-            System.out.println("Name "+entity.getName());
-            System.out.println("Duracion "+entity.getDuracion());
-            System.out.println("Doctor "+entity.getDoctor());
-            System.out.println("Hora "+entity.getHora());
+//            System.out.println("Fecha "+entity.getFecha());
+//            System.out.println("Habilitada "+entity.getHabilitada());
+//            System.out.println("Name "+entity.getName());
+//            System.out.println("Duracion "+entity.getDuracion());
+//            System.out.println("Doctor "+entity.getDoctor());
+//            System.out.println("Hora "+entity.getHora());
             CitaDTO citaaa = new CitaDTO(entity, true);
-            System.out.println("DTO-Fecha "+citaaa.getFecha());
-            System.out.println("DTODoctor "+citaaa.getMedico());
-            System.out.println("DTOHora "+citaaa.getHora());
+//            System.out.println("DTO-Fecha "+citaaa.getFecha());
+//            System.out.println("DTODoctor "+citaaa.getMedico());
+//            System.out.println("DTOHora "+citaaa.getHora());
             dtos.add( citaaa );
         }
         return Response

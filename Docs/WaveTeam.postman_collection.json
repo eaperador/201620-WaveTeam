@@ -3,8 +3,11 @@
 	"name": "WaveTeam",
 	"description": "",
 	"order": [
+		"50fcc1b7-91b1-e5cb-9781-78a0f1edebf9",
+		"caeed312-89ae-f0a9-6720-0854fe94a405",
 		"38513372-aa86-ea3a-537f-2ed4d87f9261",
-		"50fcc1b7-91b1-e5cb-9781-78a0f1edebf9"
+		"a9dd03fd-04d6-0fb5-9f8c-75d1ac8577cf",
+		"d97dd881-eb39-679d-f098-42d18a38f522"
 	],
 	"folders": [],
 	"timestamp": 1478235619156,
@@ -24,12 +27,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1478298756902,
+			"time": 1478406837447,
 			"name": "Create a doctor",
 			"description": "",
 			"collectionId": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
 			"responses": [],
-			"rawModeData": "{\n\t\"name\":\"Pedro Jaramillo\",\n\t\"especialidad\":\"Cardiodlogo\",\n\t\"consultorio\":24\n}"
+			"rawModeData": "{\n\t\"name\":\"Luis Plazas\",\n\t\"especialidad\":\"Cardiologo\",\n\t\"consultorio\":22\n}"
 		},
 		{
 			"id": "50fcc1b7-91b1-e5cb-9781-78a0f1edebf9",
@@ -48,6 +51,63 @@
 			"description": "",
 			"collectionId": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
 			"responses": []
+		},
+		{
+			"id": "a9dd03fd-04d6-0fb5-9f8c-75d1ac8577cf",
+			"headers": "",
+			"url": "http://localhost:8080/SistemaHospital-web/api/consultorios",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
+			"data": null,
+			"dataMode": "params",
+			"name": "Get consultorios",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1478406363393,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "caeed312-89ae-f0a9-6720-0854fe94a405",
+			"headers": "",
+			"url": "http://localhost:8080/SistemaHospital-web/api/doctors/2",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1478410977433,
+			"name": "Get doctor ID#2",
+			"description": "",
+			"collectionId": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
+			"responses": []
+		},
+		{
+			"id": "d97dd881-eb39-679d-f098-42d18a38f522",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8080/SistemaHospital-web/api/consultorios",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1478406408538,
+			"name": "Create a consutorio",
+			"description": "",
+			"collectionId": "9dcf3553-5732-6a9f-0372-a97b0ca516d2",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\":\"Hola\"\n}"
 		}
 	]
 }
