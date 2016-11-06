@@ -2,10 +2,12 @@ package co.edu.uniandes.waveteam.sistemahospital.ejbs;
 
 import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.ConsultorioEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.EspecialidadEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.ConsultorioPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.EspecialidadPersistence;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
@@ -30,6 +32,9 @@ public class DoctorLogic implements IDoctorLogic {
 
     @Inject
     private PacientePersistence pacientePersistence;
+    
+    @Inject
+    private ConsultorioPersistence consultorioPersistence;
 
     /**
      * List all the doctors
@@ -99,6 +104,16 @@ public class DoctorLogic implements IDoctorLogic {
         }
         doctorEntity.setEspecialidad(specialty);
         specialty.getDoctores().add(doctorEntity);
+        
+        if (doctorEntity.getConsultorio() != null){
+            ConsultorioEntity consultorioEnt = consultorioPersistence.find(doctorEntity.getConsultorio());
+            if (consultorioEnt == null);
+                /**
+                 * Uncomment as soon as consultorio api is working
+                 */
+    //            throw new WaveTeamLogicException("ERROR: The given consulting room does not exist");
+        }
+
         if (doctorEntity.getId() == null){
             persistence.create(doctorEntity);
         }
@@ -127,7 +142,6 @@ public class DoctorLogic implements IDoctorLogic {
     /**
      * Get availability
      * @param doctorID
-     * @param days
      * @return 
      */
     @Override

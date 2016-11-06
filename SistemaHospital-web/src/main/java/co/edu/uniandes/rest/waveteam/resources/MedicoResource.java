@@ -26,6 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -38,8 +39,6 @@ import javax.ws.rs.core.Response;
  * @author Luis Felipe Plazas
  */
 @Path("doctors")
-@Produces("application/json")
-@Consumes("application/json")
 @RequestScoped
 public class MedicoResource {
 
@@ -54,13 +53,14 @@ public class MedicoResource {
      * @return List with all the doctors
      * @throws WebApplicationException 
      */
+    @Produces("application/json")
     @GET
-    public List<MedicoDetailDTO> getDoctors() {
-        List <MedicoDetailDTO> doctors = new ArrayList<>();
+    public Response getDoctors() {
+        ArrayList <MedicoDetailDTO> doctors = new ArrayList<>();
         for (DoctorEntity entity: logic.getDoctores()){
             doctors.add(new MedicoDetailDTO(entity));
         }
-        return doctors;
+        return Response.status(200).entity(doctors).build();
     }
 
     /**
@@ -69,13 +69,22 @@ public class MedicoResource {
      * @return
      * @throws WebApplicationException 
      */
+    @Produces("application/json")
     @GET
     @Path("{id: \\d+}")
-    public MedicoDetailDTO getDoctor(@PathParam("id") Long id) { 
+    public Response getDoctor(@PathParam("id") Long id) { 
         DoctorEntity doc = logic.getDoctorById(id);
         if (doc == null)
-            throw new WebApplicationException("The given doctor does nor exist", Response.Status.BAD_REQUEST);
-        return new MedicoDetailDTO(logic.getDoctorById(id));
+            return Response
+                    .status(400)
+                    .entity("The given doctor does not exist.")
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        MedicoDetailDTO med = new MedicoDetailDTO(logic.getDoctorById(id));
+        return Response
+                .status(200)
+                .entity(med)
+                .build();
     }
 
     /**
@@ -85,15 +94,24 @@ public class MedicoResource {
      * @return
      * @throws MedicoLogicException 
      */
+    @Produces("application/json")
+    @Consumes("application/json")
     @PUT
     @Path("{id: \\d+}")
-    public MedicoDetailDTO updateDoctor(@PathParam("id") Long id, MedicoDTO doctor) throws WebApplicationException {
+    public Response updateDoctor(@PathParam("id") Long id, MedicoDTO doctor) throws WebApplicationException {
         try{
             logic.updateDoctor(doctor.toEntity());
         } catch (WaveTeamLogicException w){
-             throw new WebApplicationException(w.getMessage(), Response.Status.BAD_REQUEST);
+             return Response
+                    .status(400)
+                    .entity(w.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
-        return new MedicoDetailDTO(logic.getDoctorById(id));
+        return Response
+                .status(200)
+                .entity(logic.getDoctorById(id))
+                .build();
     }
     
     /**
@@ -103,10 +121,16 @@ public class MedicoResource {
      * @return
      * @throws MedicoLogicException 
      */
+    @Produces("application/json")
+    @Consumes("application/json")
     @PUT
     @Path("{idMedico: \\d+}/{idConsultorio: \\d+}")
-    public MedicoDTO asignConsultorio(@PathParam("idMedico") Long idMedico, @PathParam("idConsultorio") Long idConsultorio) throws MedicoLogicException {
-        return cityLogic.asignConsultorio(idMedico, idConsultorio);
+    public Response asignConsultorio(@PathParam("idMedico") Long idMedico, @PathParam("idConsultorio") Long idConsultorio) throws MedicoLogicException {
+        return Response
+                    .status(400)
+                    .entity(cityLogic.asignConsultorio(idMedico, idConsultorio))
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
     }
     
     /**
@@ -116,16 +140,25 @@ public class MedicoResource {
      * @throws MedicoLogicException cuando ya existe un médico con la cédula
      * suministrada
      */
+    @Produces("application/json")
+    @Consumes("application/json")
     @POST
-    public MedicoDetailDTO createDoctor(MedicoDetailDTO doctor) throws MedicoLogicException {
+    public Response createDoctor(MedicoDetailDTO doctor) throws MedicoLogicException {
         try{
             DoctorEntity ent = logic.createDoctor( doctor.toEntity() );
             System.out.println("ENTITY WAS CREATED");
             MedicoDetailDTO med = new MedicoDetailDTO( ent );
-            return med;
+            return Response
+                    .status(200)
+                    .entity(med)
+                    .build();
         } catch (Exception w){
             w.printStackTrace();
-            throw new WebApplicationException(w.getMessage(), Response.Status.BAD_REQUEST);
+            return Response
+                    .status(400)
+                    .entity(w.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
     }
 
@@ -147,11 +180,12 @@ public class MedicoResource {
     //REQUERIMIENTOS R4 Y R7 - MEDICO Y SUS DISPONIBILIDADES
 
     /**
-     * 
+     * Set the availability of a given doctor
      * @param id
      * @param days
      * @throws MedicoLogicException 
      */
+    @Consumes("application/json")
     @POST
     @Path("{id: \\d+}/disponibilidad/")
     public void setDisponibilidad(@PathParam("id") Long id, ArrayList days) throws MedicoLogicException {
@@ -159,29 +193,23 @@ public class MedicoResource {
     }
 
     /**
-     * 
+     * Get a given doctor availability
      * @param id
-     * @return
+     * @return List of {@link CitaDTO} if retrieved successfully
      * @throws MedicoLogicException 
      */
+    @Produces("application/json")
     @GET
     @Path("{id: \\d+}/disponibilidad/")
-    public List<CitaDTO> getDisponibilidad(@PathParam("id") Long id) throws MedicoLogicException {
+    public Response getDisponibilidad(@PathParam("id") Long id) throws MedicoLogicException {
         List<CitaEntity> citas = logic.getDisponibilidad(id);
-        List<CitaDTO> dtos = new ArrayList<>();
+        ArrayList<CitaDTO> dtos = new ArrayList<>();
         for (CitaEntity entity: citas){
-            System.out.println("Fecha "+entity.getFecha());
-            System.out.println("Habilitada "+entity.getHabilitada());
-            System.out.println("Name "+entity.getName());
-            System.out.println("Duracion "+entity.getDuracion());
-            System.out.println("Doctor "+entity.getDoctor());
-            System.out.println("Hora "+entity.getHora());
-            CitaDTO citaaa = new CitaDTO(entity, true);
-            System.out.println("DTO-Fecha "+citaaa.getFecha());
-            System.out.println("DTODoctor "+citaaa.getMedico());
-            System.out.println("DTOHora "+citaaa.getHora());
-            dtos.add( citaaa );
+            dtos.add( new CitaDTO(entity, true) );
         }
-        return dtos;
+        return Response
+                .status(200)
+                .entity(dtos)
+                .build();
     }
 }

@@ -131,12 +131,12 @@
                 }
             }
             var doc = JSON.stringify(dates);
-            $http.post(context+"/"+$scope.selectedDoctor.id+"/disponibilidad", doc.toString()).then(function (response) {
+            $http.post(context+"/"+$scope.selectedDoctor.id+"/disponibilidad", doc).then(function (response) {
                 loadCitas();
             }, responseError);
-            $http.post(context+"/"+$scope.selectedDoctor.id+"/disponibilidad", doc.toString()).then(function (response) {
-                loadCitas();
-            }, responseError);
+            // $http.post(context+"/"+$scope.selectedDoctor.id+"/disponibilidad", doc.toString()).then(function (response) {
+            //     loadCitas();
+            // }, responseError);
             alert("Saved succesfully");
         }
 
@@ -144,7 +144,7 @@
             if (!$scope.scheduleDay1 || !$scope.scheduleDay2){
                 if (!$scope.showAssigned) return true;
                 else{
-                    if (cita.paciente !== -1 && cita.paciente!== undefined) return true
+                    if (cita.paciente !== -1 && cita.paciente !== undefined && cita.paciente != undefined) return true
                 }
                 return false;
             }
