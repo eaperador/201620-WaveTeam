@@ -64,7 +64,7 @@ public class ConsultorioLogic implements IConsultorioLogic {
         if (cons == null){
             throw new WaveTeamLogicException("El consultorio que se quiere eliminar no existe");}
         persistencia.delete(id);
-    }
+    } 
 
     @Override
     public ConsultorioEntity unasignDoctors(Long id) throws WaveTeamLogicException {
