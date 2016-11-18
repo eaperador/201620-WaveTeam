@@ -36,17 +36,17 @@ public class CitaPersistence {
     }
     
     
-    public CitaEntity findByDoctor(DoctorEntity doctor) {
-        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}", doctor.getId());
+    public List<CitaEntity> findByDoctor(Long doctor) {
+        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}", doctor);
         TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.doctor.id = :idDoctor", CitaEntity.class);
-        q = q.setParameter("idDoctor", doctor.getId()); 
-        return q.getSingleResult();
+        q = q.setParameter("idDoctor", doctor); 
+        return q.getResultList();
     }
     
-    public List<CitaEntity> findByPaciente(PacienteEntity paciente){
-        LOGGER.log(Level.INFO, "Consultando cita con paciente = {0}", paciente.getId());
+    public List<CitaEntity> findByPaciente(Long paciente){
+        LOGGER.log(Level.INFO, "Consultando cita con paciente = {0}", paciente);
         TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.paciente.id = :idPaciente", CitaEntity.class);
-        q = q.setParameter("idPaciente", paciente.getId());
+        q = q.setParameter("idPaciente", paciente);
         return q.getResultList();
     }
     
@@ -77,17 +77,17 @@ public class CitaPersistence {
         em.remove(entity);
     }
     
-    public List<CitaEntity> findByDoctorEnFecha(DoctorEntity doctor, Long fechaInicio, Long fechaFin){
-        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}",doctor.getId() + " - " +fechaInicio + " - " + fechaFin);
+    public List<CitaEntity> findByDoctorEnFecha(Long doctor, Long fechaInicio, Long fechaFin){
+        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}",doctor + " - " +fechaInicio + " - " + fechaFin);
         TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.doctor.id = :idDoctor and u.fecha >= fechaInicio and u.fecha <= fechaFin", CitaEntity.class);
-        q = q.setParameter("idDoctor", doctor.getId()); 
+        q = q.setParameter("idDoctor", doctor); 
         return q.getResultList();
     }
     
-    public List<CitaEntity> findByPacienteEnFecha(PacienteEntity paciente, Long fechaInicio, Long fechaFin){
-        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}",paciente.getId() + " - " +fechaInicio + " - " + fechaFin);
+    public List<CitaEntity> findByPacienteEnFecha(Long paciente, Long fechaInicio, Long fechaFin){
+        LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}",paciente + " - " +fechaInicio + " - " + fechaFin);
         TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.paciente.id = :idDoctor and u.fecha >= fechaInicio and u.fecha <= fechaFin", CitaEntity.class);
-        q = q.setParameter("idPaciente", paciente.getId()); 
+        q = q.setParameter("idPaciente", paciente); 
         return q.getResultList();
     }
     

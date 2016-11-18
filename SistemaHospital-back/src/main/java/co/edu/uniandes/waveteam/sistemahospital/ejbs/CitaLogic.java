@@ -53,18 +53,23 @@ public class CitaLogic implements ICitaLogic{
     }
     
     @Override
-    public List<CitaEntity> getCitasByPaciente(PacienteEntity paciente){
+    public List<CitaEntity> getCitasByPaciente(Long paciente){
         return persistence.findByPaciente(paciente);
     }
     
     @Override
-    public List<CitaEntity> getCitasByDoctorEnFecha(DoctorEntity doctor, Long fechaInicio, Long fechaFin){        
+    public List<CitaEntity> getCitasByDoctor(Long doctor){
+        return persistence.findByDoctor(doctor);
+    }
+    
+    @Override
+    public List<CitaEntity> getCitasByDoctorEnFecha(Long doctor, Long fechaInicio, Long fechaFin){        
         return persistence.findByDoctorEnFecha(doctor, fechaInicio, fechaFin);
         
     }
     
     @Override
-    public List<CitaEntity> getCitasByPacienteEnFecha(PacienteEntity paciente, Long fechaInicio, Long fechaFin){
+    public List<CitaEntity> getCitasByPacienteEnFecha(Long paciente, Long fechaInicio, Long fechaFin){
         return persistence.findByPacienteEnFecha(paciente, fechaInicio, fechaFin);
     }
 

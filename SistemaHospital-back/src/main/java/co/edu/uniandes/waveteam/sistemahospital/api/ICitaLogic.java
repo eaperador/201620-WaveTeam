@@ -21,8 +21,9 @@ public interface ICitaLogic {
     public CitaEntity createCita(CitaEntity entity);
     public CitaEntity updateCita(CitaEntity entity);
     public void deleteCita(Long id);
-    public List<CitaEntity> getCitasByPaciente(PacienteEntity paciente);
-    public List<CitaEntity> getCitasByDoctorEnFecha(DoctorEntity doctor, Long fechaInicio, Long fechaFin);
-    public List<CitaEntity> getCitasByPacienteEnFecha(PacienteEntity paciente, Long fechaInicio, Long fechaFin);
+    public List<CitaEntity> getCitasByDoctor(Long doctor);
+    public List<CitaEntity> getCitasByPaciente(Long paciente);
+    public List<CitaEntity> getCitasByDoctorEnFecha(Long doctor, Long fechaInicio, Long fechaFin);
+    public List<CitaEntity> getCitasByPacienteEnFecha(Long paciente, Long fechaInicio, Long fechaFin);
     
 }
