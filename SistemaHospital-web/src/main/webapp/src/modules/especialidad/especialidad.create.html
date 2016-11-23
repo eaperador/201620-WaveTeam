@@ -1,5 +1,10 @@
-<h1>Especialidades</h1>
-      <form novalidate name="form" id="especialidad-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Especialidades</h2>
+    </div>
+    
+    <div class="col-lg-8">
+        <form novalidate name="form" id="especialidad-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
         <table width ="100%">
             <tr>
                 <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
@@ -16,20 +21,34 @@
             <th align="left">
               Grupos edad:
             </th>
-            <th align="left">
-              <input id="grupo" name="grupo" class="form-control" type="text" ng-model="currentRecord.gruposEdad" ng-init="currentRecord.gruposEdad" required />
+            <th>
+                <select name="grupo" ng-model="currentRecord.gruposEdad" ng-init="currentRecord.gruposEdad" required>
+                    <option value="Niños">Niños</option>
+                    <option value="Adolecentes">Adolecentes</option>
+                    <option value="Menores de edad">Menores de edad</option>
+                    <option value="Adultos"> Adultos</option>
+                    <option value="Ancianos">Ancianos</option>
+                    <option value="Todo el mundo">Todo el mundo</option>
+                </select>
             </th>
           </tr>
           <tr>
             <th align="left">
               Tipo:
             </th>
-            <th align="left">
-              <input id="tipo" name="tipo" class="form-control" type="text" ng-model="currentRecord.tipo" ng-init="currentRecord.tipo" required />
+            <th>
+                <select name="tipo" ng-model="currentRecord.tipo" ng-init="currentRecord.tipo" required>
+                    <option value="Clínica">Clínica</option>
+                    <option value="Quirúrgica">Quirúrgica</option>
+                    <option value="Médico-quirúrgica"> Médico-quirúrgica</option>
+                    <option value="Diagnósticas">Diagnósticas</option>
+                </select>
             </th>
           </tr>
         </table>
         <br>
         <button class="btn btn-default btn-sm" type="submit" >Guardar</button> 
-         <button class="btn btn-default btn-sm"  ui-sref='especialidadList'>Cancel</button> 
-      </form>
+        <button class="btn btn-default btn-sm"  ui-sref='especialidadList'>Cancel</button>
+        </form>
+    </div>
+</div>
