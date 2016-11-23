@@ -4,6 +4,7 @@
  */
 package co.edu.uniandes.rest.waveteam.dtos;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,13 +14,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PatientDTO {
 
-    private Long id;
+   Long id;
     private String name;
     private String sexo;
     private int edad;
     private String tipoSangre;
     private String eps;
     private String tipoDocumento;
+    private List<CitaDTO> citas;
     
     /**
      * Constructor por defecto
@@ -34,13 +36,38 @@ public class PatientDTO {
      */
      public PatientDTO(PacienteEntity entity) {
         if (entity != null) {
-        this.id = id;
-        this.name = name;
-        this.edad=edad;
-        this.sexo=sexo;
-        this.tipoSangre=tipoSangre;
-        this.eps=eps;
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.edad=entity.getEdad();
+        this.sexo=entity.getSexo();
+        this.tipoSangre=entity.getTipoSangre();
+        this.eps=entity.getEps();
+        this.tipoDocumento=entity.getTipoDocumento();
+        this.citas=new ArrayList();
         }
+        }
+        
+       
+    /**
+     *
+     * @param id
+     * @param name
+     * @param edad
+     * @param sexo
+     * @param sangre
+     * @param eps
+     * @param documento
+     */
+    public PatientDTO(Long id, String name, int edad, String sexo, String sangre, String eps, String documento ) {
+            this.id = id;
+            this.name = name;
+            this.edad=edad;
+            this.sexo=sexo;
+            this.tipoSangre=sangre;
+            this.eps=eps;
+            this.tipoDocumento=documento;
+            this.citas=new ArrayList();
+        
     }
      
     /**
@@ -49,14 +76,22 @@ public class PatientDTO {
      */
      public PacienteEntity toEntity() {
         PacienteEntity entity = new PacienteEntity();
-        entity.setName(this.getName());
-        entity.setId(this.getId());
+        entity.setName(this.name);
+        entity.setId(this.id);
         entity.setEdad(this.edad);
         entity.setSexo(this.sexo);
         entity.setEps(this.eps);
         entity.setTipoSangre(this.tipoSangre);
         entity.setTipoDocumento(this.tipoDocumento);
         return entity;
+    }
+
+    public List<CitaDTO> getCitas() {
+        return citas;
+    }
+
+    public void setCitas(List<CitaDTO> citas) {
+        this.citas = citas;
     }
 
     /**

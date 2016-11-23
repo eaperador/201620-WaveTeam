@@ -184,11 +184,11 @@ public class PacientePersistenceTest {
      */
     @Test
     public void findPacienteByNameTest(){
-        Random random= new Random();
+       Random random= new Random();
         int number = random.nextInt(8);
-        PacienteEntity entity = data.get(number);
+        PacienteEntity entity = data.get(0);
         System.out.println("****************************************");
-        System.out.println("NOMBRE ENTIDAD : "+entity.getName());
+        System.out.println("NOMBRE ENTIDAD : "+ entity.getName());
         PacienteEntity resp=pacientePersistence.findByName(entity.getName());
         System.out.println("****************************************");
         System.out.println("NOMBRE RESP : "+resp.getName());

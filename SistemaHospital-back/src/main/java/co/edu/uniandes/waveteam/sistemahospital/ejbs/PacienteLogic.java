@@ -26,8 +26,20 @@ public class PacienteLogic implements IPacienteLogic{
         return pacientePercistence.find(id);
     }
     
-    public void deletePaciente (Long id){
+    /**
+     *
+     * @param id
+     * @throws WaveTeamLogicException
+     */
+    
+    public void deletePaciente (Long id) throws WaveTeamLogicException{
+        if(pacientePercistence.find(id)==null){
+        throw new WaveTeamLogicException("no existe un pcinete con el id ingrasado");
+        }
+        else{
+            
         pacientePercistence.delete(id);
+    }
     }
     
     public PacienteEntity updatePaciente(PacienteEntity paciente) throws WaveTeamLogicException{ 
@@ -71,5 +83,5 @@ public class PacienteLogic implements IPacienteLogic{
     
     public List<PacienteEntity> findAllPacientes(){
         return pacientePercistence.findAll();
-    }  
+    } 
 }

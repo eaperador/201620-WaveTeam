@@ -36,9 +36,9 @@ public class PatientDetailDTO extends PatientDTO{
     public PacienteEntity toEntity() {
         PacienteEntity entity = super.toEntity();
          List<CitaDTO> citas = this.getCitas();
-        for (CitaDTO cita : this.citas) {         
-            entity.getCitas().add(cita.toEntity());
-        }
+//        for (CitaDTO cita : this.citas) {         
+//            entity.getCitas().add(cita.toEntity());
+//        }
         return entity;
     }
 
@@ -49,7 +49,6 @@ public class PatientDetailDTO extends PatientDTO{
     public void setCitas(List<CitaDTO> citas) {
         this.citas = citas;
     }
-    
     
  
 }

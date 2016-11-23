@@ -1,6 +1,17 @@
-<div class="page-header">
+<div class="row">
+<div class="page-header" style="padding-left: 400px ">
   <h1>Listado de pacientes</h1>
 </div>
+ <div class="col-xs-6" style="padding-left: 400px ">
+     <div class="input-group" style="width: 300px" >
+            <span class="input-group-addon" style="background-color: #c7ddef">Buscar</span> 
+            <input class="form-control" type="text" ng-model="searchField" style="color: #1b6d85" >
+        </div>
+    </div>
+    <div class="page-header" style="padding-top: 30px">
+        
+        
+    </div>
 <div class="container-fluid">
     <table class="table table-striped" class="col-md-8">
         <thead>
@@ -11,20 +22,22 @@
                 <th>Sexo</th>
                 <th>TipoSangre</th>
                 <th>Eps</th>
+                <th>TipoDocumento</th>
                 
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="ptn in patient">
+            <tr ng-repeat="ptn in patient | filter:searchField">
                 <td>{{ptn.name}}</td>
                 <td>{{ptn.id}}</td>
                 <td>{{ptn.edad}}</td>
                 <td>{{ptn.sexo}}</td>
                 <td>{{ptn.tipoSangre}}</td>
                 <td>{{ptn.eps}}</td>
-                <td>
-                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(ptn)"><span class="glyphicon glyphicon-minus"></span> Eliminar</button>
-                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="editPatient({ptnID: ptn.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                <td>{{ptn.tipoDocumento}}</td>
+                <td style="padding-left: 50px">
+                    <button id="{{$index}}-edit-btn"   class="btn btn-success" ui-sref="editPatient({ptnID: ptn.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                    <button id="{{$index}}-delete-btn"  class="btn btn-danger" ng-click="ctrl.deleteRecord(ptn)"><span class="glyphicon glyphicon-minus"></span> Eliminar</button>
                     
                 </td>
             </tr>

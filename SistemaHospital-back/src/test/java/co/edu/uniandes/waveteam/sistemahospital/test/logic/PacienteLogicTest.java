@@ -135,7 +135,7 @@ public class PacienteLogicTest {
      * La NO existencia se verifica en el resource.
      */
     @Test
-    public void deletePacienteTest(){
+    public void deletePacienteTest() throws WaveTeamLogicException{
         Random random = new Random();
         int number = random.nextInt(8);
         
