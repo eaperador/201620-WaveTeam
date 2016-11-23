@@ -17,7 +17,7 @@ import java.util.*;
  */
 @XmlRootElement
 public class MedicoDTO {
-    Long id;
+    Long id; 
     private String name;
     private String especialidad;
     private Long consultorio;
@@ -34,6 +34,7 @@ public class MedicoDTO {
     public MedicoDTO(DoctorEntity entity){
         this.id = entity.getId();
         this.name = entity.getName();
+        System.out.println(entity.getEspecialidad());
         this.especialidad = entity.getEspecialidad().getName();
         this.consultorio = entity.getConsultorio();
     }

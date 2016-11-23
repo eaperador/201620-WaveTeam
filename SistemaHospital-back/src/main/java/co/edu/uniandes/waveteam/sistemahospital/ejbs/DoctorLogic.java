@@ -95,8 +95,10 @@ public class DoctorLogic implements IDoctorLogic {
      */
     @Override
     public DoctorEntity createDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException {
+        System.out.println("FINDING SPECIALTY");
         EspecialidadEntity specialty = specialtyPersistence.findByName(doctorEntity.getEspecialidad().getName());
         if (specialty == null){
+            System.out.println("NO SPECIALTY FOUND");
             specialty = new EspecialidadEntity();
             specialty.setName(doctorEntity.getEspecialidad().getName());
             specialty.setTipo("Clinica");
@@ -104,6 +106,7 @@ public class DoctorLogic implements IDoctorLogic {
         }
         doctorEntity.setEspecialidad(specialty);
         specialty.getDoctores().add(doctorEntity);
+        System.out.println("DONE WITH SPECIALTY RELATIONS");
         
         if (doctorEntity.getConsultorio() != null){
             ConsultorioEntity consultorioEnt = consultorioPersistence.find(doctorEntity.getConsultorio());

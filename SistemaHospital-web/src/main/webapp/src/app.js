@@ -10,6 +10,14 @@
         "consultaHistoricaModule", 
         "citasModule"
     ]);
+    
+    app.controller("appCtrl", function ($scope, $resource, $window, $cookies) {
+        $window.cookies = $cookies;
+        $scope.$on("$stateChangeSuccess", function (event, newState) {
+            $scope.currentState = newState.name;
+        });
+        console.log("HERE");
+    });
 
     app.config(['$logProvider', function ($logProvider) {
             $logProvider.debugEnabled(true);

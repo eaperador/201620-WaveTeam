@@ -75,7 +75,11 @@
 
         this.saveDoctor = function () {
             if (!$scope.nombre || !$scope.especialidad || !$scope.consultorio || !$scope.cedula) {
-                alert("No puede dejar ningún campo vacio.");
+                swal(
+                    'Oops...',
+                    'Please fill out all the fields!',
+                    'error'
+                 );
                 return;
             }
             if (isNaN($scope.cedula)) {
@@ -90,12 +94,11 @@
                 var doc =
                 {
                     "name": $scope.nombre,
-                    "id": $scope.cedula,
+//                    "id": $scope.cedula,
                     "especialidad": $scope.especialidad,
                     "consultorio": $scope.consultorio
                 };
-                doc = JSON.stringify(doc);
-                return $http.post(context, doc.toString())
+                return $http.post(context, doc)
                     .then(function () {
                         $state.go('doctorsList');
                     }, responseError)
