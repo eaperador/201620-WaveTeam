@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-sm-4 text-center doctorItemList" ng-repeat="doc in doctors | filter:searchField">
-        <img class="img-circle img-responsive img-center" src="http://www.clipartkid.com/images/356/blue-and-white-person-icon-png-clipart-image-iconbug-com-g7EhRd-clipart.png" style="width: 200px; height: 200px" alt="">
+        <a href="" class="menu-title" ng-click="loadModal(doc)"><img class="img-circle img-responsive img-center" src="http://www.clipartkid.com/images/356/blue-and-white-person-icon-png-clipart-image-iconbug-com-g7EhRd-clipart.png" style="width: 200px; height: 200px" alt=""></a>
         <h3><a href="" class="menu-title" ng-click="loadModal(doc)">{{doc.name}}</a>
             <small>{{doc.especialidad}}</small>
         </h3>
@@ -35,9 +35,9 @@
                 <!--Body-->                
                 <div class="modal-body" style="padding:40px 50px;">
                     <ul class="list-group">
+                        <li class="list-group-item">Nombre: {{loadedDoctor.name}}</li>
                         <li class="list-group-item">Especialidad: {{loadedDoctor.especialidad}}</li>
-                        <li class="list-group-item">Full name: {{loadedDoctor.name}}</li>
-                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Consultorio: {{loadedDoctor.consultorio}}</li>
                     </ul>
                     <button type="submit" ng-click="addProductCart()" class="btn btn-info btn-block"><span class="glyphicon glyphicon-check"></span> Edit</button>
                     <button type="submit" ng-click="ctrl.deleteRecord()" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-warning-sign"></span> Delete</button>
