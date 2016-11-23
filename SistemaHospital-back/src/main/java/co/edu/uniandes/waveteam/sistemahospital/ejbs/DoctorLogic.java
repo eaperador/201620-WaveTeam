@@ -103,6 +103,7 @@ public class DoctorLogic implements IDoctorLogic {
             specialty.setName(doctorEntity.getEspecialidad().getName());
             specialty.setTipo("Clinica");
             specialty.setGruposEdad("8-80");
+            System.out.println("CREATED SPECIALTY");
         }
         doctorEntity.setEspecialidad(specialty);
         specialty.getDoctores().add(doctorEntity);
