@@ -1,34 +1,22 @@
 <div class="row">
-<div class="page-header">
-  <h1>Especialidades</h1>
-</div>
-    <div class="col-xs-6">
-        <div class="input-group">
-            <span class="input-group-addon">Buscar</span>
-            <input class="form-control" type="text" ng-model="searchField">
+            <div class="col-lg-12">
+                <h2 class="page-header">Especialidades</h2>
+                <button class="btn btn-default btn-sm"  ui-sref='especialidadCreate'> Crear</button>
+            </div>
+            <div  class="col-md-3 col-sm-6" ng-repeat="record in records| orderBy:'nombre'" >
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <span class="fa-stack fa-5x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i class="fa fa-ambulance fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <h4>{{record.nombre}}</h4>
+                        <p><b>Tipo:</b> {{record.tipo}}</p>
+                        <p><b>Grupos Edad:</b> {{record.gruposEdad}}</p>
+                        <a ui-sref="especialidadEdit({especialidadId: record.id })" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-<div class="container-fluid" >
-    <table class="table table-striped" class="col-md-8" width="80%">
-        <thead>
-            <tr>
-                <th> Id </th>
-                <th> Nombre </th>
-                <th> Grupo edad</th>
-                <th> Tipo</th>
-                <th>  </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="record in records | filter:searchField">
-                <td id="{{$index}}-id">{{record.id}}</td>
-                <td id="{{$index}}-name">{{record.nombre}}</td>
-                <td id="{{$index}}-grupo">{{record.gruposEdad}}</td>
-                <td id="{{$index}}-tipo">{{record.tipo}}</td>
-                <td><button class="btn btn-default btn-sm" ui-sref="especialidadEdit({especialidadId: record.id })"><span class="glyphicon glyphicon-edit"></span> Ver detalles </button></td>
-            </tr>    
-        </tbody>
-    </table>
-    <button class="btn btn-default btn-sm"  ui-sref='especialidadCreate'> Crear</button>
-    </div>
-</div>
