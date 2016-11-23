@@ -12,12 +12,12 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4 col-sm-4 text-center doctorItemList" ng-repeat="doc in doctors | filter:searchField">
+    <div class="col-lg-4 col-xm-4 col-xs-4 col-md-4 col-sm-4 text-center doctorItemList" ng-repeat="doc in doctors | filter:searchField">
         <a href="" class="menu-title" ng-click="loadModal(doc)"><img class="img-circle img-responsive img-center" src="http://www.clipartkid.com/images/356/blue-and-white-person-icon-png-clipart-image-iconbug-com-g7EhRd-clipart.png" style="width: 200px; height: 200px" alt=""></a>
         <h3><a href="" class="menu-title" ng-click="loadModal(doc)">{{doc.name}}</a>
             <small>{{doc.especialidad}}</small>
         </h3>
-        <p>Click to view more info!</p>
+        <button ng-click="loadModal(doc)" class="btn btn-info">Ver perfil</button>
     </div>
 </div>
 <div class="container">
@@ -38,8 +38,9 @@
                         <li class="list-group-item">Nombre: {{loadedDoctor.name}}</li>
                         <li class="list-group-item">Especialidad: {{loadedDoctor.especialidad}}</li>
                         <li class="list-group-item">Consultorio: {{loadedDoctor.consultorio}}</li>
+                        <li class="list-group-item">ID: {{loadedDoctor.id}}</li>
                     </ul>
-                    <button type="submit" ng-click="addProductCart()" class="btn btn-info btn-block"><span class="glyphicon glyphicon-check"></span> Edit</button>
+                    <button type="submit" ng-click="editClick(loadedDoctor)" class="btn btn-info btn-block"><span class="glyphicon glyphicon-check"></span> Edit</button>
                     <button type="submit" ng-click="ctrl.deleteRecord()" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-warning-sign"></span> Delete</button>
                     <!--</form>-->
                 </div>

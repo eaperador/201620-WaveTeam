@@ -30,6 +30,11 @@
                 }, responseError);
             }
         });
+        
+        $scope.editClick = function (doc) {
+            $("#myModal").modal('hide');
+            $state.go('editDoctor',{docID: doc.id});
+        }
 
         this.turnMillisToHour = function (dateLong){
             var d = new Date(dateLong);
