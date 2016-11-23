@@ -123,7 +123,7 @@ public class DoctorLogic implements IDoctorLogic {
         }
         else{
             if (getDoctorById(doctorEntity.getId() ) != null)
-                throw new WaveTeamLogicException("There already exists a doctor with that id");
+//                throw new WaveTeamLogicException("There already exists a doctor with that id");
             persistence.create(doctorEntity);
         }
         return doctorEntity;

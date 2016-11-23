@@ -162,7 +162,8 @@ public class DoctorLogicTest {
     @Test
     public void createDoctorTest(){
         try{
-                    DoctorEntity entity = factory.manufacturePojo(DoctorEntity.class);
+        DoctorEntity entity = factory.manufacturePojo(DoctorEntity.class);               
+        entity.setId(524235L);
         logic.createDoctor(entity);
         DoctorEntity result = logic.getDoctorById(entity.getId());
 
