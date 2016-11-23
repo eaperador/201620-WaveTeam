@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface IPacienteLogic {
     public  PacienteEntity  getPaciente (Long id);
-    public  void  deletePaciente (Long id);
+    public  void  deletePaciente (Long id)throws WaveTeamLogicException;;
     public  PacienteEntity  updatePaciente(PacienteEntity paciente) throws WaveTeamLogicException;
     public  PacienteEntity  createPaciente(PacienteEntity paciente) throws WaveTeamLogicException;
     public  PacienteEntity  findPacienteByName (String name);

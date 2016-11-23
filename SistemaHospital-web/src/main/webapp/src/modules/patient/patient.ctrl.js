@@ -47,6 +47,7 @@
                     $scope.tipoSangre = currentRecord.tipoSangre;
                     $scope.eps = currentRecord.eps;
                     $scope.sexo = currentRecord.sexo;
+                    $scope.tipoDocumento = currentRecord.tipoDocumento;
                 }, responseError);
 
             // el controlador no recibió un editorialId
@@ -63,7 +64,7 @@
             
             
             this.savePatient = function () {
-                if (!$scope.nombre || !$scope.cedula || !$scope.sexo || !$scope.edad || !$scope.tipoSangre || !$scope.eps )
+                if (!$scope.nombre || !$scope.cedula || !$scope.edad ||  !$scope.eps || !$scope.tipoDocumento )
                 {
                     alert("No puede dejar ningún campo vacio.");
                     return;
@@ -86,7 +87,8 @@
                         "edad" : $scope.edad,   
                         "sexo" : $scope.sexo,
                         "tipoSangre" : $scope.tipoSangre,
-                        "eps" : $scope.eps
+                        "eps" : $scope.eps,
+                        "tipoDocumento": $scope.tipoDocumento
                     };
                     ptn = JSON.stringify(ptn);
                     console.log(ptn);
@@ -98,7 +100,7 @@
             }
             
             this.editFinalPatient = function () {
-                if (!$scope.nombre || !$scope.cedula || !$scope.sexo || !$scope.edad|| !$scope.tipoSangre || !$scope.eps ){
+                if (!$scope.nombre || !$scope.cedula || !$scope.sexo || !$scope.edad|| !$scope.tipoSangre || !$scope.eps || !$scope.tipoDocumento){
                     alert("No puede dejar ningún campo vacio.");
                     return;
                 }
@@ -119,7 +121,8 @@
                         "edad" : $scope.edad,    
                         "sexo" : $scope.sexo,
                         "tipoSangre" : $scope.tipoSangre,
-                        "eps" : $scope.eps
+                        "eps" : $scope.eps,
+                        "tipoDocumento": $scope.tipoDocumento
                     };
                     ptn = JSON.stringify(ptn);
                     console.log(ptn);
@@ -166,7 +169,7 @@
 //            }
             
             this.editFinalPatientForPatient = function () {
-                if (!$scope.nombre || !$scope.cedula || !$scope.sexo || !$scope.edad|| !$scope.tipoSangre || !$scope.eps ){
+                if (!$scope.nombre || !$scope.cedula || !$scope.sexo || !$scope.edad|| !$scope.tipoSangre || !$scope.eps || !$scope.tipoDocumento){
                     alert("No puede dejar ningún campo vacio.");
                     return;
                 }
@@ -187,7 +190,8 @@
                         "edad" : $scope.edad,    
                         "sexo" : $scope.sexo,
                         "tipoSangre" : $scope.tipoSangre,
-                        "eps" : $scope.eps
+                        "eps" : $scope.eps,
+                        "tipoDocumento": $scope.tipoDocumento
                     };
                     ptn = JSON.stringify(ptn);
                     console.log(ptn);

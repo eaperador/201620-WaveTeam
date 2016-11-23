@@ -24,6 +24,9 @@ public class PacienteEntity extends BaseEntity implements Serializable{
     private int edad;
     private String tipoSangre;
     private String eps;
+    
+    
+    
 
     public List<CitaEntity> getCitas() {
         return citas;
@@ -40,6 +43,7 @@ public class PacienteEntity extends BaseEntity implements Serializable{
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+    
 
     public int getEdad() {
         return edad;

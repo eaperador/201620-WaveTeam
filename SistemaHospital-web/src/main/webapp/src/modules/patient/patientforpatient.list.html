@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" style="padding-left: 400px ">
   <h1>Lista Pacientes</h1>
 </div>
 <div class="container-fluid">
@@ -11,6 +11,7 @@
                 <th>Sexo</th>
                 <th>TipoSangre</th>
                 <th>Eps</th>
+                <th>TipoDocumento</th>
                 
             </tr>
         </thead>
@@ -22,12 +23,13 @@
                 <td>{{ptn.sexo}}</td>
                 <td>{{ptn.tipoSangre}}</td>
                 <td>{{ptn.eps}}</td>
+                <td>{{ptn.tipoDocumento}}</td>
                 <td>
                     
-                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="editPatientforpatient({ptnID: ptn.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                    <button id="{{$index}}-edit-btn"  class="btn btn-group"  ui-sref="editPatientforpatient({ptnID: ptn.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
 <!--                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="getCitasPaciente({ptnID: ptn.id})"><span class="glyphicon glyphicon-edit"></span> Citas Programadas</button>-->
 <!--                    <button type="button" ui-sref='citasList'>Citas Programadas</button>-->
-                        <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="citasList({ptnID: ptn.id})"><span class="glyphicon glyphicon-edit"></span> Citas Programadas</button>
+                        <button id="{{$index}}-edit-btn"  class="btn btn-info"  ui-sref="citasList({ptnID: ptn.id})"><span class="glyphicon glyphicon-edit"></span> Citas Programadas</button>
                 </td>
             </tr>
         </tbody>

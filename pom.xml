@@ -8,9 +8,9 @@
     <packaging>pom</packaging>
     
 	<modules>
-        <module>SistemaHospital-back</module>
-        <module>SistemaHospital-web</module>
-    </modules>
+	 <module>SistemaHospital-back</module>
+	 <module>SistemaHospital-web</module>
+	</modules>
 	
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

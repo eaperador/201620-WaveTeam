@@ -30,7 +30,7 @@ public class PacientePersistence {
     
     public PacienteEntity findByName(String pname) {
         LOGGER.log(Level.INFO, "Consultando paciente con name={}", pname);
-        TypedQuery<PacienteEntity> query = em.createQuery("select u from PacienteEntity u where u.name=:pname", PacienteEntity.class);
+        TypedQuery<PacienteEntity> query = em.createQuery("select u from PacienteEntity u where u.name = :pname", PacienteEntity.class);
         query = query.setParameter("pname", pname);
         return query.getSingleResult();
     }
@@ -57,6 +57,7 @@ public class PacientePersistence {
     {
         LOGGER.log(Level.INFO,"Borrando paciente con id={0}",id);
         PacienteEntity entity = em.find(PacienteEntity.class,id);
+        System.out.println("**********************************************************el paciente q encontro : " + entity);
         em.remove(entity);
     }
     
@@ -70,5 +71,10 @@ public class PacientePersistence {
         TypedQuery<PacienteEntity> query = em.createQuery("select u.paciente from CitaEntity u where u.paciente.id:pId", PacienteEntity.class);
         query = query.setParameter("pId", Idpaciente);
         return query.getResultList();
+    }
+    
+    public void asignarCitaPaciente (Long IdCita, Long IdPaciente){
+        LOGGER.log(Level.INFO, "asignando al paciente con id={0}", IdPaciente);
+        
     }
 }
