@@ -106,6 +106,7 @@ public class DoctorLogic implements IDoctorLogic {
         }
         doctorEntity.setEspecialidad(specialty);
         specialty.getDoctores().add(doctorEntity);
+        specialtyPersistence.create(specialty);
         System.out.println("DONE WITH SPECIALTY RELATIONS");
         
         if (doctorEntity.getConsultorio() != null){

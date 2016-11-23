@@ -126,3 +126,9 @@ table {
     moz-border-radius: 50%;
     -o-border-radius: 50%;
 }
+
+.createDoctorForm{
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 80%;
+}

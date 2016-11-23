@@ -34,8 +34,8 @@ public class MedicoDTO {
     public MedicoDTO(DoctorEntity entity){
         this.id = entity.getId();
         this.name = entity.getName();
-        System.out.println(entity.getEspecialidad());
-        this.especialidad = entity.getEspecialidad().getName();
+        if (entity.getEspecialidad() != null)
+            this.especialidad = entity.getEspecialidad().getName();
         this.consultorio = entity.getConsultorio();
     }
 

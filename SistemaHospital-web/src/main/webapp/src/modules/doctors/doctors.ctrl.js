@@ -1,7 +1,9 @@
 (function (ng) {
     var mod = ng.module("doctorModule");
     mod.controller("doctorsCtrl", ['$scope', '$state', '$stateParams', '$http', 'doctorContext', function ($scope, $state, $stateParams, $http, context) {
-
+        $scope.$on("$stateChangeSuccess", function (event, newState) {
+            $scope.currentState = newState.name;
+        });
         loadDocs = function () {
             $http.get(context).then(function (response) {
                 $scope.doctors = response.data;
@@ -40,7 +42,8 @@
         }
 
         this.deleteRecord = function (doc) {
-            return $http.delete(context + "/" + doc)
+            $("#myModal").modal('hide');
+            return $http.delete(context + "/" + $scope.loadedDoctor.id)
                 .then(function () {
                     loadDocs();
                 }, responseError)
@@ -79,7 +82,7 @@
                     'Oops...',
                     'Please fill out all the fields!',
                     'error'
-                );
+                ).catch();
                 return;
             }
             if (isNaN($scope.cedula)) {
@@ -87,7 +90,7 @@
                     'Oops...',
                     'The id must be a number',
                     'error'
-                );
+                ).catch();
                 return;
             }
             if (isNaN($scope.consultorio)) {
@@ -95,7 +98,7 @@
                     'Oops...',
                     'The consulting room must be a number',
                     'error'
-                );
+                ).catch();
                 return;
             }
             else {
@@ -203,6 +206,12 @@
                         $state.go('doctorsList');
                     }, responseError)
             }
+        }
+        
+        $scope.loadModal = function (doctor){
+            console.log("JEJEJEJIJI");
+            $scope.loadedDoctor = doctor;
+            $("#myModal").modal();
         }
 
         this.closeAlert = function (index) {
