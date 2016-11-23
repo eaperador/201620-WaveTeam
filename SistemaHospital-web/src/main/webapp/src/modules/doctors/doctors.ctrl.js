@@ -42,11 +42,28 @@
         }
 
         this.deleteRecord = function (doc) {
-            $("#myModal").modal('hide');
-            return $http.delete(context + "/" + $scope.loadedDoctor.id)
+            swal({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes'
+            }).then(function () {
+                $("#myModal").modal('hide');
+                swal(
+                  'Deleted!',
+                  'The doctor has been deleted.',
+                  'success'
+                )
+                return $http.delete(context + "/" + $scope.loadedDoctor.id)
                 .then(function () {
                     loadDocs();
                 }, responseError)
+
+            })
+
         }
 
         if ($stateParams.docID !== null && $stateParams.docID !== undefined) {
@@ -209,7 +226,6 @@
         }
         
         $scope.loadModal = function (doctor){
-            console.log("JEJEJEJIJI");
             $scope.loadedDoctor = doctor;
             $("#myModal").modal();
         }
