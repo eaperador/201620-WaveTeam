@@ -79,15 +79,23 @@
                     'Oops...',
                     'Please fill out all the fields!',
                     'error'
-                 );
+                );
                 return;
             }
             if (isNaN($scope.cedula)) {
-                alert("La cédula debe ser numérica.");
+                swal(
+                    'Oops...',
+                    'The id must be a number',
+                    'error'
+                );
                 return;
             }
             if (isNaN($scope.consultorio)) {
-                alert("El consultorio debe ser un número.");
+                swal(
+                    'Oops...',
+                    'The consulting room must be a number',
+                    'error'
+                );
                 return;
             }
             else {
