@@ -4,15 +4,53 @@
         $scope.$on("$stateChangeSuccess", function (event, newState) {
             $scope.currentState = newState.name;
         });
+        
         loadDocs = function () {
             $http.get(context).then(function (response) {
                 $scope.doctors = response.data;
+                if ($state.current.name == 'viewSchedule'){
+                    var docs = {};
+                    $scope.doctors.forEach(function(doc) {
+                        docs[doc.id]=doc.name;
+                    });
+                    swal({
+                        title: 'Selecciona un doctor',
+                        type: 'info',
+                        input: 'select',
+                        allowOutsideClick: false,
+                        inputOptions: docs,
+                        inputPlaceholder: 'doctor...',
+                        inputValidator: function (value) {
+                            return new Promise(function (resolve, reject) {
+                                if (value === '') {
+                                    reject('You need to select an doctor');
+                                } else {
+                                    $scope.selectedDoctorId = value;
+                                    $scope.doctors.forEach(function(doc) {
+                                        if (doc.id == value)
+                                            $scope.selectedDoctor = doc;
+                                    });
+                                    $http.get(context+"/"+value+"/disponibilidad").then(function (response) {
+                                        $scope.citas = response.data;
+                                    }, responseError);
+                                    resolve();
+                                }
+                            })
+                        }
+                    })
+                }
             }, responseError);
         }
 
-        loadCitas = function () {
+        $scope.loadCitas = function () {
             if($scope.selectedDoctor !== undefined){
                 $http.get(context+"/"+$scope.selectedDoctor.id+"/disponibilidad").then(function (response) {
+                    $scope.citas = response.data;
+                    console.log($scope.citas);
+                }, responseError);
+            }
+            if($scope.selectedDoctorId){
+                $http.get(context+"/"+$scope.selectedDoctorId+"/disponibilidad").then(function (response) {
                     $scope.citas = response.data;
                     console.log($scope.citas);
                 }, responseError);
@@ -20,13 +58,12 @@
         }
 
         loadDocs();
-        loadCitas()
+        $scope.loadCitas();
 
         $scope.$watch("selectedDoctor", function(newValue, oldValue){
             if($scope.selectedDoctor !== undefined){
                 $http.get(context+"/"+$scope.selectedDoctor.id+"/disponibilidad").then(function (response) {
                     $scope.citas = response.data;
-                    console.log($scope.citas);
                 }, responseError);
             }
         });
@@ -139,16 +176,21 @@
         }
 
         this.updateSchedule = function (){
-            if (!$scope.selectedDoctor){
-                alert("Please select a doctor first.");
-                return;
-            }
             if (!$scope.fromDate || !$scope.toDate){
-                alert("Please select both dates.");
+                swal(
+                    'Oops...',
+                    'Por favor selecciona u',
+                    'error'
+                )   
                 return;
             }
             if ($scope.fromDate.getTime() > $scope.toDate.getTime() ){
-                alert("La primera fecha no puede ser mayor a la segunda");
+                swal(
+                    'Oops...',
+                    'La primera fecha no puede ser mayor a la segunda',
+                    'error'
+                )   
+                alert("");
                 return;
             }
             var dates = [];
@@ -167,13 +209,14 @@
                 }
             }
             var doc = JSON.stringify(dates);
-            $http.post(context+"/"+$scope.selectedDoctor.id+"/disponibilidad", doc).then(function (response) {
-                loadCitas();
+            $http.post(context+"/"+$scope.selectedDoctorId+"/disponibilidad", doc).then(function (response) {
+                $scope.loadCitas();
+                swal(
+                    'Éxito',
+                    'Horario definido exitosamente',
+                    'success'
+                  )
             }, responseError);
-            // $http.post(context+"/"+$scope.selectedDoctor.id+"/disponibilidad", doc.toString()).then(function (response) {
-            //     loadCitas();
-            // }, responseError);
-            alert("Saved succesfully");
         }
 
         this.checkIfAssigned = function(cita){
@@ -188,7 +231,7 @@
                 if (cita.hora >= $scope.scheduleDay1.getTime() && cita.hora <= $scope.scheduleDay2.getTime()){
                     if (!$scope.showAssigned) return true;
                     else{
-                        if (cita.paciente !== -1) return true
+                        if (cita.paciente !== -1) return true;
                     }
                 }
                 return false;

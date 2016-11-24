@@ -10,7 +10,6 @@ import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.MedicoLogicMock;
 import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
 import co.edu.uniandes.waveteam.sistemahospital.api.IEspecialidadLogic;
-
 import co.edu.uniandes.waveteam.sistemahospital.entities.*;
 import co.edu.uniandes.waveteam.sistemahospital.exceptions.WaveTeamLogicException;
 import java.util.ArrayList;

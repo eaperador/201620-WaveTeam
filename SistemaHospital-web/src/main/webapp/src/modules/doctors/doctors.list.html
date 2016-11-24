@@ -12,9 +12,9 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4 col-xm-4 col-xs-4 col-md-4 col-sm-4 text-center doctorItemList" ng-repeat="doc in doctors | filter:searchField">
+    <div class="col-xs-4 col-md-4 text-center doctorItemList" ng-repeat="doc in doctors | filter:searchField">
         <a href="" class="menu-title" ng-click="loadModal(doc)"><img class="img-circle img-responsive img-center" src="http://www.clipartkid.com/images/356/blue-and-white-person-icon-png-clipart-image-iconbug-com-g7EhRd-clipart.png" style="width: 200px; height: 200px" alt=""></a>
-        <h3><a href="" class="menu-title" ng-click="loadModal(doc)">{{doc.name}}</a>
+        <h3><a href="" class="menu-title" ng-click="loadModal(doc)" style="color: black;">{{doc.name}}</a>
             <small>{{doc.especialidad}}</small>
         </h3>
         <button ng-click="loadModal(doc)" class="btn btn-info">Ver perfil</button>
