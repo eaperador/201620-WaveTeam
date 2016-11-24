@@ -82,6 +82,37 @@
             var d = new Date(dateLong);
             return d.getUTCDate()+"/"+(d.getUTCMonth()+1)+"/"+d.getFullYear();
         }
+        
+        $scope.changeDoctorSchedule = function () {
+            var docs = {};
+            $scope.doctors.forEach(function(doc) {
+                docs[doc.id]=doc.name;
+            });
+            swal({
+                title: 'Selecciona un doctor',
+                type: 'info',
+                input: 'select',
+                inputOptions: docs,
+                inputPlaceholder: 'doctor...',
+                inputValidator: function (value) {
+                    return new Promise(function (resolve, reject) {
+                        if (value === '') {
+                            reject('You need to select an doctor');
+                        } else {
+                            $scope.selectedDoctorId = value;
+                            $scope.doctors.forEach(function(doc) {
+                                if (doc.id == value)
+                                    $scope.selectedDoctor = doc;
+                            });
+                            $http.get(context+"/"+value+"/disponibilidad").then(function (response) {
+                                $scope.citas = response.data;
+                            }, responseError);
+                            resolve();
+                        }
+                    })
+                }
+            })
+        }
 
         this.deleteRecord = function (doc) {
             swal({

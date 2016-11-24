@@ -1,9 +1,11 @@
 <div class="row">
     <div class="page-header">
+        <button class="btn btn-success pull-right" type="button" ng-click="changeDoctorSchedule()" style="margin-bottom: 0px; right: 0%">Cambiar de doctor</button>
         <h1>Horario de citas de {{selectedDoctor.name}}</h1>
+        
     </div>
     <div class="col-xs-12">
-        <h3>Seleccione una rango de fechas:</h3> <md-datepicker ng-model="scheduleDay1" md-placeholder="De"></md-datepicker>
+        <h3>Filtrar por un rango de fechas:</h3> <md-datepicker ng-model="scheduleDay1" md-placeholder="De"></md-datepicker>
         <md-datepicker ng-model="scheduleDay2" md-placeholder="Hasta"></md-datepicker>
     </div>
     <div class="col-xs-12">
