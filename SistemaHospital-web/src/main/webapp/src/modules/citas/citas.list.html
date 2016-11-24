@@ -33,8 +33,8 @@ and open the template in the editor.
                 <td id ="{{$index}}-fecha">{{ctrl.turnMillisToDate(x.hora)}}</td>
                 <td id ="{{$index}}-hora">{{ctrl.turnMillisToHour(x.hora)}}</td>
                 <td id ="{{$index}}-duracion">{{x.duracion}}</td>
-                <td id ="{{$index}}-medico">{{x.medico.id}}</td>
-                <td id ="{{$index}}-paciente">{{x.paciente.id}}</td>
+                <td id ="{{$index}}-medico">{{x.medicoO}}</td>
+                <td id ="{{$index}}-paciente">{{x.pacienteO}}</td>
                 <td id ="{{$index}}-habilitada">{{x.habilitada}}</td>
                 <td>
                         <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(x)"><span class="glyphicon glyphicon-minus"></span> Eliminar</button>

@@ -7,7 +7,10 @@ package co.edu.uniandes.rest.waveteam.resources;
 
 
 import co.edu.uniandes.rest.waveteam.dtos.CitaDTO;
+import co.edu.uniandes.rest.waveteam.dtos.MedicoDTO;
+import co.edu.uniandes.rest.waveteam.dtos.MedicoDetailDTO;
 import co.edu.uniandes.rest.waveteam.dtos.PatientDTO;
+import co.edu.uniandes.rest.waveteam.dtos.PatientDetailDTO;
 import co.edu.uniandes.rest.waveteam.exceptions.CitaLogicException;
 import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
@@ -51,11 +54,11 @@ public class CitaResource {
     @Inject
     ICitaLogic citaLogic;
     
-//    @Inject
-//    IDoctorLogic doctorLogic;
-//    
-//    @Inject
-//    IPacienteLogic patientLogic;
+    @Inject
+    IDoctorLogic doctorLogic;
+    
+    @Inject
+    IPacienteLogic patientLogic;
     private static final Logger LOGGER = Logger.getLogger(CitaResource.class.getName());
     
 //    CitaLogicMock citaLogic = new CitaLogicMock();
@@ -114,6 +117,17 @@ public class CitaResource {
     @POST
     public CitaDTO createCita(CitaDTO cita) throws CitaLogicException{
         LOGGER.info("Hay metodo create cita en CitaResource: Fecha=" + cita.getFecha());
+        MedicoDetailDTO doctor = null;
+        PatientDetailDTO patient = null;
+        doctor = new MedicoDetailDTO(doctorLogic.getDoctorById(cita.getMedico()));
+        LOGGER.info("DOCTOR ENCONTRADO: "+doctor.toString());
+        patient = new PatientDetailDTO(patientLogic.getPaciente(cita.getPaciente()));
+        LOGGER.info("PACIENTE ENCONTRADO: "+patient.toString());
+        LOGGER.info("Se van a asignar paciente y doctor al DTO de cita");
+        cita.setDoctorO(doctor);
+        cita.setPacienteO(patient);
+        LOGGER.info("VALORES ASIGNADOS EN EL DTO: "+ cita.getDoctorO().getName() + ", " + cita.getPatientO().getName());
+        
         
         return new CitaDTO(citaLogic.createCita(cita.toEntity()));
     }

@@ -7,6 +7,7 @@ package co.edu.uniandes.rest.waveteam.dtos;
 
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
+import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.CitaPersistence;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -28,8 +29,8 @@ public class CitaDTO {
     private Long fecha;
     private Long hora;
     private int duracion;
-    //private MedicoDetailDTO doctorO;
-    //private PatientDetailDTO pacienteO;
+    private MedicoDetailDTO doctorO;
+    private PatientDetailDTO pacienteO;
     private Long doctor;
     private Long paciente;
     private String habilitada;
@@ -79,7 +80,10 @@ public class CitaDTO {
         entity.setHabilitada(habilitada);
         entity.setHora(hora);
         entity.setId(id);
+        entity.setDoctor(doctorO.toEntity());
+        entity.setPaciente(pacienteO.toEntity());
         LOGGER.info("Hay metodo to Entity! ");
+        LOGGER.info("Los valores de medico y paciente son: " + doctorO.toEntity().toString() +", " +pacienteO.toEntity().toString());
         
         return entity;
     }
@@ -157,9 +161,21 @@ public class CitaDTO {
         this.paciente = paciente;
     }
     
-//    public void setPacienteO(PatientDetailDTO patient){
-//        this.pacienteO = patient;
-//    }
+    public void setPacienteO(PatientDetailDTO patient){
+    this.pacienteO = patient;
+    }
+    
+    public void setDoctorO(MedicoDetailDTO doctor){
+        this.doctorO = doctor;
+    }
+    
+    public PatientDetailDTO getPatientO(){
+        return pacienteO;
+    }
+    
+    public MedicoDetailDTO getDoctorO(){
+        return doctorO;
+    }
     
     
     public void desactivar(){
