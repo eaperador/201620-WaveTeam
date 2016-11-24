@@ -30,10 +30,23 @@
                                         if (doc.id == value)
                                             $scope.selectedDoctor = doc;
                                     });
-                                    $http.get(context+"/"+value+"/disponibilidad").then(function (response) {
-                                        $scope.citas = response.data;
-                                    }, responseError);
-                                    resolve();
+                                    $http.get(context+"/"+value+"/disponibilidad")
+                                        .success(function (data) {
+                                            $scope.citas = response.data;
+                                            resolve();
+                                        })
+                                        .error(function (error) {
+//                             When the application is loaded for the first time, the first GET doesn't
+//                             work, thats why it is being made twice.
+                                            $http.get(context+"/"+value+"/disponibilidad")
+                                                .success(function (data) {
+                                                    $scope.citas = response.data;
+                                                    resolve();
+                                                })
+                                                .error(function (error) {
+                                                    alert("Something went wrong " + error.message);
+                                                });
+                                        });
                                 }
                             })
                         }

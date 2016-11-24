@@ -25,7 +25,6 @@
         }
 
         if ($stateParams.citaID !== null && $stateParams.citaId !== undefined) {
-
             // toma el id del parámetro
             id = $stateParams.citaId;
             // obtiene el dato del recurso REST
@@ -33,10 +32,13 @@
                 .then(function (response) {
                     // $http.get es una promesa
                     // cuando llegue el dato, actualice currentRecord
+                    console.log(response)
+                    $scope.fechaEdit = new Date();
                     var currentRecord = response.data;
+                    $scope.fechaEdit.setTime(currentRecord.hora)
                     $scope.id = currentRecord.id;
                     $scope.fecha = currentRecord.fecha;
-                    $scope.hora = currentRecord.hora;
+                    $scope.hora = new Date(currentRecord.hora).getHours();
                     $scope.duracion = currentRecord.duracion;
                     $scope.medico = currentRecord.medico;
                     $scope.paciente = currentRecord.paciente;
@@ -112,7 +114,7 @@
         
         
         this.editCitaFinal = function () {
-            if (!$scope.id || !$scope.fecha || !$scope.hora || !$scope.duracion || !$scope.medico || !$scope.paciente) {
+            if (!$scope.id || !$scope.hora || !$scope.duracion || !$scope.medico || !$scope.paciente) {
                 alert("No puede dejar ningún campo vacio.");
                 return;
             }
@@ -128,20 +130,20 @@
 
             else {
                 console.log("Se va a editar la cita" + $scope.id);
-                
+                $scope.fechaEdit.setHours(0);
                 var cita =
                 {
                     "id": $scope.id,
-                    "fecha": $scope.fecha.getTime(),
-                    "hora": $scope.hora,
+                    "fecha": $scope.fechaEdit.setHours(0) + ($scope.hora*3600000),
+                    "hora": $scope.fechaEdit.setHours(0) + ($scope.hora*3600000),
                     "duracion": $scope.duracion,
                     "medico": $scope.medico,
                     "paciente": $scope.paciente,
                     "habilitada": $scope.habilitada
                 };
-                cita = JSON.stringify(cita);
+//                cita = JSON.stringify(cita);
                 console.log(cita);
-                return $http.put(context + "/" + $stateParams.citaId, cita.toString())
+                return $http.put(context + "/" + $stateParams.citaId, cita)
                     .then(function () {
                         $state.go('listaCitas');
                     }, responseError)

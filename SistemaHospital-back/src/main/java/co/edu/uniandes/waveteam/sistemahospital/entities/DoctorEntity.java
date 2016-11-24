@@ -68,6 +68,7 @@ public class DoctorEntity extends BaseEntity implements Serializable{
                 cita.setHora(inicio+(i*900000));
                 n.setTimeInMillis(n.getTimeInMillis()+(i*900000));
                 cita.setDuracion(15);
+                cita.setHabilitada("Habilitada");
                 cita.setDoctor(this);
                 disponibilidadCitas.add(cita);
                 i++;

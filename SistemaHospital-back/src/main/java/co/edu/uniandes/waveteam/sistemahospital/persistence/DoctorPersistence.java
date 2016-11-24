@@ -75,6 +75,7 @@ public class DoctorPersistence {
     public void delete(Long id) {
         LOGGER.log(Level.INFO, "Borrando doctor con id={0}", id);
         DoctorEntity entity = em.find(DoctorEntity.class, id);
+        System.out.println(("ENTITY BEING DELETED ID: "+entity.getId()));
         em.remove(entity);
     }
 
