@@ -1,51 +1,53 @@
 <div class="row">
     <div class="page-header">
-        <h1>Horario</h1>
-    </div>
-
-    <div class="col-xs-12">
-        Seleccione su nombre: <select ng-model="selectedDoctor" ng-options="x.name for x in doctors">
-        </select>
-        <h1>  </h1>
-        <h1>  </h1>
+        <h1>Horario de citas de {{selectedDoctor.name}}</h1>
     </div>
     <div class="col-xs-12">
-        Seleccione una rango de fechas: <md-datepicker ng-model="scheduleDay1" md-placeholder="De"></md-datepicker>
+        <h3>Seleccione una rango de fechas:</h3> <md-datepicker ng-model="scheduleDay1" md-placeholder="De"></md-datepicker>
         <md-datepicker ng-model="scheduleDay2" md-placeholder="Hasta"></md-datepicker>
     </div>
     <div class="col-xs-12">
     </div>
-    <div class="col-xs-8">
+    <div class="col-xs-9">
     </div>
-        <div class="input-group">
-            <span class="input-group-addon">Mostrar sólo citas asignadas</span>
-            <span class="input-group-addon">
-                <input type="checkbox" ng-model="showAssigned">
-                </span>
-        </div>
-        <div class="container-fluid">
-            <table class="table table-striped" class="col-md-8">
-                <thead>
-                <tr>
-                    <th>ID Paciente</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Duración</th>
-                    <th>Consultorio</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="c in citas" ng-show="ctrl.checkIfAssigned(c)">
-                    <td>{{hasPatient(c.patient)}}</td>
-                    <td>{{ctrl.turnMillisToDate(c.hora)}}</td>
-                    <td>{{ctrl.turnMillisToHour(c.hora)}}</td>
-                    <td>{{c.duracion}}</td>
-                    <td>{{selectedDoctor.consultorio}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
+    <div class="dropdown col-xs-3">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="margin-bottom: 5px; right: 0%">Opciones avanzadas
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <div class="input-group" style="width: 120px">
+                    <span class="input-group-addon">Mostrar sólo citas asignadas</span>
+                    <span class="input-group-addon">
+                        <input type="checkbox" ng-model="showAssigned">
+                        </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--Table-->
+    <div class="container-fluid myTable">
+        <table class="table table-striped" class="col-md-8">
+            <thead>
+            <tr>
+                <th>ID Paciente</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Duración</th>
+                <th>Consultorio</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in citas" ng-show="ctrl.checkIfAssigned(c)">
+                <td>{{hasPatient(c.patient)}}</td>
+                <td>{{ctrl.turnMillisToDate(c.hora)}}</td>
+                <td>{{ctrl.turnMillisToHour(c.hora)}}</td>
+                <td>{{c.duracion}}</td>
+                <td>{{selectedDoctor.consultorio}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--/Table-->
     <div class="page-header">
         <h2>Establecer disponibilidad adicional</h2>
     </div>
