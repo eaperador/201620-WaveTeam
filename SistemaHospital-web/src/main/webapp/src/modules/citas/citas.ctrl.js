@@ -70,10 +70,11 @@
                     console.log($scope.medico + " : " + $scope.paciente)
                     console.log($scope.fecha.getTime() +"SE CREA UNA CITA CON ESTE TIEMPO")
                     var hora = $scope.fecha.getTime() + ($scope.hora*3600000);
+                    console.log(hora);
                     var cita = {
                         "id" :  $scope.id,
                         "fecha" :hora,
-                        "hora" : $scope.hora,
+                        "hora" : hora,
                         "duracion" : $scope.duracion,
                         "medico": $scope.medico,
                         "paciente": $scope.paciente,

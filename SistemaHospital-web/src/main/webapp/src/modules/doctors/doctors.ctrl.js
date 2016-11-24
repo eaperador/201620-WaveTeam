@@ -91,7 +91,7 @@
             swal({
                 title: 'Selecciona un doctor',
                 type: 'info',
-                input: 'select',
+                input: 'select',    
                 inputOptions: docs,
                 inputPlaceholder: 'doctor...',
                 inputValidator: function (value) {
