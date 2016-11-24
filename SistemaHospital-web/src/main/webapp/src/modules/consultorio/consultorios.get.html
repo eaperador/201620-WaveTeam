@@ -3,12 +3,14 @@
     <div>
         <div> <h1> </h1> </div>
         <div class="col-xs-6">
-            <div class="input-group">
-                <h4> Consultorios </h4>
-                <table> <thead> <tr> <th> <span class="input-group-addon">Buscar</span> </th>
-                            <th> <input class="form-control" type="text" ng-model="searchField"> </th> </tr> </thead> </table>
-            </div>
+            <h3> Consultorios </h3>
         </div>
+
+            <div class="input-group">
+
+                <span class="input-group-addon">Buscar</span>
+                <input class="form-control" type="text" ng-model="searchField">
+            </div>
         <div class="container-fluid">
             <table id="tablaConsultorios" class="table table-hover table-striped">
                 <thead>
@@ -16,7 +18,7 @@
                         <th> </th>
                         <th> Nombre </th>
                         <th> Horario </th>
-                        <th> Atiencion a urgencias </th>
+                        <th> Atención a urgencias </th>
                         <th> UCI </th>
                     </tr>
                 </thead>
@@ -25,8 +27,8 @@
                         <td>{{consultorio.id}}</td>
                         <td>{{consultorio.nombre}}</td>
                         <td>{{consultorio.horario}}</td>
-                        <td>{{consultorio.atencionUrgencias}}</td>
-                        <td>{{consultorio.unidadCuidadosIntensivos}}</td>
+                        <td align="center"><input id="uci" name="uci" type="checkbox" ng-disabled="true" ng-model="consultorio.atencionUrgencias" ng-init="consultorio.atencionUrgencias"/></td>
+                        <td><input id="uci" name="uci" type="checkbox" ng-disabled="true" ng-model="consultorio.unidadCuidadosIntensivos" ng-init="consultorio.unidadCuidadosIntensivos"/></td>
                         <td>
                             <button class="btn btn-default btn-sm" ui-sref="buscarConsultorio({consultorioId: consultorio.id})"><span class="glyphicon glyphicon-edit"></span> Ver detalles </button>
 
@@ -35,6 +37,11 @@
                 </tbody>
             </table>
         </div>
-        <button type="button" ui-sref='crearConsultorio'> Crear consultorio</button>
+        <table style="float: right;">
+            <tr><th>
+            <button type="button" ui-sref='crearConsultorio'> Crear consultorio</button> </th>
+        
+                <th> <h1> &emsp; </h1> </th> </tr> 
+        </table>
     </div>
 </div>
