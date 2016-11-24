@@ -3,25 +3,15 @@
         <h2 class="page-header">Especialidades</h2>
     </div>
     
-    <div class="col-lg-8">
+    <div class="col-lg-9">
+        <div class="panel panel-body">
         <form novalidate name="form" id="especialidad-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
-        <table width ="100%">
-            <tr>
-                <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
-            </tr>
-          <tr>
-            <th align="left">
-              Nombre:
-            </th>
-            <th align="left">
-              <input id="nombre" name="nombre" class="form-control" type="text" ng-model="currentRecord.nombre" ng-init="currentRecord.nombre" required />
-            </th>
-          </tr>
-          <tr>
-            <th align="left">
-              Grupos edad:
-            </th>
-            <th>
+            <div class="form-group" layout="row">
+                <label class="control-label col-sm-2">Nombre:</label>
+                <input id="nombre" name="nombre" class="form-control" type="text" ng-model="currentRecord.nombre" ng-init="currentRecord.nombre" required />
+            </div>
+            <div class="form-group" layout="row">
+                <label class="control-label col-sm-2">Grupo edad:</label>
                 <select name="grupo" ng-model="currentRecord.gruposEdad" ng-init="currentRecord.gruposEdad" required>
                     <option value="Niños">Niños</option>
                     <option value="Adolecentes">Adolecentes</option>
@@ -30,25 +20,20 @@
                     <option value="Ancianos">Ancianos</option>
                     <option value="Todo el mundo">Todo el mundo</option>
                 </select>
-            </th>
-          </tr>
-          <tr>
-            <th align="left">
-              Tipo:
-            </th>
-            <th>
-                <select name="tipo" ng-model="currentRecord.tipo" ng-init="currentRecord.tipo" required>
+   
+                <label class="control-label col-sm-2">Tipo:</label>
+                 <select name="tipo" ng-model="currentRecord.tipo" ng-init="currentRecord.tipo" required>
                     <option value="Clínica">Clínica</option>
                     <option value="Quirúrgica">Quirúrgica</option>
                     <option value="Médico-quirúrgica"> Médico-quirúrgica</option>
                     <option value="Diagnósticas">Diagnósticas</option>
                 </select>
-            </th>
-          </tr>
-        </table>
-        <br>
-        <button class="btn btn-default btn-sm" type="submit" >Guardar</button> 
-        <button class="btn btn-default btn-sm"  ui-sref='especialidadList'>Cancel</button>
+            </div>
+            <div class="form-group" align="right">
+                <button class="btn btn-default btn-sm" type="submit" >Guardar</button> 
+                <button class="btn btn-default btn-sm"  ui-sref='especialidadList'>Cancel</button>
+            </div>
         </form>
+        </div>
     </div>
 </div>

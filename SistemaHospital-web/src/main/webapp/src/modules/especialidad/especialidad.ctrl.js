@@ -78,6 +78,18 @@
                     }, responseError);
               }
             };
+            
+            this.buscarRecordPorNombre = function (nombre) {
+              if(nombre != null)
+              {
+                  console.log(nombre);
+                $http.get(context + "/" + nombre)
+                    .then(function (response) {
+                        $scope.currentRecord = response.data;
+                        $state.reload('especialidadSearch({especialidadNombre: currentRecord.nombre})');
+                    }, responseError);
+              }
+            };
 
 
 
