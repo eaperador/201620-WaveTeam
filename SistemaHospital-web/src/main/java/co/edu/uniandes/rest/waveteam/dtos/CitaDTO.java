@@ -7,24 +7,29 @@ package co.edu.uniandes.rest.waveteam.dtos;
 
 
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.CitaPersistence;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author jm.lizarazo10
  */
 public class CitaDTO {
+    
+     private static final Logger LOGGER = Logger.getLogger(CitaPersistence.class.getName());
 
     public ArrayList a = new ArrayList();
 
     
     
     private Long id;
-    private String fecha;
+    private Long fecha;
     private Long hora;
     private int duracion;
-    //private MedicoDTO doctor;
-    //private PatientDTO paciente;
+    //private MedicoDetailDTO doctorO;
+    //private PatientDetailDTO pacienteO;
     private Long doctor;
     private Long paciente;
     private String habilitada;
@@ -47,6 +52,7 @@ public class CitaDTO {
             this.paciente = paciente; 
             this.habilitada = habilitada;
         }
+         LOGGER.info("Hay metodo de cita dto con parametro entity: " + entity.getId() + ", " + entity.getDuracion() + ", " + entity.getFecha());
     }
     
     public CitaDTO(CitaEntity entity, boolean alternate){
@@ -56,36 +62,39 @@ public class CitaDTO {
             this.fecha = entity.getFecha();
             this.hora = entity.getHora();
             this.duracion = entity.getDuracion();
-            if (entity.getDoctor() != null )
-                this.doctor = entity.getDoctor().getId();
-            if (entity.getPaciente() != null )
-                this.paciente = entity.getPaciente().getId(); 
+            
             this.habilitada = entity.getHabilitada();
         }
+        LOGGER.info("Hay metodo de cita DTO alterno, " +                 
+                entity.getFecha()+ ", "+ 
+                entity.getHabilitada());
     }
     
     
     public CitaEntity toEntity() {
+        
         CitaEntity entity = new CitaEntity();
         entity.setDuracion(duracion);
-//        entity.setFecha(fecha);
+        entity.setFecha(fecha);
         entity.setHabilitada(habilitada);
         entity.setHora(hora);
         entity.setId(id);
+        LOGGER.info("Hay metodo to Entity! ");
         
         return entity;
     }
    
      //***********************************************************************
     
-    public CitaDTO(Long id, String fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
+    public CitaDTO(Long id, Long fecha, Long hora, int duracion, Long medico, Long paciente, String habilitada){
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.duracion = duracion;
-        this.doctor = doctor;
+        this.doctor = medico;
         this.paciente = paciente; 
         this.habilitada = habilitada;
+        LOGGER.info("Hay metodo crear DTO con todos los parametros");
 
     }
     
@@ -102,11 +111,11 @@ public class CitaDTO {
         this.id = id;
     }
     
-    public String getFecha(){
+    public Long getFecha(){
         return fecha;
     }
     
-    public void setFecha(String fecha){
+    public void setFecha(Long fecha){
         this.fecha = fecha;
     }
     
@@ -147,6 +156,10 @@ public class CitaDTO {
     public void setPaciente(Long paciente){
         this.paciente = paciente;
     }
+    
+//    public void setPacienteO(PatientDetailDTO patient){
+//        this.pacienteO = patient;
+//    }
     
     
     public void desactivar(){

@@ -12,7 +12,10 @@ import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
 import co.edu.uniandes.waveteam.sistemahospital.persistence.CitaPersistence;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.DoctorPersistence;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.PacientePersistence;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -23,7 +26,9 @@ import javax.inject.Inject;
 @Stateless 
 public class CitaLogic implements ICitaLogic{
     
+    private static final Logger LOGGER = Logger.getLogger(CitaPersistence.class.getName());
     @Inject private CitaPersistence persistence;
+    
 
     @Override
     public List<CitaEntity> getCitas() {
@@ -38,6 +43,8 @@ public class CitaLogic implements ICitaLogic{
     @Override
     public CitaEntity createCita(CitaEntity entity) {
         persistence.create(entity);
+        
+        LOGGER.info("Método create cita en CitaLogic: Fecha=" +entity.getFecha());
         return entity;
     }
 

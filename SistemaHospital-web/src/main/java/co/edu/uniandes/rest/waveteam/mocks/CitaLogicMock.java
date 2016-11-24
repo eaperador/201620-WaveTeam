@@ -47,12 +47,12 @@ public class CitaLogicMock {
             //MedicoDTO doctor3 = new MedicoDTO(6L, "Carlos Diaz", "Pediatría", 320L, new ArrayList<CitaDTO>());
            // MedicoDTO doctor4 = new MedicoDTO(3L, "Fernando Vallejo", "Traumatologia", 320L, new ArrayList<CitaDTO>());
             citas = new ArrayList<>();
-            citas.add(new CitaDTO(1L, "17/08/2016", 1471352400000L, 30,1L , 1L, "Habilitada"));
-            citas.add(new CitaDTO(2L, "01/09/2016", 1471352400000L, 15,2L , 2L, "Cancelada"));
-            citas.add(new CitaDTO(3L, "18/8/2016", (1471352400000L + 86400000L) ,15, 3L, 2L, "Habilitada"));
-            citas.add(new CitaDTO(4L, "15/10/2016", (1471352400000L + 86400000L) ,30, 2L, 2L, "Habilitada"));
-            citas.add(new CitaDTO(5L, "19/8/2016", 1471352400000L + (2*86400000L),15, 3L,3L, "Cancelada"));
-            citas.add(new CitaDTO(6L, "31/12/2016", 1471352400000L + (2*86400000L),30, 1L,3L, "Habilitada"));
+            citas.add(new CitaDTO(1L, 17082016L, 1471352400000L, 30,1L , 1L, "Habilitada"));
+            citas.add(new CitaDTO(2L, 1092016L, 1471352400000L, 15,2L , 2L, "Cancelada"));
+            citas.add(new CitaDTO(3L, 1882016L, (1471352400000L + 86400000L) ,15, 3L, 2L, "Habilitada"));
+            citas.add(new CitaDTO(4L, 15102016L, (1471352400000L + 86400000L) ,30, 2L, 2L, "Habilitada"));
+            citas.add(new CitaDTO(5L, 1982016L, 1471352400000L + (2*86400000L),15, 3L,3L, "Cancelada"));
+            citas.add(new CitaDTO(6L, 3112016L, 1471352400000L + (2*86400000L),30, 1L,3L, "Habilitada"));
 
         }    
         
@@ -226,13 +226,13 @@ public class CitaLogicMock {
             
             if(medico==idMedico){
                 MedicoDTO medic = mlm.getDoctor(medico);
-                String[] fecha = cita.getFecha().split("/");
-                int diaFecha = Integer.parseInt(fecha[0]);
-                int mesFecha = Integer.parseInt(fecha[1]);
-                if(mesInicio <= mesFecha && mesFin >= mesFecha){
-                    if(diaInicio <= diaFecha && diaFin >= diaFecha){
+                Long fecha = cita.getFecha();
+                //int diaFecha = Integer.parseInt(fecha[0]);
+                //int mesFecha = Integer.parseInt(fecha[1]);
+                if(mesInicio <= fecha && mesFin >= fecha){
+                    
                         lista.add(cita);
-                    }
+                    
                 }
                 
             }

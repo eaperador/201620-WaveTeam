@@ -68,9 +68,11 @@
 
                 else{
                     console.log($scope.medico + " : " + $scope.paciente)
+                    console.log($scope.fecha.getTime() +"SE CREA UNA CITA CON ESTE TIEMPO")
+                    var hora = $scope.fecha.getTime() + ($scope.hora*3600000);
                     var cita = {
                         "id" :  $scope.id,
-                        "fecha" : $scope.fecha,
+                        "fecha" :hora,
                         "hora" : $scope.hora,
                         "duracion" : $scope.duracion,
                         "medico": $scope.medico,
@@ -88,6 +90,14 @@
             }
 
         }
+        
+        
+        
+        
+        
+        
+        
+        
 
         this.turnMillisToDate = function (dateLong) {
             var d = new Date(dateLong);
@@ -96,7 +106,7 @@
 
         this.turnMillisToHour = function (dateLong) {
             var d = new Date(dateLong);
-            return d.getHours() + ":" + d.getMinutes();
+            return d.getHours() + ":" + d.getMinutes() + "0";
         }
         
         
@@ -117,10 +127,11 @@
 
             else {
                 console.log("Se va a editar la cita" + $scope.id);
+                
                 var cita =
                 {
                     "id": $scope.id,
-                    "fecha": $scope.fecha,
+                    "fecha": $scope.fecha.getTime(),
                     "hora": $scope.hora,
                     "duracion": $scope.duracion,
                     "medico": $scope.medico,
@@ -137,7 +148,7 @@
         };
         
         this.terminarCita = function (cita) {
-            console.log("llego");
+            console.log("Metodo terminar");
             $http.put(context + "/" + cita.id+"/terminar")
                 .then(function () {
                     $state.reload('listaCitas');
