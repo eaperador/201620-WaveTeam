@@ -19,6 +19,15 @@
                 }
             }
 
+        }).state('infoConsultorios',{
+            url:"/consultorios/servicios",
+            views: {
+                'mainView':{
+                    controller:'consultoriosCtrl',
+                    controllerAs:'ctrl',
+                    templateUrl:basePath+'consultorio.info.html'
+                }
+            }
         }).state('crearConsultorio',{
             url:"/consultorios/crear",
             views: {
