@@ -21,6 +21,15 @@ mod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,$url
                         templateUrl: basePath + 'consultaHistorica.list.html'
                     }
                 }
+            }).state('consultaHistoricaCreate', {
+                url: '/consultaHistorica/create',
+                views: {
+                    'mainView': {
+                        controller: 'consultaHistoricaCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'consultaHistorica.create.html'
+                    }
+                }
             });
 }]);
 
