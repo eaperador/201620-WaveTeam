@@ -5,7 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 <a href="../../../../../../../../../../../NetBeansProjects/book_201620-master/src/main/webapp/index.html"></a>
 -->
-<div class="page-header">
+<div class="page-header" style="padding-left: 400px">
   <h1>Listado de citas</h1>
 </div>
 <div class="col-xs-6">
@@ -30,11 +30,11 @@ and open the template in the editor.
         <tbody>
             <tr ng-repeat="x in citas| filter:searchField">
                 <td id ="{{$index}}-id">{{x.id}}</td>
-                <td id ="{{$index}}-fecha">{{ctrl.turnMillisToDate(x.hora)}}</td>
-                <td id ="{{$index}}-hora">{{ctrl.turnMillisToHour(x.hora)}}</td>
+                <td id ="{{$index}}-fecha">{{ctrl.turnMillisToDate(x.fecha)}}</td>
+                <td id ="{{$index}}-hora">{{ctrl.turnMillisToHour(x.fecha)}}</td>
                 <td id ="{{$index}}-duracion">{{x.duracion}}</td>
-                <td id ="{{$index}}-medico">{{x.medico}}</td>
-                <td id ="{{$index}}-paciente">{{x.paciente}}</td>
+                <td id ="{{$index}}-medico">{{x.medico.id}}</td>
+                <td id ="{{$index}}-paciente">{{x.paciente.id}}</td>
                 <td id ="{{$index}}-habilitada">{{x.habilitada}}</td>
                 <td>
                         <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(x)"><span class="glyphicon glyphicon-minus"></span> Eliminar</button>

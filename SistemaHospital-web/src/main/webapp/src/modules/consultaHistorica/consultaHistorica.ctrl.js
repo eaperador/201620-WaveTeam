@@ -17,7 +17,7 @@
             if ($stateParams.especialidad !== null && $stateParams.especialidad!== undefined) {
                 especialidad = $stateParams.especialidad;
                 
-                $http.get(context + "/" + especialidad.nombre)
+                $http.get(context + "/" + especialidad.id)
                     .then(function (response) {
                         $scope.currentRecord = response.data;
                     }, responseError);
@@ -38,13 +38,13 @@
                 $scope.alerts = [];
             }
             
-            this.generarTodas = function () {
-                $http.get(context + "/generateAll")
+            this.saveRecord = function (nombre) {
+                return $http.post(context, nombre)
                     .then(function () {
-                        $state.reload("consultaHistoricaList")
-                    }, responseError); 
+                        $state.reload('consultaHistoricaList');
+                    }, responseError);
             };
-
+            
 
             // -----------------------------------------------------------------
             // Funciones para manejra los mensajes en la aplicación

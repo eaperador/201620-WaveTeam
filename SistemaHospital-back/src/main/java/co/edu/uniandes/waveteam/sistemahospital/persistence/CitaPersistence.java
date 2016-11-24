@@ -38,14 +38,14 @@ public class CitaPersistence {
     
     public List<CitaEntity> findByDoctor(Long doctor) {
         LOGGER.log(Level.INFO, "Consultando cita con doctor = {0}", doctor);
-        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.doctor.id = :idDoctor", CitaEntity.class);
+        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.doctor_id = :idDoctor", CitaEntity.class);
         q = q.setParameter("idDoctor", doctor); 
         return q.getResultList();
     }
     
     public List<CitaEntity> findByPaciente(Long paciente){
         LOGGER.log(Level.INFO, "Consultando cita con paciente = {0}", paciente);
-        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.paciente.id = :idPaciente", CitaEntity.class);
+        TypedQuery<CitaEntity> q = em.createQuery("select u from CitaEntity u where u.paciente_id = :idPaciente", CitaEntity.class);
         q = q.setParameter("idPaciente", paciente);
         return q.getResultList();
     }

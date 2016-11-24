@@ -12,11 +12,15 @@ import co.edu.uniandes.rest.waveteam.exceptions.CitaLogicException;
 import co.edu.uniandes.rest.waveteam.exceptions.MedicoLogicException;
 import co.edu.uniandes.rest.waveteam.mocks.CitaLogicMock;
 import co.edu.uniandes.waveteam.sistemahospital.api.ICitaLogic;
+import co.edu.uniandes.waveteam.sistemahospital.api.IDoctorLogic;
+import co.edu.uniandes.waveteam.sistemahospital.api.IPacienteLogic;
 import co.edu.uniandes.waveteam.sistemahospital.entities.CitaEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.DoctorEntity;
 import co.edu.uniandes.waveteam.sistemahospital.entities.PacienteEntity;
+import co.edu.uniandes.waveteam.sistemahospital.persistence.CitaPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -46,6 +50,13 @@ public class CitaResource {
     
     @Inject
     ICitaLogic citaLogic;
+    
+//    @Inject
+//    IDoctorLogic doctorLogic;
+//    
+//    @Inject
+//    IPacienteLogic patientLogic;
+    private static final Logger LOGGER = Logger.getLogger(CitaResource.class.getName());
     
 //    CitaLogicMock citaLogic = new CitaLogicMock();
 
@@ -102,6 +113,8 @@ public class CitaResource {
      */
     @POST
     public CitaDTO createCita(CitaDTO cita) throws CitaLogicException{
+        LOGGER.info("Hay metodo create cita en CitaResource: Fecha=" + cita.getFecha());
+        
         return new CitaDTO(citaLogic.createCita(cita.toEntity()));
     }
     

@@ -25,18 +25,18 @@ public class CitaEntity extends BaseEntity implements Serializable{
     @ManyToOne
     private PacienteEntity paciente;
 
-    private String fecha;
+    private Long fecha;
     private Long hora;
     private int duracion;
     private String habilitada;
     
 
     
-    public String getFecha(){
+    public Long getFecha(){
         return fecha;
     }
     
-    public void setFecha(String fecha){
+    public void setFecha(Long fecha){
         this.fecha = fecha;
     }
     

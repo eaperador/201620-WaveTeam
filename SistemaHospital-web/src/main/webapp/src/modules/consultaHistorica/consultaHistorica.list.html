@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<h2>Estado del hospital</h2>
- <table class="table table-striped" class="col-md-8">
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Consultas Historicas</h2>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <input id="nombre" name="nombre" class="form-control" type="text" ng-model="currentRecord.especialidad.nombre" ng-init="currentRecord.especialidad.nombre" required />
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button"  ng-click="ctrl.saveRecord(currentRecord.especialidad.nombre)"><i class="fa fa-search"></i>Buscar</button>
+            </span>
+        </div>
+    </div>
+    
+    <table class="table table-striped">
         <thead>
-            <tr align="left"><button class="btn btn-default btn-sm" ng-click="ctrl.generarTodas()" >Generar estado actual</button> 
-            </tr>
             <tr>
                 <th>Especialidad</th>        
                 <th>Doctores</th>
@@ -21,15 +25,18 @@ and open the template in the editor.
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="record in records" >
-                <td>{{record.especialidad.nombre}}</td>
-                <td>{{record.numeroDoctores}}</td>
-                <td>{{record.numeroCitas}}</td>
-                <td>{{record.promedioDuracion}}</td>
-                <td>{{record.citasLibres}}</td>
-                <td>{{record.citasCanceladas}}</td>
-                <td>{{record.citasTerminadas}}</td>
-                <td>{{record.fecha}}</td>
+            <tr>
+                <td>{{currentRecord.especialidad.nombre}}</td>
+                <td>{{currentRecord.numeroDoctores}}</td>
+                <td>{{currentRecord.numeroCitas}}</td>
+                <td>{{currentRecord.promedioDuracion}}</td>
+                <td>{{currentRecord.citasLibres}}</td>
+                <td>{{currentRecord.citasCanceladas}}</td>
+                <td>{{currentRecord.citasTerminadas}}</td>
+                <td>{{currentRecord.fecha}}</td>
             </tr>
         </tbody>
     </table>
+    
+</div>
+ 
