@@ -107,9 +107,9 @@ public class PatientResource {
      * @param id
      * @throws PatientLogicException 
      */
-    @DELETE
-    @Path("{id: \\d+}")
-    public void deltePatient (@PathParam("id") Long id) throws WaveTeamLogicException{
+    @DELETE//No entra aqui ni nada//cada vez que se hace despliegue se borra la BD ¬¬
+    @Path("{id: \\d+}")//Asi es como estaba inicialmente
+    public void deletePatient (@PathParam("id") Long id) throws WaveTeamLogicException{
         pacienteLogic.deletePaciente(id);
     }
 

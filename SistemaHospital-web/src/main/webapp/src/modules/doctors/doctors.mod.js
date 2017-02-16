@@ -5,7 +5,7 @@
  */
 
 (function (ng) {
-    var mod = ng.module("doctorModule", ["ngMessages", "ngMaterial"]);
+    var mod = ng.module("doctorModule", ["ngMessages", "ngMaterial", "ui.router"]);
     mod.constant("doctorContext", "api/doctors");
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {

@@ -8,9 +8,11 @@
     var mod = ng.module("citasModule");
 
     mod.controller("citasCtrl", ['$scope', '$state', '$stateParams', '$http', 'citasContext', function ($scope, $state, $stateParams, $http, context) {
+            console.log(context);
         load = function () {
             $http.get(context).then(function (response) {
                 $scope.citas = response.data;
+                console.log("Hola mundo");
                 console.log(response.data);
             }, responseError);
         }
