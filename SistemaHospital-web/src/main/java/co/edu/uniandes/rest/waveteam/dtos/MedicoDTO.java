@@ -53,7 +53,6 @@ public class MedicoDTO {
 //        System.out.println("JOJO: "+entity.getId());
         entity.setConsultorio(this.consultorio);
         entity.setName(this.name);
-        entity.setConsultorio(this.consultorio);
         
         EspecialidadEntity ent = new EspecialidadEntity();
 //        ent.setId(5L);

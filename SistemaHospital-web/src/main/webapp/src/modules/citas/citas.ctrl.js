@@ -8,36 +8,61 @@
     var mod = ng.module("citasModule");
 
     mod.controller("citasCtrl", ['$scope', '$state', '$stateParams', '$http', 'citasContext', function ($scope, $state, $stateParams, $http, context) {
-            console.log(context);
-        load = function () {
+            $scope.doctors = [];
+            $scope.patients= [];
+            $scope.paciente = {};
+            $scope.medico = {};
+        this.load = function () {
             $http.get(context).then(function (response) {
                 $scope.citas = response.data;
-                console.log("Hola mundo");
-                console.log(response.data);
             }, responseError);
-        }
+        };
 
-        load();
+        this.load();
+        
+        
+        this.loadMedicos = function(){
+            $http.get('./api/doctors').then(function(response){
+                console.log(response);
+                $scope.doctors = response.data;
+            }.bind(this),function(error){
+                console.log(error);
+            }.bind(this));
+        };
+        
+        this.loadMedicos();
+        
+        this.loadPacientes = function(){
+            $http.get('./api/patient').then(function(response){
+                console.log(response);
+                $scope.patients = response.data;
+            }.bind(this),function(error){
+                console.log(error);
+            }.bind(this));
+        };
+        
+        this.loadPacientes();
 
         this.deleteRecord = function (cita) {
             return $http.delete(context + "/" + cita.id)
                 .then(function () {
                     load();
                 }, responseError)
-        }
+        };
 
         if ($stateParams.citaID !== null && $stateParams.citaId !== undefined) {
             // toma el id del parámetro
-            id = $stateParams.citaId;
+            var id = $stateParams.citaId;
             // obtiene el dato del recurso REST
             $http.get(context + "/" + id)
                 .then(function (response) {
                     // $http.get es una promesa
                     // cuando llegue el dato, actualice currentRecord
-                    console.log(response)
+                    console.log("Hola mundo");
+                    console.log(response);
                     $scope.fechaEdit = new Date();
                     var currentRecord = response.data;
-                    $scope.fechaEdit.setTime(currentRecord.hora)
+                    $scope.fechaEdit.setTime(currentRecord.hora);
                     $scope.id = currentRecord.id;
                     $scope.fecha = currentRecord.fecha;
                     $scope.hora = new Date(currentRecord.hora).getHours();

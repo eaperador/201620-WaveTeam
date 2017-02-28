@@ -167,6 +167,10 @@ public class DoctorLogic implements IDoctorLogic {
     public void updateDoctor(DoctorEntity doctorEntity) throws WaveTeamLogicException {
         if (persistence.find(doctorEntity.getId()) == null)
             throw new WaveTeamLogicException("The instance you are trying to update does not exist");
+        EspecialidadEntity ee = specialtyPersistence.findByName(doctorEntity.getEspecialidad().getName());
+        if(ee != null){
+            doctorEntity.setEspecialidad(ee);
+        }
         persistence.update(doctorEntity);
     }
 

@@ -45,27 +45,31 @@ public class CitaDTO {
     
     public CitaDTO(CitaEntity entity){
         if (entity != null) {
-            this.id = id;
-            this.fecha = fecha;
-            this.hora = hora;
-            this.duracion = duracion;
-            this.doctor = doctor;
-            this.paciente = paciente; 
-            this.habilitada = habilitada;
+            this.id = entity.getId();
+            this.fecha = entity.getFecha();
+            this.hora = entity.getHora();
+            this.duracion = entity.getDuracion();
+            this.doctor = entity.getDoctor().getId();
+            this.paciente = entity.getPaciente().getId(); 
+            this.habilitada = entity.getHabilitada();
         }
          LOGGER.info("Hay metodo de cita dto con parametro entity: " + entity.getId() + ", " + entity.getDuracion() + ", " + entity.getFecha());
     }
     
     public CitaDTO(CitaEntity entity, boolean alternate){
-        if (entity != null) {
+            if (entity != null) {
             this.id = entity.getId();
             this.fecha = entity.getFecha();
             this.fecha = entity.getFecha();
             this.hora = entity.getHora();
             this.duracion = entity.getDuracion();
-            
+            this.doctorO = new MedicoDetailDTO(entity.getDoctor());
+            this.pacienteO = new PatientDetailDTO(entity.getPaciente());
+            this.doctor = entity.getDoctor().getId();
+            this.paciente = entity.getPaciente().getId();
             this.habilitada = entity.getHabilitada();
         }
+        
         LOGGER.info("Hay metodo de cita DTO alterno, " +                 
                 entity.getFecha()+ ", "+ 
                 entity.getHabilitada());
